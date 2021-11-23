@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "926940975707",
+    "project_id": "sumbangsih-abdimas",
+    "storage_bucket": "sumbangsih-abdimas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926940975707:android:c934fc283242410abae57e",
+        "android_client_info": {
+          "package_name": "com.feylabs.sumbangsih"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926940975707-i81coa3nggbv0mvmfjd3vhiqu4nd4ct0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.feylabs.sumbangsih",
+            "certificate_hash": "db764d48fa071e0794dbfd097081805c67c327da"
+          }
+        },
+        {
+          "client_id": "926940975707-cv431j5grt7eafrj2fjs4847naaqu1c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQgA2FOJA7ddm1RNYnfMPNnlFpZG4VHzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926940975707-cv431j5grt7eafrj2fjs4847naaqu1c6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

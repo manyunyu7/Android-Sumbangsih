@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.feylabs.sumbangsih.MainActivity
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.ActivityWalkthroughBinding
+import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPActivity
+import com.feylabs.sumbangsih.presentation._otp.WriteOTPActivity
 import com.feylabs.sumbangsih.util.BaseActivity
 
 class WalkthroughActivity : BaseActivity() {
@@ -32,7 +34,7 @@ class WalkthroughActivity : BaseActivity() {
     }
 
     private fun goToNextActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, WriteOTPActivity::class.java))
         finish()
     }
 

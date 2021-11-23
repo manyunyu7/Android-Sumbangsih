@@ -22,4 +22,14 @@ open class BaseActivity : AppCompatActivity() {
         this.visibility = View.GONE
     }
 
+    fun hideActionBar(){
+        actionBar?.hide()
+        supportActionBar?.hide();
+    }
+
+    fun showActionBar(){
+        actionBar?.show()
+        supportActionBar?.show();
+    }
+
 }

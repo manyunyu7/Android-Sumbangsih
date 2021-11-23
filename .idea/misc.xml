@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/button_background.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/red_border.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_receive_otpactivity.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_walkthrough.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_write_otpactivity.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_on_board.xml" value="0.16" />
       </map>
     </option>

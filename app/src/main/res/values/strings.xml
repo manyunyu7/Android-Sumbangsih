@@ -11,4 +11,8 @@ Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan
     <string name="title_on_board_2">Terdapat Fitur Pengajuan, lho!</string>
     <string name="title_on_board_3">Terdapat Fitur Tracking juga, lho!</string>
     <string name="skip">Lewati</string>
+    <string name="message_otp">Silahkan Masukkan Nomor Telepon Yang Bisa Dihubungi. Kami akan mengirim kode verifikasi via SMS</string>
+    <string name="title_insert_phone_number_otp">Masukkan Nomor Telepon</string>
+    <string name="message_please_check_otp">Masukkan Kode yang kami kirim melalui SMS ke nomor anda yang ditulis sebelumnya</string>
+    <string name="title_verification">Verifikasi</string>
 </resources>
