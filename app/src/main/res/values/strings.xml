@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Sumbangsih</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_on_board_1">Sumbangsih adalah aplikasi resmi dari Kementerian Koperasi dan UKM yang dapat mempermudah pemilik UMKM untuk mengajukan permohonan BLT UMKM langsung dari Rumah</string>
+    <string name="text_on_board_2">Kini tanpa harus keluar rumah, Anda hanya butuh 15 menit untuk mengajukan permohonan BLT UMKM secara daring. </string>
+    <string name="text_on_board_3">Khawatir tidak ada transparansi data?
+Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan BLT UMKM milik anda.</string>
+
 </resources>
