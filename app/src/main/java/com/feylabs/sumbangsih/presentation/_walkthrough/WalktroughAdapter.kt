@@ -11,7 +11,6 @@ class WalktroughAdapter(fm: FragmentManager, lf: Lifecycle) : FragmentStateAdapt
         OnBoardFragment(1),
         OnBoardFragment(2),
         OnBoardFragment(3),
-        OnBoardFragment(4),
     )
 
     override fun getItemCount(): Int = fragmentList.size

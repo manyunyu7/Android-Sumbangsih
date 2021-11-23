@@ -8,39 +8,16 @@
 
 
     <ImageView
+        android:id="@+id/img"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="130dp"
         android:src="@drawable/on_boarding_img_1"
-        app:layout_constraintBottom_toTopOf="@id/tv_main"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/tv_desc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/redSumbangsih"
-        tools:text="Sumbangsih Itu Aplikasi Apa Sih ?"
-        />
 
-    <TextView
-        android:id="@+id/tv_desc"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="120dp"
-        android:fontFamily="@font/poppins_light"
-        tools:text="@string/text_on_board_1"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

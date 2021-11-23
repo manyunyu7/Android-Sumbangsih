@@ -7,4 +7,8 @@
     <string name="text_on_board_3">Khawatir tidak ada transparansi data?
 Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan BLT UMKM milik anda.</string>
 
+    <string name="title_on_board_1">Sumbangsih itu aplikasi apa sih?</string>
+    <string name="title_on_board_2">Terdapat Fitur Pengajuan, lho!</string>
+    <string name="title_on_board_3">Terdapat Fitur Tracking juga, lho!</string>
+    <string name="skip">Lewati</string>
 </resources>
