@@ -15,4 +15,8 @@ Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan
     <string name="title_insert_phone_number_otp">Masukkan Nomor Telepon</string>
     <string name="message_please_check_otp">Masukkan Kode yang kami kirim melalui SMS ke nomor anda yang ditulis sebelumnya</string>
     <string name="title_verification">Verifikasi</string>
+    <string name="title_activity_common_controller">CommonControllerActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

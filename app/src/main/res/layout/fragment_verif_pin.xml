@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="top|center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/redSumbangsih" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Verifikasi PIN"
+                android:textAlignment="viewStart"
+                android:textColor="@color/redSumbangsih"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/label_desc_jargon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/poppins_light"
+                android:scrollHorizontally="false"
+                android:text="Silahkan masukkan PIN untuk menjaga keamanan data anda"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+        <in.arjsna.passcodeview.PassCodeView
+            android:id="@+id/pass_code_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="25.0dp"
+            app:digit_size="15.0dp"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout"
+            app:digits="6"
+            android:layout_marginTop="25dp"
+            app:empty_drawable="@drawable/pin_view_empty"
+            app:filled_drawable="@drawable/pin_view_filled"
+            app:key_text_size="30.0sp"
+            app:layout_constraintBottom_toTopOf="@id/btn_next" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/redSumbangsih"
+            android:text="Next"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

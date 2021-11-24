@@ -1,9 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation._walkthrough.WalkthroughActivity">
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/container_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="55dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/label_title_jargon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAlignment="textStart"
+                android:textColor="@color/redSumbangsih"
+                android:textSize="25sp"
+                tools:text="Judul Jargon Ditulis Disini" />
+
+            <TextView
+                android:id="@+id/label_desc_jargon"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="none"
+                android:fontFamily="@font/poppins_light"
+                android:scrollHorizontally="false"
+                android:textSize="15sp"
+                tools:text="Deskripsi Motto Ditulis Disini " />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/btn_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="0dp"
+                android:paddingEnd="20dp"
+                android:text="Lewati"
+                android:textAlignment="viewStart"
+                android:textSize="15sp"
+                app:cornerRadius="20dp" />
+
+            <TextView
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="0dp"
+                android:paddingEnd="20dp"
+                android:text="Selanjutnya"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/greenSumbangsih"
+                android:textSize="15sp"
+                app:cornerRadius="20dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

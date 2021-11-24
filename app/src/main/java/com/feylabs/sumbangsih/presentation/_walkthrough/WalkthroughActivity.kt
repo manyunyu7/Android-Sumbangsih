@@ -6,9 +6,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.feylabs.sumbangsih.MainActivity
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.ActivityWalkthroughBinding
+import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPActivity
 import com.feylabs.sumbangsih.presentation._otp.WriteOTPActivity
 import com.feylabs.sumbangsih.util.BaseActivity
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
+import com.google.android.gms.common.internal.service.Common
 
 class WalkthroughActivity : BaseActivity() {
 
@@ -19,7 +22,19 @@ class WalkthroughActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        hideActionBar()
         setupViewpager()
+
+        if (!RazPreferenceHelper.isFirstTime(this)) {
+
+            if (RazPreferenceHelper.getPhoneNumber(this) != "") {
+                goToInputPinActivity()
+            } else {
+                goToNextActivity()
+            }
+        }
+
+        RazPreferenceHelper.setFirstTimeFalse(this)
 
         binding.btnSkip.setOnClickListener {
             goToNextActivity()
@@ -35,6 +50,12 @@ class WalkthroughActivity : BaseActivity() {
 
     private fun goToNextActivity() {
         startActivity(Intent(this, WriteOTPActivity::class.java))
+        finish()
+    }
+
+    private fun goToInputPinActivity() {
+        val intent = Intent(this, CommonControllerActivity::class.java)
+        intent.putExtra("desc", "logged_in")
         finish()
     }
 
