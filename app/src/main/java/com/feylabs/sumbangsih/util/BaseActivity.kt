@@ -3,6 +3,7 @@ package com.feylabs.sumbangsih.util
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import timber.log.Timber as CatetLog
 
 open class BaseActivity : AppCompatActivity() {
 

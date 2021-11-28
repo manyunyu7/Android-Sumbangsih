@@ -1,8 +1,7 @@
 package com.feylabs.sumbangsih.di
 
 import com.androidnetworking.interceptors.HttpLoggingInterceptor
-import com.feylabs.sumbangsih.data.web.AuthService
-import com.feylabs.sumbangsih.data.web.HomeService
+import com.feylabs.sumbangsih.data.source.remote.web.HomeService
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import okhttp3.OkHttpClient
 import org.koin.dsl.module

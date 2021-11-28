@@ -86,5 +86,7 @@ dependencies {
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
 
+    // TIMBER FOR LOGGING
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 }
