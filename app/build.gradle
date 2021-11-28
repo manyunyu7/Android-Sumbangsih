@@ -65,4 +65,26 @@ dependencies {
 
     implementation 'in.arjsna:passcodeview:1.2.1'
 
+    // Retrofit
+    def retrofit2_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    //Fast Android Networking --->OKHTTP Based
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
+    // Chucker
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+    // Interceptor
+    def interceptor_version = "4.7.2"
+    implementation "com.squareup.okhttp3:logging-interceptor:$interceptor_version"
+
+    //KOIN DEPENDENCY INJECTION
+    def koin_version= "2.1.5"
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+
+
 }
