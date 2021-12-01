@@ -2,15 +2,19 @@ package com.feylabs.sumbangsih.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.feylabs.sumbangsih.R
+import com.feylabs.sumbangsih.SharedViewModel
 import com.feylabs.sumbangsih.databinding.ActivityCommonControllerBinding
 import com.feylabs.sumbangsih.util.BaseActivity
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
+import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class CommonControllerActivity : BaseActivity() {
 
@@ -35,12 +39,17 @@ class CommonControllerActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navController.navigate(R.id.createPinFragment)
+        navController.navigate(R.id.navigation_createPinFragment)
+
+        val loggedInPhoneNumber = RazPreferenceHelper.getPhoneNumber(this)
+        if (RazPreferenceHelper.isLoggedIn(this) && loggedInPhoneNumber.isNotEmpty()) {
+            navController.navigate(R.id.navigation_dashboard)
+        }
 
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (getCurrentNav()) {
-                R.id.createPinFragment, R.id.verifPinFragment -> {
+                R.id.navigation_createPinFragment, R.id.navigation_verifPinFragment -> {
                     binding.navView.visibility = View.GONE
                     hideActionBar()
                 }
@@ -54,11 +63,11 @@ class CommonControllerActivity : BaseActivity() {
 
     }
 
-    fun showNavView(){
+    fun showNavView() {
         binding.navView.visibility = View.VISIBLE
     }
 
-    fun hideNavView(){
+    fun hideNavView() {
         binding.navView.visibility = View.GONE
     }
 

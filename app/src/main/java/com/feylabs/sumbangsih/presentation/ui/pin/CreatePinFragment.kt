@@ -11,6 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.FragmentCreatePinBinding
 import com.feylabs.sumbangsih.util.BaseFragment
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferencesConst
 
 
 class CreatePinFragment : BaseFragment() {
@@ -34,18 +37,52 @@ class CreatePinFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val number = RazPreferences(requireContext()).getPrefString(RazPreferencesConst.USER_NUMBER)
+        val hasNumber =
+            RazPreferences(requireContext()).getPrefBool(RazPreferencesConst.HAS_NUMBER) ?: false
+
+        val isLoggedIn = RazPreferenceHelper.isLoggedIn(requireContext()) ?: false
+
         binding.btnGoToVerif.setOnClickListener {
             val text = binding.passCodeView.passCodeText.toString().length
             if (text < 6) {
                 "Lengkapi Inputan".showLongToast()
             } else {
                 findNavController().navigate(
-                    R.id.verifPinFragment, bundleOf(
+                    R.id.navigation_verifPinFragment, bundleOf(
                         "firstPin" to binding.passCodeView.passCodeText
                     )
                 )
             }
         }
+
+        // if user has number that registered to server
+        if (hasNumber) {
+            binding.btnGoToVerif.setOnClickListener {
+
+            }
+            binding.apply {
+                btnGoToVerif.text = "Login"
+                this.tvDescPin.text =
+                    "Masukkan pin yang telah Anda atur ketika melakukan pendaftaran"
+                this.tvTitlePin.text = "Masukkan Pin Anda"
+            }
+
+            showToast(RazPreferences(requireContext()).getPrefString(RazPreferencesConst.USER_NUMBER))
+        }
+
+        if (isLoggedIn) {
+            val loggedInNumber = RazPreferenceHelper.getPhoneNumber(requireContext())
+            binding.apply {
+                tvChangeNumber.makeViewVisible()
+                tvForgotPin.makeViewVisible()
+                btnGoToVerif.text = "Login"
+                this.tvDescPin.text =
+                    "Masukkan pin yang telah Anda atur ketika melakukan pendaftaran (${loggedInNumber})"
+                this.tvTitlePin.text = "Masukkan Pin Anda"
+            }
+        }
+
     }
 
 }

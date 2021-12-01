@@ -25,15 +25,19 @@ class WalkthroughActivity : BaseActivity() {
         hideActionBar()
         setupViewpager()
 
-        if (!RazPreferenceHelper.isFirstTime(this)) {
-
-            if (RazPreferenceHelper.getPhoneNumber(this) != "") {
-                goToInputPinActivity()
-            } else {
-                goToNextActivity()
-            }
+        val loggedInNumber = RazPreferenceHelper.getPhoneNumber(this)
+        if (RazPreferenceHelper.isLoggedIn(this) && loggedInNumber.isNotEmpty()) {
+            goToInputPinActivity()
         }
 
+        // if this not the first time user open the app
+        // then skip the walkthrough
+        if (!RazPreferenceHelper.isFirstTime(this)) {
+            goToNextActivity()
+        }
+
+        // because the walkthrough is opened
+        // set this to false, so next time this walkthrough screen wont appeared again
         RazPreferenceHelper.setFirstTimeFalse(this)
 
         binding.btnSkip.setOnClickListener {
@@ -55,7 +59,6 @@ class WalkthroughActivity : BaseActivity() {
 
     private fun goToInputPinActivity() {
         val intent = Intent(this, CommonControllerActivity::class.java)
-        intent.putExtra("desc", "logged_in")
         finish()
     }
 

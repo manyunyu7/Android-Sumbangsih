@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.feylabs.sumbangsih.databinding.FragmentDashboardBinding
+import com.feylabs.sumbangsih.util.CommonHelper
+import com.feylabs.sumbangsih.util.CommonHelper.logout
 
 class DashboardFragment : Fragment() {
 
@@ -35,6 +37,14 @@ class DashboardFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnLogout.setOnClickListener {
+            logout()
+        }
     }
 
     override fun onDestroyView() {

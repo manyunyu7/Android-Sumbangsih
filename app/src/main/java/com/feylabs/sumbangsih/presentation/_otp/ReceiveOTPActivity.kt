@@ -2,22 +2,28 @@ package com.feylabs.sumbangsih.presentation._otp
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
-import com.feylabs.sumbangsih.MainActivity
-import com.feylabs.sumbangsih.R
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.feylabs.sumbangsih.SharedViewModel
+import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.databinding.ActivityReceiveOtpactivityBinding
 import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.util.BaseActivity
-import com.google.android.gms.common.internal.service.Common
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferencesConst
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthProvider
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReceiveOTPActivity : BaseActivity() {
+
+    private val vm: ReceiveOTPViewModel by viewModel()
 
     lateinit var mContext: Context
 
@@ -26,6 +32,25 @@ class ReceiveOTPActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         hideActionBar()
+
+        vm.pokeApi()
+
+        vm.pokeLiveData.observe(this, Observer {
+            when (it) {
+                is ManyunyuRes.Loading -> {
+                    "Loading".showLongToast()
+                }
+                is ManyunyuRes.Success -> {
+                    "${it.data}  ${it.message}".showLongToast()
+                }
+                is ManyunyuRes.Error -> {
+                    "${it.data}  ${it.message}".showLongToast()
+                }
+                else -> {
+                    showToast("Lohe Lohe")
+                }
+            }
+        })
 
         mContext = this
 
@@ -55,18 +80,10 @@ class ReceiveOTPActivity : BaseActivity() {
                             btnVerif.visibility = View.VISIBLE
 
                             if (it.isSuccessful) {
-                                Toast.makeText(
-                                    this@ReceiveOTPActivity,
-                                    "Login Berhasil",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                showToast("Login Berhasil")
                                 gotoNextActivity()
                             } else {
-                                Toast.makeText(
-                                    this@ReceiveOTPActivity,
-                                    "Kode OTP Salah",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                showToast("Kode OTP Salah")
                             }
                         }
 
@@ -78,7 +95,16 @@ class ReceiveOTPActivity : BaseActivity() {
     }
 
     private fun gotoNextActivity() {
-        val intent = Intent(this@ReceiveOTPActivity,CommonControllerActivity::class.java)
+
+        val hasNumber = intent.getBooleanExtra("hasNumber", false)
+        val number = intent.getStringExtra("mobile")
+
+        if (hasNumber) {
+            RazPreferences(this).save(RazPreferencesConst.HAS_NUMBER, hasNumber)
+            RazPreferenceHelper.savePhoneNumber(this, number.toString())
+        }
+
+        val intent = Intent(this@ReceiveOTPActivity, CommonControllerActivity::class.java)
         startActivity(intent)
     }
 

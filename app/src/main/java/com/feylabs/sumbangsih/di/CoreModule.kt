@@ -1,20 +1,37 @@
 package com.feylabs.sumbangsih.di
 
 import com.androidnetworking.interceptors.HttpLoggingInterceptor
-import com.feylabs.sumbangsih.data.source.remote.web.HomeService
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
+import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
+import com.feylabs.sumbangsih.presentation.ui.pin.AuthViewModel
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val networkModule = module{
-    single{
+val networkModule = module {
+    single {
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120,TimeUnit.SECONDS)
-            .readTimeout(120,TimeUnit.SECONDS)
+//            .authenticator(TokenAuthenticator(get(), get()))
+            .addInterceptor(
+                okhttp3.logging.HttpLoggingInterceptor()
+                    .setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(
+                ChuckerInterceptor.Builder(androidContext())
+                    .collector(ChuckerCollector(androidContext()))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(true)
+                    .build()
+            )
+//            .addInterceptor(HttpCustomInterceptor(get(), get()))
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
             .build()
     }
 
@@ -24,17 +41,21 @@ val networkModule = module{
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
-        retrofit.create(AuthService::class.java)
+        retrofit.create(AuthApiClient::class.java)
     }
-
-    single {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(get())
-            .build()
-        retrofit.create(HomeService::class.java)
-    }
+}
 
 
+val usecaseModule = module {
+//    factory<AuthUseCase> { AuthInteractor(get()) }
+}
+
+val viewModelModule = module {
+//    single { SharedViewModel(get(), get()) }
+    single { ReceiveOTPViewModel(get()) }
+    single { AuthViewModel(get()) }
+}
+
+val repositoryModule = module{
+//    single<IAuthRepository> { AuthRepository(get()) }
 }

@@ -2,6 +2,9 @@ package com.feylabs.sumbangsih
 
 import android.app.Application
 import com.feylabs.sumbangsih.di.networkModule
+import com.feylabs.sumbangsih.di.repositoryModule
+import com.feylabs.sumbangsih.di.usecaseModule
+import com.feylabs.sumbangsih.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -22,7 +25,10 @@ class SumbangsihApplication : Application() {
             androidContext(this@SumbangsihApplication)
             modules(
                 listOf(
-                    networkModule
+                    networkModule,
+                    repositoryModule,
+                    usecaseModule,
+                    viewModelModule
                 )
             )
         }

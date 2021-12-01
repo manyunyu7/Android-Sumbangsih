@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -20,6 +19,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/btn_back"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -29,6 +29,7 @@
                 app:tint="@color/redSumbangsih" />
 
             <TextView
+                android:id="@+id/tv_title_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
@@ -41,7 +42,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/label_desc_jargon"
+                android:id="@+id/tv_desc_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
@@ -72,11 +73,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_background"
             android:backgroundTint="@color/redSumbangsih"
             android:text="Next"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/tv_forgot_pin" />
+
+        <TextView
+            android:id="@+id/tv_forgot_pin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="none"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:fontFamily="@font/poppins_light"
+            android:scrollHorizontally="false"
+            android:text="Lupa Password ? Klik Disini"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_change_number"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_change_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="none"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_light"
+            android:scrollHorizontally="false"
+            android:text="Sudah Mengganti Nomor ? Klik Disini."
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

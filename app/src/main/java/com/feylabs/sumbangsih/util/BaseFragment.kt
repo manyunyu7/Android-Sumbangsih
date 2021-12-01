@@ -13,6 +13,15 @@ open class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    fun showToast(text: String?, isLong: Boolean = false) {
+        if (isLong) {
+            Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     fun String.showLongToast() {
         Toast.makeText(requireContext(), this, Toast.LENGTH_LONG).show()
     }
