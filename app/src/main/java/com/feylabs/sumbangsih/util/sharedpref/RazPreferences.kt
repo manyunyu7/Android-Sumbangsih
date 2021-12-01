@@ -31,8 +31,11 @@ class RazPreferences(context: Context) {
         editor.commit()
     }
 
-    fun getPrefBool(KEY_NAME: String): Boolean? {
-        return sharedPref.getBoolean(KEY_NAME, false)
+    fun getPrefBool(KEY_NAME: String): Boolean {
+        if (sharedPref.contains(KEY_NAME)) {
+            return sharedPref.getBoolean(KEY_NAME, false)
+        } else
+            return false
     }
 
     fun getPrefString(KEY_NAME: String): String? {
@@ -40,7 +43,7 @@ class RazPreferences(context: Context) {
     }
 
     fun getPrefInt(KEY_NAME: String): Int? {
-        return sharedPref.getInt(KEY_NAME,-9999)
+        return sharedPref.getInt(KEY_NAME, -9999)
     }
 
 

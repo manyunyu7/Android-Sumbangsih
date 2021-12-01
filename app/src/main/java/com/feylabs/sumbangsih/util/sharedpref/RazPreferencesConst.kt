@@ -6,6 +6,9 @@ object RazPreferencesConst {
   const val USER_ROLE = "sSSws"
   const val USER_ID = "das"
 
+  const val USER_NUMBER = "USER_NUMBER"
+  const val HAS_NUMBER = "USER HAS NUMBER"
+
 //  AIzaSyAoajgYBFmrbajptYkY6wkAsew_KsrMQxg
 
   const val USER_NAME ="dSEQEWWQ"

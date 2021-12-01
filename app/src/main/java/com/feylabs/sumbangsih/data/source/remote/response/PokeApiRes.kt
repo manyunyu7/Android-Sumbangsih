@@ -3,7 +3,7 @@ package com.feylabs.sumbangsih.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class CheckServiceModel(
+data class PokeApiRes(
     @SerializedName("changeLog")
     val changeLog: List<String>,
     @SerializedName("http_response")
@@ -18,4 +18,16 @@ data class CheckServiceModel(
     val version: String,
     @SerializedName("version_code_name")
     val versionCodeName: String
-)
+) {
+
+//    fun toPokeApi(): PokeApi {
+//        return PokeApi(
+//            changeLog = changeLog,
+//            httpResponse = httpResponse,
+//            messageEn = messageEn,
+//            messageId = messageId,
+//            quotesOfTheDay = quotesOfTheDay,
+//            version = version,
+//        )
+//    }
+}

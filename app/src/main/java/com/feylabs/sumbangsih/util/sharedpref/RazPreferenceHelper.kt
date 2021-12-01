@@ -33,13 +33,13 @@ object RazPreferenceHelper {
 
     fun setFirstTimeFalse(context: Context) {
         Preference(context).apply {
-            save("FIRST_TIME", false)
+            save("FIRST_TIME", "DSDS")
         }
     }
 
     fun isFirstTime(context: Context): Boolean {
         Preference(context).apply {
-            return getPrefBool("FIRST_TIME") ?: false
+            return !this.sharedPref.contains("FIRST_TIME")
         }
     }
 
@@ -65,7 +65,7 @@ object RazPreferenceHelper {
     fun getPhoneNumber(context: Context): String {
         Preference(context).apply {
             val number = getPrefString("CURRENT_PHONE_NUMBER").orEmpty()
-            return if (number != "")
+            return if (number.isNotEmpty())
                 number
             else ""
         }
