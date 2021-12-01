@@ -1,6 +1,7 @@
 package com.feylabs.sumbangsih.data.source.remote.web
 
 import com.feylabs.sumbangsih.data.source.remote.response.CheckNumberRes
+import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
 import com.feylabs.sumbangsih.data.source.remote.response.PokeApiRes
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -17,8 +18,6 @@ import retrofit2.Call
 import retrofit2.http.FormUrlEncoded
 
 
-
-
 interface AuthApiClient {
 
     @GET("auth/colek")
@@ -31,11 +30,12 @@ interface AuthApiClient {
         @QueryMap queryMap: Map<String, Any>
     ): Response<CheckNumberRes>
 
-    @POST("login")
+    @FormUrlEncoded
+    @POST("auth/login")
     @JvmSuppressWildcards
-    fun login(
-        @Body() queryMap: Map<String, Any>
-    ): Response<JsonElement>
+    suspend fun loginWithNumber(
+        @FieldMap queryMap: Map<String, Any>
+    ): Response<LoginWithNumberRes>
 
     @FormUrlEncoded
     @POST("auth/registerNumber")

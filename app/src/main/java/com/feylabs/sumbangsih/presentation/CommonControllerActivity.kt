@@ -43,9 +43,8 @@ class CommonControllerActivity : BaseActivity() {
 
         val loggedInPhoneNumber = RazPreferenceHelper.getPhoneNumber(this)
         if (RazPreferenceHelper.isLoggedIn(this) && loggedInPhoneNumber.isNotEmpty()) {
-            navController.navigate(R.id.navigation_dashboard)
+            navController.navigate(R.id.navigation_home)
         }
-
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (getCurrentNav()) {
@@ -61,6 +60,17 @@ class CommonControllerActivity : BaseActivity() {
 
         }
 
+    }
+
+    override fun onBackPressed() {
+        when (getCurrentNav()) {
+            R.id.navigation_createPinFragment -> {
+
+            }
+            else -> {
+                super.onBackPressed()
+            }
+        }
     }
 
     fun showNavView() {

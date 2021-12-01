@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.CheckNumberRes
+import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
 import com.feylabs.sumbangsih.data.source.remote.response.PokeApiRes
 import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
 import com.google.gson.JsonObject
@@ -23,6 +24,31 @@ class AuthViewModel(
         MutableLiveData()
     val regNumberLiveData get() = _regNumberLiveData
 
+
+    private var _loginNumberLiveData: MutableLiveData<ManyunyuRes<LoginWithNumberRes?>> =
+        MutableLiveData()
+    val loginNumberLiveData get() = _loginNumberLiveData
+
+    fun loginNumber(number: String, password: String) {
+        viewModelScope.launch {
+            _loginNumberLiveData.value = ManyunyuRes.Loading()
+            try {
+                val req = authApiClient.loginWithNumber(
+                    mapOf(
+                        "contact" to number,
+                        "password" to password
+                    )
+                )
+                if (req.isSuccessful) {
+                    _loginNumberLiveData.postValue(ManyunyuRes.Success(req.body()))
+                } else {
+                    _loginNumberLiveData.postValue(ManyunyuRes.Error(req.message()))
+                }
+            } catch (e: Exception) {
+                _loginNumberLiveData.postValue(ManyunyuRes.Error(e.message.toString()))
+            }
+        }
+    }
 
     fun registerNumber(number: String, password: String) {
         viewModelScope.launch {
