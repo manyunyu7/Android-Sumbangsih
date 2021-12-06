@@ -1,9 +1,9 @@
 package com.feylabs.sumbangsih.util
 
-import android.R
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import timber.log.Timber as CatetLog
 
@@ -21,7 +21,6 @@ open class BaseFragment : Fragment() {
         }
     }
 
-
     fun String.showLongToast() {
         Toast.makeText(requireContext(), this, Toast.LENGTH_LONG).show()
     }
@@ -33,5 +32,18 @@ open class BaseFragment : Fragment() {
     fun View.makeViewGone() {
         this.visibility = View.GONE
     }
+
+    fun hideActionBar(){
+        this.activity?.actionBar?.hide()
+        (activity as AppCompatActivity?)?.getSupportActionBar()?.hide()
+    }
+
+    fun showActionBar(){
+        this.activity?. actionBar?.show()
+        (activity as AppCompatActivity?)?.getSupportActionBar()?.show()
+    }
+
+
+
 
 }

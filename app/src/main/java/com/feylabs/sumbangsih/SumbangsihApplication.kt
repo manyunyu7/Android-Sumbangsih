@@ -13,6 +13,10 @@ import timber.log.Timber as Tanaman
 
 class SumbangsihApplication : Application() {
 
+    companion object {
+        const val URL_VIDEO = "http://makan-gratis.com/web_files/doc/1638754963.mp4"
+    }
+
     override fun onCreate() {
         super.onCreate()
 
