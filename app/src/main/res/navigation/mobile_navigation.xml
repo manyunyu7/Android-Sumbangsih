@@ -22,12 +22,19 @@
         android:name="com.feylabs.sumbangsih.presentation.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/navigation_createPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.pin.CreatePinFragment"
         android:label="CreatePinFragment" />
+
     <fragment
         android:id="@+id/navigation_verifPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.pin.VerifPinFragment"
         android:label="VerifPinFragment" />
+
+    <fragment
+        android:id="@+id/navigation_videoPlayerFragment"
+        android:name="com.feylabs.sumbangsih.presentation.video.VideoPlayerFragment"
+        android:label="VideoPlayerFragment" />
 </navigation>
