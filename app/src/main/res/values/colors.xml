@@ -46,5 +46,6 @@
     <color name="orange">#FABB02</color>
     <color name="chipDisabledBackgroundColor">#F4F4F4</color>
     <color name="chipDisabledBackgroundText">#CCCCCC</color>
+    <color name="grey_separator">#757575</color>
 
 </resources>

@@ -16,27 +16,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.feylabs.sumbangsih.presentation.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.feylabs.sumbangsih.presentation.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
         android:id="@+id/navigation_createPinFragment"
-        android:name="com.feylabs.sumbangsih.presentation.ui.pin.CreatePinFragment"
+        android:name="com.feylabs.sumbangsih.presentation.pin.CreatePinFragment"
         android:label="CreatePinFragment"
         tools:layout="@layout/fragment_create_pin"
         />
 
     <fragment
         android:id="@+id/navigation_verifPinFragment"
-        android:name="com.feylabs.sumbangsih.presentation.ui.pin.VerifPinFragment"
+        android:name="com.feylabs.sumbangsih.presentation.pin.VerifPinFragment"
         android:label="VerifPinFragment"
         tools:layout="@layout/fragment_verif_pin"
         />
@@ -53,5 +41,16 @@
         android:name="com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialFragment"
         android:label="DetailTutorialFragment"
         tools:layout="@layout/detail_tutorial_fragment"
+        />
+    <fragment
+        android:id="@+id/navigation_profileFragment"
+        android:name="com.feylabs.sumbangsih.presentation.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/navigation_detailNewsFragment"
+        android:name="com.feylabs.sumbangsih.presentation.ui.home.news.DetailNewsFragment"
+        android:label="DetailNewsFragment"
+        tools:layout="@layout/fragment_detail_news"
         />
 </navigation>

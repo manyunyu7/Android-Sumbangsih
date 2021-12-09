@@ -39,7 +39,7 @@ class CommonControllerActivity : BaseActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_profileFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -51,6 +51,9 @@ class CommonControllerActivity : BaseActivity() {
         if (RazPreferenceHelper.isLoggedIn(this) && loggedInPhoneNumber.isNotEmpty()) {
             navController.navigate(R.id.navigation_home)
         }
+
+        hideNavView()
+        hideActionBar()
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (getCurrentNav()) {
@@ -72,7 +75,7 @@ class CommonControllerActivity : BaseActivity() {
 
     private fun setStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.decorView.systemUiVisibility =View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             window.statusBarColor = Color.WHITE
         }
     }
@@ -88,13 +91,17 @@ class CommonControllerActivity : BaseActivity() {
         }
     }
 
+    fun hideCustomTopbar() {
+        binding.toolbar.makeViewGone()
+    }
+
     fun showNavView() {
         binding.navView.visibility = View.VISIBLE
 //        AnimUtil.animateFromResource(binding.navView,R.anim.anim_slide_in_top)
     }
 
     fun hideNavView() {
-        AnimUtil.animateFromResource(binding.navView,R.anim.anim_slide_out_bottom)
+//        AnimUtil.animateFromResource(binding.navView, R.anim.anim_slide_out_bottom)
         binding.navView.visibility = View.GONE
     }
 
