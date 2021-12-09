@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/redSumbangsih" />
+
+            <TextView
+                android:id="@+id/label_page_title_topbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@id/btn_back"
+                android:ellipsize="none"
+                android:fontFamily="@font/montserrat_bold"
+                android:scrollHorizontally="false"
+                android:textColor="@color/redSumbangsih"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="Apa Itu BLT" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_title_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            tools:text="Apa Itu BLT UMKM?"
+            android:textAlignment="viewStart"
+            android:textColor="@color/grey_c4"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textStyle="bold" />
+        
+        <ImageView
+            android:layout_marginTop="25dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/ic_faq"
+            app:tint="@color/redSumbangsih" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="35dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:fontFamily="@font/poppins_light"
+            android:scrollHorizontally="false"
+            android:textSize="15sp"
+            android:text="@string/content_tutor_1"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

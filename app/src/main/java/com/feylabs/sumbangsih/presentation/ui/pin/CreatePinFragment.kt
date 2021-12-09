@@ -35,7 +35,8 @@ class CreatePinFragment : BaseFragment() {
                 is ManyunyuRes.Success -> {
                     proceedLogin(it.data)
                 }
-                is ManyunyuRes.Default -> { }
+                is ManyunyuRes.Default -> {
+                }
                 is ManyunyuRes.Empty -> {
                     showToast("Login Gagal")
                 }
@@ -68,7 +69,8 @@ class CreatePinFragment : BaseFragment() {
         initObserver()
 
         val number = RazPreferenceHelper.getPhoneNumber(requireContext())
-        val hasNumber = RazPreferences(requireContext()).getPrefBool(RazPreferencesConst.HAS_NUMBER) ?: false
+        val hasNumber =
+            RazPreferences(requireContext()).getPrefBool(RazPreferencesConst.HAS_NUMBER) ?: false
 
         val isLoggedIn = RazPreferenceHelper.isLoggedIn(requireContext()) ?: false
 
@@ -88,7 +90,7 @@ class CreatePinFragment : BaseFragment() {
         // if user has number that registered to server
         if (hasNumber) {
             binding.btnGoToVerif.setOnClickListener {
-                viewModel.loginNumber(number,binding.passCodeView.passCodeText)
+                viewModel.loginNumber(number, binding.passCodeView.passCodeText)
             }
             binding.apply {
                 btnGoToVerif.text = "Login"
@@ -99,8 +101,13 @@ class CreatePinFragment : BaseFragment() {
         }
 
         if (isLoggedIn) {
+            binding.passCodeView.setOnTextChangeListener {
+                if (it.length == 6) {
+                    viewModel.loginNumber(number, binding.passCodeView.passCodeText)
+                }
+            }
             binding.btnGoToVerif.setOnClickListener {
-                viewModel.loginNumber(number,binding.passCodeView.passCodeText)
+                viewModel.loginNumber(number, binding.passCodeView.passCodeText)
             }
             val loggedInNumber = RazPreferenceHelper.getPhoneNumber(requireContext())
             binding.apply {

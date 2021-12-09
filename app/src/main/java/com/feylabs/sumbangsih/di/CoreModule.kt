@@ -6,6 +6,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
+import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
 import com.feylabs.sumbangsih.presentation.ui.pin.AuthViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +21,8 @@ val networkModule = module {
 //            .authenticator(TokenAuthenticator(get(), get()))
             .addInterceptor(
                 okhttp3.logging.HttpLoggingInterceptor()
-                    .setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY))
+                    .setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY)
+            )
             .addInterceptor(
                 ChuckerInterceptor.Builder(androidContext())
                     .collector(ChuckerCollector(androidContext()))
@@ -54,8 +56,9 @@ val viewModelModule = module {
 //    single { SharedViewModel(get(), get()) }
     single { ReceiveOTPViewModel(get()) }
     single { AuthViewModel(get()) }
+    single { DetailTutorialViewModel() }
 }
 
-val repositoryModule = module{
+val repositoryModule = module {
 //    single<IAuthRepository> { AuthRepository(get()) }
 }
