@@ -14,6 +14,7 @@ import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.SumbangsihApplication.Companion.URL_VIDEO
 import com.feylabs.sumbangsih.databinding.FragmentHomeBinding
 import com.feylabs.sumbangsih.util.BaseFragment
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 
 class HomeFragment : BaseFragment() {
 
@@ -47,6 +48,30 @@ class HomeFragment : BaseFragment() {
                 bundleOf("url" to URL_VIDEO)
             )
         }
+
+        val number = RazPreferenceHelper.getPhoneNumber(requireContext())
+        binding.tvSapa.text = number
+
+        binding.includeHomeTutor.apply {
+            btnTutorBlt.setOnClickListener {
+                goToDetailTutorFragment(1)
+            }
+
+            btnTutorSuratPengajuan.setOnClickListener {
+                goToDetailTutorFragment(2)
+            }
+
+            btnTutorStep.setOnClickListener {
+                goToDetailTutorFragment(3)
+            }
+        }
+    }
+
+    private fun goToDetailTutorFragment(tutorType: Int) {
+        findNavController().navigate(
+            R.id.action_navigation_home_to_navigation_detailTutorialFragment,
+            bundleOf("tutor_type" to tutorType)
+        )
     }
 
     override fun onDestroyView() {

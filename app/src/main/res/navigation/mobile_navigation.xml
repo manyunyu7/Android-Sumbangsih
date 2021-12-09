@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.feylabs.sumbangsih.presentation.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_detailTutorialFragment"
+            app:destination="@id/navigation_detailTutorialFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -26,15 +30,28 @@
     <fragment
         android:id="@+id/navigation_createPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.pin.CreatePinFragment"
-        android:label="CreatePinFragment" />
+        android:label="CreatePinFragment"
+        tools:layout="@layout/fragment_create_pin"
+        />
 
     <fragment
         android:id="@+id/navigation_verifPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.pin.VerifPinFragment"
-        android:label="VerifPinFragment" />
+        android:label="VerifPinFragment"
+        tools:layout="@layout/fragment_verif_pin"
+        />
 
     <fragment
         android:id="@+id/navigation_videoPlayerFragment"
         android:name="com.feylabs.sumbangsih.presentation.video.VideoPlayerFragment"
-        android:label="VideoPlayerFragment" />
+        android:label="VideoPlayerFragment"
+        tools:layout="@layout/fragment_video_player"
+        />
+
+    <fragment
+        android:id="@+id/navigation_detailTutorialFragment"
+        android:name="com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialFragment"
+        android:label="DetailTutorialFragment"
+        tools:layout="@layout/detail_tutorial_fragment"
+        />
 </navigation>
