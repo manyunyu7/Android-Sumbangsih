@@ -19,4 +19,32 @@ Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <string name="content_tutor_1">Program BPUM atau BLT UMKM merupakan strategi pemerintah dalam upaya pemulihan ekonomi nasional untuk membantu pelaku usaha mikro agar bertahan dan bangkit di tengah pandemi Covid-19.
+
+\n\nBesaran yang diberikan pada program BPUM tahun 2021 sekitar 1,2 juta rupiah. Jumlah tersebut berkurang dibandingkan tahun lalu, yaitu Rp2,4 juta untuk setiap pelaku usaha.
+
+\n\nBantuan bagi pelaku usaha merupakan dana hibah, bukan pinjaman ataupun kredit. Penerima tidak dipungut biaya apapun dalam menerima penyaluran bantuan bagi Pelaku Usaha Mikro.
+
+\n\nPenyalur bantuan bagi Pelaku Usaha Mikro adalah BUMN, BUMD, serta PT Pos Indonesia yang ditetapkan oleh pemerintah.
+</string>
+
+    <string name="content_tutor_2">• Warga Negara Indonesia (WNI) \n
+        • Memiliki Kartu Tanda Penduduk (KTP) elektronik \n
+        • Memiliki usaha mikro \n
+        • Bukan ASN, anggota TNI/POLRI, pegawai BUMN atau BUMD \n
+        • Tidak sedang menerima kredit usaha mikro (KUR) dari perbankan \n
+</string>
+
+    <string name="content_tutor_3">
+    <ul>• Siapkan KTP, Foto usaha dan pastikan sedang berada di rumah \n
+        • Buka Aplikasi sumbangsih \n
+        • Pastikan anda telah melakukan verifikasi data \n
+        • Klik menu pengajuan \n
+        • Klik ajukan sekarang \n
+        • Maka akan muncul pop up langkah-langkah pendaftaran \n
+        • Ikuti langkah-langkah pendaftaran sesuai intruksi dari aplikasi \n
+    </ul>
+</string>
 </resources>
