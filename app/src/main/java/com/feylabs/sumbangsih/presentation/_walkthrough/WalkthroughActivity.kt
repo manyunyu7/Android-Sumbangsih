@@ -44,6 +44,8 @@ class WalkthroughActivity : BaseActivity() {
             goToNextActivity()
         }
 
+        binding.labelTitleJargon.text=getString(R.string.title_on_board_1)
+        binding.labelDescJargon.text=getString(R.string.text_on_board_1)
         binding.btnNext.setOnClickListener {
             if (currentItem < 2)
                 binding.viewPager.currentItem = currentItem + 1

@@ -1,17 +1,16 @@
-package com.feylabs.sumbangsih.presentation.ui.pin
+package com.feylabs.sumbangsih.presentation.pin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
 import com.feylabs.sumbangsih.databinding.FragmentCreatePinBinding
+import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
@@ -52,7 +51,7 @@ class CreatePinFragment : BaseFragment() {
 
     private fun proceedLogin(data: LoginWithNumberRes?) {
         showToast("Login Berhasil")
-        findNavController().navigate(R.id.navigation_dashboard)
+        findNavController().navigate(R.id.navigation_home)
     }
 
     override fun onCreateView(
@@ -66,6 +65,7 @@ class CreatePinFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (getActivity() as CommonControllerActivity).hideCustomTopbar()
         initObserver()
 
         val number = RazPreferenceHelper.getPhoneNumber(requireContext())

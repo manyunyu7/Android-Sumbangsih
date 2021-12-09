@@ -19,7 +19,7 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="55dp"
@@ -33,20 +33,24 @@
                 android:textAlignment="textStart"
                 android:textColor="@color/redSumbangsih"
                 android:textSize="25sp"
-                tools:text="Judul Jargon Ditulis Disini" />
+                tools:text="Judul Jargon Ditulis Disini"
+                app:layout_constraintBottom_toTopOf="@id/label_desc_jargon"
+                />
 
             <TextView
                 android:id="@+id/label_desc_jargon"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ellipsize="none"
                 android:fontFamily="@font/poppins_light"
                 android:scrollHorizontally="false"
                 android:textSize="15sp"
-                tools:text="Deskripsi Motto Ditulis Disini " />
+                tools:text="Deskripsi Motto Ditulis Disini "
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

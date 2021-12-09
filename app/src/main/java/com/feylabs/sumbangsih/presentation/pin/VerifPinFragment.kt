@@ -1,4 +1,4 @@
-package com.feylabs.sumbangsih.presentation.ui.pin
+package com.feylabs.sumbangsih.presentation.pin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.databinding.FragmentVerifPinBinding
+import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -56,11 +57,12 @@ class VerifPinFragment : BaseFragment() {
     private fun proceedLogin(number: String) {
         RazPreferenceHelper.savePhoneNumber(requireContext(), number)
         RazPreferenceHelper.isLoggedIn(requireContext())
-        findNavController().navigate(R.id.navigation_dashboard)
+        findNavController().navigate(R.id.navigation_home)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (getActivity() as CommonControllerActivity).hideCustomTopbar()
         initObserver()
 
         binding.btnNext.setOnClickListener {

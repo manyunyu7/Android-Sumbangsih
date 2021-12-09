@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:fontFamily="@font/poppins_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Pengaturan Akun" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_menu_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Data Diri"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_baseline_mode_edit_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_menu_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_menu_1"
+            app:tint="@color/redSumbangsih" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/grey_separator"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_menu_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Ubah PIN"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_baseline_lock_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_menu_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_menu_2"
+            app:tint="@color/redSumbangsih" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/grey_separator"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Tentang" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_menu_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="FAQ"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_icon_faq"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_menu_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_menu_3"
+            app:tint="@color/redSumbangsih" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/grey_separator"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_menu_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Customer Service"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_icon_cs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_menu_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_menu_4"
+            app:tint="@color/redSumbangsih" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/grey_separator"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_menu_5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Syarat &amp; Ketentuan"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_icon_tos"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_menu_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_menu_5"
+            app:tint="@color/redSumbangsih" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/grey_separator"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_menu_6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Kebijakan Privasi"
+            android:textSize="15sp"
+            app:drawableStartCompat="@drawable/ic_icon_privasi"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_menu_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_menu_6"
+            app:tint="@color/redSumbangsih" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/grey_separator"
+            app:layout_constraintTop_toBottomOf="@id/tv_menu_6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keluar"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:cornerRadius="20dp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_medium"
+        />
+
+
+
+</LinearLayout>
