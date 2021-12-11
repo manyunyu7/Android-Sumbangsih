@@ -1,6 +1,7 @@
 package com.feylabs.sumbangsih.util
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -50,6 +51,20 @@ object ImageView {
                 }
 
             })
+            .into(this)
+    }
+
+    fun ImageView.loadImage(
+        context: Context,
+        drawable: Int,
+//        thumbnailsType: ThumbnailsType = ThumbnailsType.LOADING_1
+    ) {
+        Glide.with(context)
+            .load(drawable)
+//            .placeholder(thumbnailsType.value)
+            .thumbnail(Glide.with(context).load(R.raw.ic_loading_google).fitCenter())
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .into(this)
     }
 
