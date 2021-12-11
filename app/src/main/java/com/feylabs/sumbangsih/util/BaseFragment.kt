@@ -5,6 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.feylabs.sumbangsih.R
+import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import timber.log.Timber as CatetLog
 
 open class BaseFragment : Fragment() {
@@ -33,17 +36,38 @@ open class BaseFragment : Fragment() {
         this.visibility = View.GONE
     }
 
-    fun hideActionBar(){
+    fun hideActionBar() {
         this.activity?.actionBar?.hide()
         (activity as AppCompatActivity?)?.getSupportActionBar()?.hide()
     }
 
-    fun showActionBar(){
-        this.activity?. actionBar?.show()
+    fun showActionBar() {
+        this.activity?.actionBar?.show()
         (activity as AppCompatActivity?)?.getSupportActionBar()?.show()
     }
 
+    fun hideSumbangsihToolbar() {
+        try {
+            (getActivity() as CommonControllerActivity).hideCustomTopbar()
+        } catch (e: Exception) {
 
+        }
+    }
+
+    fun showSumbangsihToolbar() {
+        try {
+            (getActivity() as CommonControllerActivity).showCustomTopbar()
+        } catch (e: Exception) {
+
+        }
+    }
+
+    fun makeSrlLoading(value:Boolean=false){
+        val srl = view?.findViewById<SwipeRefreshLayout>(R.id.srl)
+        if(srl!=null){
+            srl.isRefreshing = value
+        }
+    }
 
 
 }
