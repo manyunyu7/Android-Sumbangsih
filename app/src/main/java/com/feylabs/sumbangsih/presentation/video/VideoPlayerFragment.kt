@@ -12,7 +12,6 @@ import com.feylabs.sumbangsih.util.BaseFragment
 
 class VideoPlayerFragment : BaseFragment() {
 
-
     var _binding : FragmentVideoPlayerBinding? = null
     val binding get() = _binding as FragmentVideoPlayerBinding
 
@@ -27,6 +26,7 @@ class VideoPlayerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideSumbangsihToolbar()
         hideActionBar()
         val url = arguments?.getString("url").toString()
         binding.andExoPlayerView.setSource(url)

@@ -65,7 +65,8 @@ class CreatePinFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (getActivity() as CommonControllerActivity).hideCustomTopbar()
+        hideSumbangsihToolbar()
+        makeSrlLoading(true)
         initObserver()
 
         val number = RazPreferenceHelper.getPhoneNumber(requireContext())
@@ -101,6 +102,7 @@ class CreatePinFragment : BaseFragment() {
         }
 
         if (isLoggedIn) {
+            binding.btnBack.makeViewGone()
             binding.passCodeView.setOnTextChangeListener {
                 if (it.length == 6) {
                     viewModel.loginNumber(number, binding.passCodeView.passCodeText)

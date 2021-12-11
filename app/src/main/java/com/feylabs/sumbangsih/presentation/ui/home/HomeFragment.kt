@@ -29,13 +29,20 @@ class HomeFragment : BaseFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val adapter by lazy { NewsAdapter() }
+    private val mAdapter by lazy { NewsAdapter() }
 
     private fun initUI() {
-        binding.rvNews.adapter = adapter
+        binding.tvNewsAll.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_listAllNewsFragment)
+        }
+        binding.btnNewsAll.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_listAllNewsFragment)
+        }
+
+        binding.rvNews.adapter = mAdapter
         binding.rvNews.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        adapter.newsGridClickAdapter = object : OnNewsGridClick {
+        mAdapter.newsGridClickAdapter = object : OnNewsGridClick {
             override fun onclick(model: NewsResponse.NewsResponseItem) {
                 findNavController().navigate(
                     R.id.navigation_detailNewsFragment, bundleOf(
@@ -67,8 +74,8 @@ class HomeFragment : BaseFragment() {
                 }
                 is ManyunyuRes.Success -> {
                     it.data?.toMutableList()?.let { data ->
-                        adapter.setWholeData(data)
-                        adapter.notifyDataSetChanged()
+                        mAdapter.setWholeData(data)
+                        mAdapter.notifyDataSetChanged()
                     }
                 }
             }

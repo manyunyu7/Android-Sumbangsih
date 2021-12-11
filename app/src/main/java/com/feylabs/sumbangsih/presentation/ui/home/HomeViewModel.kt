@@ -21,19 +21,20 @@ class HomeViewModel(val newsApiClient: NewsApiClient) : ViewModel() {
     val newsLiveData get() = _newsLiveData
 
     fun getNews() {
+        _newsLiveData.postValue(ManyunyuRes.Loading())
         viewModelScope.launch {
             val req = newsApiClient.fetchNews()
             try {
                 val body = req.body()
-                if (req.isSuccessful){
-                    if(body!=null){
-                        if(!body.isEmpty()){
+                if (req.isSuccessful) {
+                    if (body != null) {
+                        if (!body.isEmpty()) {
                             _newsLiveData.postValue(ManyunyuRes.Success(body))
-                        }else{
+                        } else {
                             _newsLiveData.postValue(ManyunyuRes.Empty())
                         }
                     }
-                }else{
+                } else {
                     _newsLiveData.postValue(ManyunyuRes.Error("Terjadi Kesalahan"))
                 }
 

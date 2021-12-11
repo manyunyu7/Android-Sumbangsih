@@ -32,6 +32,7 @@ class DetailTutorialFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideSumbangsihToolbar()
         hideActionBar()
         val args = arguments?.getInt("tutor_type") ?: 0
 

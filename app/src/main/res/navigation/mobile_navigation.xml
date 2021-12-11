@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_detailTutorialFragment"
             app:destination="@id/navigation_detailTutorialFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_listAllNewsFragment"
+            app:destination="@id/navigation_listAllNewsFragment" />
     </fragment>
 
     <fragment
@@ -53,4 +56,9 @@
         android:label="DetailNewsFragment"
         tools:layout="@layout/fragment_detail_news"
         />
+    <fragment
+        android:id="@+id/navigation_listAllNewsFragment"
+        android:name="com.feylabs.sumbangsih.presentation.ui.home.news.ListAllNewsFragment"
+        android:label="list_all_news_fragment"
+        tools:layout="@layout/list_all_news_fragment" />
 </navigation>

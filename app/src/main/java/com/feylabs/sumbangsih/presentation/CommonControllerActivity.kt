@@ -15,6 +15,7 @@ import com.feylabs.sumbangsih.SharedViewModel
 import com.feylabs.sumbangsih.databinding.ActivityCommonControllerBinding
 import com.feylabs.sumbangsih.util.AnimUtil
 import com.feylabs.sumbangsih.util.BaseActivity
+import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -42,7 +43,7 @@ class CommonControllerActivity : BaseActivity() {
                 R.id.navigation_home, R.id.navigation_profileFragment
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         navController.navigate(R.id.navigation_createPinFragment)
@@ -52,7 +53,7 @@ class CommonControllerActivity : BaseActivity() {
             navController.navigate(R.id.navigation_home)
         }
 
-        hideNavView()
+        showNavView()
         hideActionBar()
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
@@ -62,6 +63,15 @@ class CommonControllerActivity : BaseActivity() {
                 -> {
                     hideNavView()
                     hideActionBar()
+                }
+                R.id.navigation_home -> {
+                    showCustomTopbar()
+                }
+                R.id.navigation_profileFragment -> {
+                    showCustomTopbar()
+                }
+                R.id.navigation_listAllNewsFragment -> {
+                    hideCustomTopbar()
                 }
                 else -> {
                     showNavView()
@@ -82,8 +92,22 @@ class CommonControllerActivity : BaseActivity() {
 
     override fun onBackPressed() {
         when (getCurrentNav()) {
+            R.id.navigation_home -> {
+                DialogUtils.showCustomDialog(
+                    context = this,
+                    title = "Anda Yakin ?",
+                    message = "Ingin Menutup Aplikasi Sumbangsih ?",
+                    positiveAction = Pair("Ya", {
+                        finish();
+                        System.exit(0);
+                    }),
+                    negativeAction = Pair("Tidak", {
+                    }),
+                    autoDismiss = true,
+                    buttonAllCaps = false
+                )
+            }
             R.id.navigation_createPinFragment -> {
-
             }
             else -> {
                 super.onBackPressed()
@@ -93,6 +117,10 @@ class CommonControllerActivity : BaseActivity() {
 
     fun hideCustomTopbar() {
         binding.toolbar.makeViewGone()
+    }
+
+    fun showCustomTopbar() {
+        binding.toolbar.makeViewVisible()
     }
 
     fun showNavView() {
