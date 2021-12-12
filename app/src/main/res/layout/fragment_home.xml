@@ -144,6 +144,14 @@
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_news"/>
 
+            <include
+                android:id="@+id/rv_news_placeholder"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                layout="@layout/lshimmer_news_home"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

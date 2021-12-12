@@ -4,7 +4,9 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toolbar
 import androidx.activity.viewModels
+import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,10 +25,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CommonControllerActivity : BaseActivity() {
 
     private lateinit var binding: ActivityCommonControllerBinding
+    private val commonViewModel by viewModel<CommonViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setStatusBar()
 
         binding = ActivityCommonControllerBinding.inflate(layoutInflater)
@@ -45,17 +47,22 @@ class CommonControllerActivity : BaseActivity() {
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        navController.navigate(R.id.navigation_createPinFragment)
+//        navView.
+//        navController.navigate(R.id.navigation_createPinFragment)
 
         val loggedInPhoneNumber = RazPreferenceHelper.getPhoneNumber(this)
         if (RazPreferenceHelper.isLoggedIn(this) && loggedInPhoneNumber.isNotEmpty()) {
             navController.navigate(R.id.navigation_home)
         }
 
+        hideCustomTopbar()
         showNavView()
         hideActionBar()
 
+        addNavChangedListener(navController)
+    }
+
+    private fun addNavChangedListener(navController: NavController) {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (getCurrentNav()) {
                 R.id.navigation_createPinFragment, R.id.navigation_verifPinFragment,
@@ -65,6 +72,7 @@ class CommonControllerActivity : BaseActivity() {
                     hideActionBar()
                 }
                 R.id.navigation_home -> {
+                    showNavView()
                     showCustomTopbar()
                 }
                 R.id.navigation_profileFragment -> {
@@ -76,6 +84,20 @@ class CommonControllerActivity : BaseActivity() {
                 else -> {
                     showNavView()
                     showActionBar()
+                }
+            }
+
+            /*
+            Show Topbar and NavView only on main menu
+             */
+            when (getCurrentNav()) {
+                R.id.navigation_home, R.id.navigation_profileFragment -> {
+                    showNavView()
+                    showCustomTopbar()
+                }
+                else -> {
+                    hideNavView()
+                    hideCustomTopbar()
                 }
             }
 
@@ -116,6 +138,7 @@ class CommonControllerActivity : BaseActivity() {
     }
 
     fun hideCustomTopbar() {
+        findViewById<Toolbar>(R.id.toolbar).makeViewGone()
         binding.toolbar.makeViewGone()
     }
 

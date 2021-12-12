@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_createPinFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_navigation_home_to_listAllNewsFragment"
             app:destination="@id/navigation_listAllNewsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_KTPVerifStep1Fragment"
+            app:destination="@id/KTPVerifStep1Fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_detailNewsFragment"
+            app:destination="@id/navigation_detailNewsFragment" />
     </fragment>
 
     <fragment
@@ -60,5 +66,26 @@
         android:id="@+id/navigation_listAllNewsFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.home.news.ListAllNewsFragment"
         android:label="list_all_news_fragment"
-        tools:layout="@layout/list_all_news_fragment" />
+        tools:layout="@layout/list_all_news_fragment" >
+        <action
+            android:id="@+id/action_navigation_listAllNewsFragment_to_navigation_detailNewsFragment"
+            app:destination="@id/navigation_detailNewsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/KTPVerifStep1Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep1Fragment"
+        android:label="KTPVerifStep1Fragment"
+        tools:layout="@layout/ktp_verif_step_1_fragment"
+        >
+        <action
+            android:id="@+id/action_KTPVerifStep1Fragment_to_KTPVerifStep2Fragment"
+            app:destination="@id/KTPVerifStep2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/KTPVerifStep2Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep2Fragment"
+        android:label="KTPVerifStep2Fragment"
+        tools:layout="@layout/ktp_verif_step_2_fragment"
+        />
 </navigation>

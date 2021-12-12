@@ -65,9 +65,8 @@ class CreatePinFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideSumbangsihToolbar()
-        makeSrlLoading(true)
         initObserver()
+        hideSumbangsihToolbar()
 
         val number = RazPreferenceHelper.getPhoneNumber(requireContext())
         val hasNumber =
@@ -92,12 +91,13 @@ class CreatePinFragment : BaseFragment() {
         if (hasNumber) {
             binding.btnGoToVerif.setOnClickListener {
                 viewModel.loginNumber(number, binding.passCodeView.passCodeText)
+                RazPreferences(requireContext()).removeKey(RazPreferencesConst.HAS_NUMBER)
             }
             binding.apply {
                 btnGoToVerif.text = "Login"
+                this.tvTitlePin.text = "Masukkan Pin Anda"
                 this.tvDescPin.text =
                     "Masukkan pin yang telah Anda atur ketika melakukan pendaftaran"
-                this.tvTitlePin.text = "Masukkan Pin Anda"
             }
         }
 

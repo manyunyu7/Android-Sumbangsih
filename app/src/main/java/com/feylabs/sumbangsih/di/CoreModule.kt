@@ -5,12 +5,18 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
 import com.feylabs.sumbangsih.data.source.remote.web.NewsApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
+import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
 import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
 import com.feylabs.sumbangsih.presentation.pin.AuthViewModel
 import com.feylabs.sumbangsih.presentation.ui.home.HomeViewModel
+import com.feylabs.sumbangsih.presentation.ui.home.news.ListAllNewsViewModel
+import com.google.android.gms.common.internal.service.Common
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,7 +33,7 @@ val networkModule = module {
             .addInterceptor(
                 ChuckerInterceptor.Builder(androidContext())
                     .collector(ChuckerCollector(androidContext()))
-                    .maxContentLength(250000L)
+                    .maxContentLength(25000000L)
                     .redactHeaders(emptySet())
                     .alwaysReadResponseBody(true)
                     .build()
@@ -35,6 +41,8 @@ val networkModule = module {
 //            .addInterceptor(HttpCustomInterceptor(get(), get()))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+//            .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
+//            .protocols(listOf(Protocol.HTTP_1_1))
             .build()
     }
 
@@ -48,12 +56,12 @@ val networkModule = module {
     }
 
     single {
-        val retrofit = Retrofit.Builder()
+        val retrofitz = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
-        retrofit.create(NewsApiClient::class.java)
+        retrofitz.create(NewsApiClient::class.java)
     }
 }
 
@@ -68,6 +76,8 @@ val viewModelModule = module {
     single { AuthViewModel(get()) }
     single { DetailTutorialViewModel() }
     single { HomeViewModel(get()) }
+    single { ListAllNewsViewModel() }
+    viewModel { CommonViewModel(get(), get()) }
 }
 
 val repositoryModule = module {

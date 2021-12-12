@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.presentation.CommonControllerActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import timber.log.Timber as CatetLog
 
 open class BaseFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    val job = Job()
+    val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     fun showToast(text: String?, isLong: Boolean = false) {
         if (isLong) {
@@ -50,7 +52,7 @@ open class BaseFragment : Fragment() {
         try {
             (getActivity() as CommonControllerActivity).hideCustomTopbar()
         } catch (e: Exception) {
-
+            showToast(e.toString())
         }
     }
 

@@ -23,6 +23,6 @@ interface NewsApiClient {
 
     @GET("news/get")
     suspend fun fetchNews(
-    ): Response<NewsResponse>
+    ): Response<NewsResponse?>
 
 }

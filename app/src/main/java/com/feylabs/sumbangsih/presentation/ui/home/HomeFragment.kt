@@ -1,15 +1,12 @@
 package com.feylabs.sumbangsih.presentation.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.feylabs.sumbangsih.R
@@ -17,26 +14,38 @@ import com.feylabs.sumbangsih.SumbangsihApplication.Companion.URL_VIDEO
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.NewsResponse
 import com.feylabs.sumbangsih.databinding.FragmentHomeBinding
+import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
 
+    //    val homeViewModel: CommonViewModel by sharedViewModel<CommonViewModel>()
     val homeViewModel: HomeViewModel by viewModel()
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding as FragmentHomeBinding
+
     private val mAdapter by lazy { NewsAdapter() }
 
     private fun initUI() {
+        binding.tvMenuNews.setOnClickListener {
+            homeViewModel.getNews()
+        }
+
         binding.tvNewsAll.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_listAllNewsFragment)
         }
         binding.btnNewsAll.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_listAllNewsFragment)
+        }
+
+        binding.btnVerifNikCard.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_KTPVerifStep1Fragment)
         }
 
         binding.rvNews.adapter = mAdapter
@@ -55,24 +64,31 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initData() {
-        homeViewModel.getNews()
+        uiScope.launch(Dispatchers.IO) {
+            homeViewModel.getNews()
+        }
     }
 
     private fun initObserver() {
         homeViewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ManyunyuRes.Default -> {
+                    setNewsLoading(false)
                 }
                 is ManyunyuRes.Empty -> {
+                    setNewsLoading(false)
                     showToast("Tidak Ada Data")
                 }
                 is ManyunyuRes.Error -> {
+                    setNewsLoading(false)
+                    binding.tvMenuNews.text = it.message
                     showToast(it.message.toString())
                 }
                 is ManyunyuRes.Loading -> {
-                    showToast("Memuat Berita")
+                    setNewsLoading(true)
                 }
                 is ManyunyuRes.Success -> {
+                    setNewsLoading(false)
                     it.data?.toMutableList()?.let { data ->
                         mAdapter.setWholeData(data)
                         mAdapter.notifyDataSetChanged()
@@ -80,6 +96,16 @@ class HomeFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    private fun setNewsLoading(b: Boolean) {
+        if (b) {
+            binding.rvNewsPlaceholder.root.makeViewVisible()
+            binding.rvNews.makeViewGone()
+        } else {
+            binding.rvNews.makeViewVisible()
+            binding.rvNewsPlaceholder.root.makeViewGone()
+        }
     }
 
     override fun onCreateView(

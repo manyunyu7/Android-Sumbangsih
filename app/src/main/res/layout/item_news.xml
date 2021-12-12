@@ -52,6 +52,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp"
+                    android:text="Loading..."
                     tools:text="Judul Berita Disini" />
 
                 <TextView
@@ -64,6 +65,7 @@
                     android:ellipsize="marquee"
                     android:fontFamily="@font/sf_pro_display"
                     android:singleLine="true"
+                    android:text="Loading..."
                     android:textColor="@color/colorWhite"
                     android:textSize="12sp"
                     tools:text="Judul Berita Disini" />

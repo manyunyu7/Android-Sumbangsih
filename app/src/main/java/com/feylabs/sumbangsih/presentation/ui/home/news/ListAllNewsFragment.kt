@@ -15,19 +15,20 @@ import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.NewsResponse
 import com.feylabs.sumbangsih.databinding.FragmentDetailNewsBinding
 import com.feylabs.sumbangsih.databinding.ListAllNewsFragmentBinding
+import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.presentation.ui.home.HomeViewModel
 import com.feylabs.sumbangsih.presentation.ui.home.NewsAdapter
 import com.feylabs.sumbangsih.presentation.ui.home.OnNewsGridClick
 import com.feylabs.sumbangsih.util.BaseFragment
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListAllNewsFragment : BaseFragment() {
 
-
     private var _binding: ListAllNewsFragmentBinding? = null
     private val binding get() = _binding as ListAllNewsFragmentBinding
 
-    private val viewModel: HomeViewModel by viewModel()
+    private val viewModel: CommonViewModel by sharedViewModel<CommonViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,7 +89,7 @@ class ListAllNewsFragment : BaseFragment() {
                     showToast(it.message.toString())
                 }
                 is ManyunyuRes.Loading -> {
-                    showToast("Memuat Berita")
+
                 }
                 is ManyunyuRes.Success -> {
                     it.data?.toMutableList()?.let { data ->
