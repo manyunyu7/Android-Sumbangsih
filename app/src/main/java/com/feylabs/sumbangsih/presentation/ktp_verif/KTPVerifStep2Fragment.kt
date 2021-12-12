@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.KtpVerifStep2FragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -29,6 +30,10 @@ class KTPVerifStep2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNegative.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.btnPositive.setOnClickListener {
+            findNavController().navigate(R.id.action_KTPVerifStep2Fragment_to_KTPVerifStep3Fragment)
         }
 
         binding.btnBack.setOnClickListener {

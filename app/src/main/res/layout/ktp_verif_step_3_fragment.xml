@@ -153,36 +153,33 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_take_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_light"
-            android:scrollHorizontally="false"
-            android:layout_marginBottom="10dp"
-            android:text="Apakah Data Diri Tersebut Benar Milik Anda ? "
-            android:textAlignment="center"
-            android:textSize="16sp" />
+            android:layout_weight="1"
+            android:text="Ambil Foto"
+            android:textAllCaps="false"
+            app:cornerRadius="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_negative"
+                android:id="@+id/btn_photo_again"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeColor="@color/redSumbangsih"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="15dp"
-                android:text="Bukan"
+                android:text="Foto Ulang"
                 android:textAllCaps="false"
                 app:cornerRadius="20dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_positive"
+                android:id="@+id/btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -190,7 +187,6 @@
                 android:text="Ya"
                 android:textAllCaps="false"
                 app:cornerRadius="20dp" />
-
 
         </LinearLayout>
 

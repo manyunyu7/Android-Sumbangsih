@@ -1,5 +1,6 @@
 package com.feylabs.sumbangsih.util
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
@@ -10,6 +11,13 @@ import android.app.Activity
 
 
 object CommonHelper {
+
+    const val PHOTO_TAG = "camerax"
+    const val FILE_NAME_FORMAT = "yy-MM-dd-HH-mm-ss-SSS"
+
+    const val REQUEST_CODE_PERMISSION = 123
+    val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
 
     fun Fragment.logout() {
         val logoutIntent = Intent(this.activity, WalkthroughActivity::class.java)

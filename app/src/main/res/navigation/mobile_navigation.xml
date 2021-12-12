@@ -87,5 +87,27 @@
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep2Fragment"
         android:label="KTPVerifStep2Fragment"
         tools:layout="@layout/ktp_verif_step_2_fragment"
+        >
+        <action
+            android:id="@+id/action_KTPVerifStep2Fragment_to_KTPVerifStep3Fragment"
+            app:destination="@id/KTPVerifStep3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/KTPVerifStep3Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep3Fragment"
+        android:label="KTPVerifStep3Fragment"
+        tools:layout="@layout/ktp_verif_step_3_fragment"
+        >
+        <action
+            android:id="@+id/action_KTPVerifStep3Fragment_to_KTPVerifTakePhotoIdCardFragment"
+            app:destination="@id/KTPVerifTakePhotoIdCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/KTPVerifTakePhotoIdCardFragment"
+        android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifTakePhotoIdCardFragment"
+        android:label="KTPVerifTakePhotoIdCardFragment"
+        tools:layout="@layout/ktp_verif_take_id_photo_fragment"
+
         />
+
 </navigation>
