@@ -1,25 +1,25 @@
 package com.feylabs.sumbangsih.presentation.ktp_verif
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.KtpVerifTakeIdPhotoFragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.CommonHelper
-import com.feylabs.sumbangsih.util.CommonHelper.REQUIRED_PERMISSIONS
+import com.feylabs.sumbangsih.util.CommonHelper.REQUIRED_PERMISSIONS_PHOTO_KTP
+import com.yalantis.ucrop.UCrop
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
@@ -43,8 +43,34 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         return binding.root
     }
 
+    private var type: String? = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        type = arguments?.getString("type") ?: ""
+
+        if (type != null) {
+            when (type) {
+                "verifnik_step3" -> {
+                    binding.tvContent.text = getString(R.string.desc_photo_frame_verif_nik_step3)
+                    binding.ivCropperFrame.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_circa_ktp
+                        )
+                    )
+                }
+                "verifnik_step4" -> {
+                    binding.tvContent.text = getString(R.string.desc_photo_frame_verif_nik_step4)
+                    binding.ivCropperFrame.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_circa_face
+                        )
+                    )
+                }
+            }
+        }
 
         outputDirectory = getOutputDirectory()
 
@@ -57,11 +83,10 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         } else {
             showToast("Permission Requested")
             ActivityCompat.requestPermissions(
-                requireActivity(), REQUIRED_PERMISSIONS,
+                requireActivity(), REQUIRED_PERMISSIONS_PHOTO_KTP,
                 CommonHelper.REQUEST_CODE_PERMISSION
             )
         }
-
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
@@ -100,10 +125,12 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(p0: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
-                    val msg = "Photo Saved"
+                    startCropping(savedUri)
+                    showToast("Gambar Berhasil Diambil")
                 }
 
                 override fun onError(p0: ImageCaptureException) {
+                    showToast("Gambar Gagal Disimpan")
                 }
 
             })
@@ -141,16 +168,21 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
 //
 //            }
 
-
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            when (type) {
+                "verifnik_step3" -> {
+                    cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                }
+                "verifnik_step4" -> {
+                    cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+                }
+            }
 
             try {
                 cameraProvider.unbindAll()
-
                 val cam: Camera = cameraProvider.bindToLifecycle(
                     this, cameraSelector, previewView, imageCapture
                 )
-
 //                binding.btnFlashlight.setOnClickListener {
 //                    if (cam.getCameraInfo().hasFlashUnit()) {
 //
@@ -188,12 +220,66 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
     }
 
     private fun allPermissionGranted(): Boolean =
-        CommonHelper.REQUIRED_PERMISSIONS.all {
+        REQUIRED_PERMISSIONS_PHOTO_KTP.all {
             ContextCompat.checkSelfPermission(
                 requireContext(),
                 it
             ) == PackageManager.PERMISSION_GRANTED
         }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == UCrop.REQUEST_CROP && resultCode == Activity.RESULT_OK) {
+            val imageResCrop = UCrop.getOutput(data!!)
+            if (imageResCrop != null) {
+                when (type) {
+                    "verifnik_step3" -> {
+                        findNavController().navigate(
+                            R.id.nav_KTPVerifStep3Fragment, bundleOf("ktp_uri" to imageResCrop.toString())
+                        )
+                    }
+                    "verifnik_step4" -> {
+                        findNavController().navigate(
+                            R.id.nav_KTPVerifStep4Fragment, bundleOf("face_uri" to imageResCrop.toString())
+                        )
+                    }
+                }
+
+            }
+        }
+    }
+
+    private fun startCropping(uri: Uri) {
+        val destName = System.currentTimeMillis().toString() + ".jpg"
+        val uCrop = UCrop.of(uri, Uri.fromFile(File(requireContext().cacheDir, destName)))
+
+        UCrop.of(uri, Uri.fromFile(File(context?.cacheDir, destName)))
+            .withAspectRatio(1.toFloat(), 1.toFloat())
+            .withOptions(getOptions())
+            .start(requireContext(), this)
+    }
+
+    private fun getOptions(): UCrop.Options {
+        val options = UCrop.Options()
+        options.setCompressionQuality(70)
+        options.setFreeStyleCropEnabled(true)
+        options.setToolbarWidgetColor(
+            ContextCompat.getColor(
+                requireContext() as Activity,
+                R.color.white
+            )
+        )
+        options.setToolbarColor(
+            ContextCompat.getColor(
+                requireContext() as Activity,
+                R.color.redSumbangsih
+            )
+        )
+        options.setToolbarTitle("Edit Photo")
+        return options
+    }
 
 
 }

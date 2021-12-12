@@ -16,7 +16,11 @@ object CommonHelper {
     const val FILE_NAME_FORMAT = "yy-MM-dd-HH-mm-ss-SSS"
 
     const val REQUEST_CODE_PERMISSION = 123
-    val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
+    val REQUIRED_PERMISSIONS_PHOTO_KTP = arrayOf(
+        Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
 
     fun Fragment.logout() {

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
@@ -19,6 +18,7 @@
     </androidx.camera.view.PreviewView>
 
     <RelativeLayout
+        android:id="@+id/custom_toolbar"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
@@ -52,15 +52,16 @@
             android:text="Ambil Foto KTP" />
     </RelativeLayout>
 
-
     <ImageView
+        android:id="@+id/iv_cropper_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ktp_circa"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginVertical="10dp"
+        android:src="@drawable/ic_circa_face"
         app:layout_constraintBottom_toTopOf="@id/container_desc_info"
+        app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/container_desc_info"
@@ -84,7 +85,7 @@
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_light"
             android:scrollHorizontally="false"
-            android:text="Pastikan e-KTP Anda berada dalam area dan cukup jelas untuk dibaca"
+            android:text="@string/desc_photo_frame_verif_nik_step3"
             android:textAlignment="center"
             android:textSize="15sp" />
 

@@ -1,43 +1,36 @@
 package com.feylabs.sumbangsih.presentation.ktp_verif
 
-import android.app.Activity
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
-import com.feylabs.sumbangsih.databinding.KtpVerifStep3FragmentBinding
+import com.feylabs.sumbangsih.databinding.KtpVerifStep4FragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
-import com.yalantis.ucrop.UCrop
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.io.File
 
-class KTPVerifStep3Fragment : BaseFragment() {
+class KTPVerifStep4Fragment : BaseFragment() {
 
     val viewModel: KTPVerifViewModel by viewModel()
 
-    var _binding: KtpVerifStep3FragmentBinding? = null
-    val binding get() = _binding as KtpVerifStep3FragmentBinding
+    var _binding: KtpVerifStep4FragmentBinding? = null
+    val binding get() = _binding as KtpVerifStep4FragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = KtpVerifStep3FragmentBinding.inflate(inflater)
+        _binding = KtpVerifStep4FragmentBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val photoUri: Uri? = arguments?.getString("ktp_uri")?.toUri()
+        val photoUri: Uri? = arguments?.getString("face_uri")?.toUri()
 
         if (photoUri != null) {
             binding.tvDesc.text = "Pastikan Foto KTP Memenuhi Frame dan dapat dibaca dengan jelas"
@@ -53,19 +46,19 @@ class KTPVerifStep3Fragment : BaseFragment() {
         binding.btnTakePhoto.setOnClickListener {
             findNavController().navigate(
                 R.id.nav_take_photo_fragment,
-                bundleOf("type" to "verifnik_step3")
+                bundleOf("type" to "verifnik_step4")
             )
         }
 
         binding.btnPhotoAgain.setOnClickListener {
             findNavController().navigate(
                 R.id.nav_take_photo_fragment,
-                bundleOf("type" to "verifnik_step3")
+                bundleOf("type" to "verifnik_step4")
             )
         }
 
         binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_KTPVerifStep3Fragment_to_KTPVerifStep4Fragment)
+
         }
 
         binding.btnBack.setOnClickListener {

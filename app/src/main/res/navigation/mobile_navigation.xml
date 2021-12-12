@@ -18,7 +18,7 @@
             app:destination="@id/navigation_listAllNewsFragment" />
         <action
             android:id="@+id/action_navigation_home_to_KTPVerifStep1Fragment"
-            app:destination="@id/KTPVerifStep1Fragment" />
+            app:destination="@id/nav_KTPVerifStep1Fragment" />
         <action
             android:id="@+id/action_navigation_home_to_navigation_detailNewsFragment"
             app:destination="@id/navigation_detailNewsFragment" />
@@ -73,41 +73,49 @@
     </fragment>
 
     <fragment
-        android:id="@+id/KTPVerifStep1Fragment"
+        android:id="@+id/nav_KTPVerifStep1Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep1Fragment"
         android:label="KTPVerifStep1Fragment"
         tools:layout="@layout/ktp_verif_step_1_fragment"
         >
         <action
             android:id="@+id/action_KTPVerifStep1Fragment_to_KTPVerifStep2Fragment"
-            app:destination="@id/KTPVerifStep2Fragment" />
+            app:destination="@id/nav_KTPVerifStep2Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/KTPVerifStep2Fragment"
+        android:id="@+id/nav_KTPVerifStep2Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep2Fragment"
         android:label="KTPVerifStep2Fragment"
         tools:layout="@layout/ktp_verif_step_2_fragment"
         >
         <action
             android:id="@+id/action_KTPVerifStep2Fragment_to_KTPVerifStep3Fragment"
-            app:destination="@id/KTPVerifStep3Fragment" />
+            app:destination="@id/nav_KTPVerifStep3Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/KTPVerifStep3Fragment"
+        android:id="@+id/nav_KTPVerifStep3Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep3Fragment"
         android:label="KTPVerifStep3Fragment"
         tools:layout="@layout/ktp_verif_step_3_fragment"
         >
+
         <action
-            android:id="@+id/action_KTPVerifStep3Fragment_to_KTPVerifTakePhotoIdCardFragment"
-            app:destination="@id/KTPVerifTakePhotoIdCardFragment" />
+            android:id="@+id/action_nav_KTPVerifStep3Fragment_to_KTPVerifStep4Fragment"
+            app:destination="@id/nav_KTPVerifStep4Fragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/KTPVerifTakePhotoIdCardFragment"
+        android:id="@+id/nav_take_photo_fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifTakePhotoIdCardFragment"
         android:label="KTPVerifTakePhotoIdCardFragment"
         tools:layout="@layout/ktp_verif_take_id_photo_fragment"
-
         />
+    <fragment
+        android:id="@+id/nav_KTPVerifStep4Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep4Fragment"
+        android:label="KTPVerifStep4Fragment"
+        tools:layout="@layout/ktp_verif_step_4_fragment"
+        >
+       </fragment>
 
 </navigation>
