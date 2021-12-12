@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.KtpVerifStep1FragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
+import com.feylabs.sumbangsih.util.DialogUtils
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class KTPVerifStep1Fragment : BaseFragment() {
@@ -34,19 +35,33 @@ class KTPVerifStep1Fragment : BaseFragment() {
 
         binding.inputMobile.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                val length = p0?.length
+                if (length == 16) {
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Perhatian",
+                        message = "Panjang Maksimum NIK adalah berjumlah 16 Karakter",
+                        positiveAction = Pair(getString(R.string.dialog_ok), { }),
+                        negativeAction = Pair(getString(R.string.dialog_cancel), { }),
+                        autoDismiss = true,
+                        buttonAllCaps = false
+                    )
+                }
             }
 
             override fun onTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
-                binding.btnNext.isEnabled = p0.length >= 16
+                val length = p0.length
+                binding.btnNext.isEnabled = length == 16
             }
 
             override fun afterTextChanged(p0: Editable?) {
-
-
             }
 
         })
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_KTPVerifStep1Fragment_to_KTPVerifStep2Fragment)

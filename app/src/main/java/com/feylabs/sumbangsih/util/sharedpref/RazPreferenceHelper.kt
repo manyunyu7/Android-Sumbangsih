@@ -61,7 +61,6 @@ object RazPreferenceHelper {
         }
     }
 
-
     fun getPhoneNumber(context: Context): String {
         Preference(context).apply {
             val number = getPrefString("CURRENT_PHONE_NUMBER").orEmpty()

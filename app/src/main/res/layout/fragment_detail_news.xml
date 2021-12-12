@@ -67,16 +67,16 @@
             android:layout_margin="20dp"
             app:cardCornerRadius="15dp">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="190dp">
 
                 <ImageView
                     android:id="@+id/img_news"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
+                    android:maxHeight="100dp"
                     android:src="@drawable/bg_inv"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="0dp" />
