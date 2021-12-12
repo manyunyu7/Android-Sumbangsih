@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.action_navigation_home_to_listAllNewsFragment)
         }
 
-        binding.btnVerifNikCard.setOnClickListener {
+        binding.btnCardId.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_KTPVerifStep1Fragment)
         }
 
@@ -59,7 +59,6 @@ class HomeFragment : BaseFragment() {
                     )
                 )
             }
-
         }
     }
 
@@ -81,7 +80,6 @@ class HomeFragment : BaseFragment() {
                 }
                 is ManyunyuRes.Error -> {
                     setNewsLoading(false)
-                    binding.tvMenuNews.text = it.message
                     showToast(it.message.toString())
                 }
                 is ManyunyuRes.Loading -> {
@@ -91,7 +89,6 @@ class HomeFragment : BaseFragment() {
                     setNewsLoading(false)
                     it.data?.toMutableList()?.let { data ->
                         mAdapter.setWholeData(data)
-                        mAdapter.notifyDataSetChanged()
                     }
                 }
             }

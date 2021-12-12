@@ -26,6 +26,10 @@ class AuthViewModel(
         MutableLiveData()
     val loginNumberLiveData get() = _loginNumberLiveData
 
+    fun fireLogin() {
+        _loginNumberLiveData.value = ManyunyuRes.Default()
+    }
+
     fun loginNumber(number: String, password: String) {
         viewModelScope.launch {
             _loginNumberLiveData.value = ManyunyuRes.Loading()

@@ -47,4 +47,6 @@ Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan
         • Ikuti langkah-langkah pendaftaran sesuai intruksi dari aplikasi \n
     </ul>
 </string>
+    <string name="dialog_ok">Oke</string>
+    <string name="dialog_cancel">Batalkan</string>
 </resources>

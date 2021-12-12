@@ -51,9 +51,10 @@ class CommonControllerActivity : BaseActivity() {
 //        navController.navigate(R.id.navigation_createPinFragment)
 
         val loggedInPhoneNumber = RazPreferenceHelper.getPhoneNumber(this)
-        if (RazPreferenceHelper.isLoggedIn(this) && loggedInPhoneNumber.isNotEmpty()) {
-            navController.navigate(R.id.navigation_home)
-        }
+
+//        if (RazPreferenceHelper.isLoggedIn(this) && loggedInPhoneNumber.isNotEmpty()) {
+//            navController.navigate(R.id.navigation_home)
+//        }
 
         hideCustomTopbar()
         showNavView()

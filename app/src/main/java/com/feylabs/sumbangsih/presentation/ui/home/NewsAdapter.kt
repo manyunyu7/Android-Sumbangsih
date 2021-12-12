@@ -20,6 +20,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     fun setWholeData(addedList: MutableList<NewsResponse.NewsResponseItem>) {
         newsList.clear()
         newsList.addAll(addedList)
+        newsList.shuffle()
+        notifyDataSetChanged()
     }
 
     inner class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {

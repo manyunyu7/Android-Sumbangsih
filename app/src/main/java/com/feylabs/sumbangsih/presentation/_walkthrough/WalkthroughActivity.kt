@@ -28,24 +28,20 @@ class WalkthroughActivity : BaseActivity() {
         // if this not the first time user open the app
         // then skip the walkthrough
         if (!RazPreferenceHelper.isFirstTime(this)) {
-            val loggedInNumber = RazPreferenceHelper.getPhoneNumber(this)
-            if (loggedInNumber.isNotEmpty()) {
+            val loggedInNumber = RazPreferenceHelper.isLoggedIn(this)
+            if (loggedInNumber) {
                 goToInputPinActivity()
             } else {
                 goToNextActivity()
             }
         }
 
-        // because the walkthrough is opened
-        // set this to false, so next time this walkthrough screen wont appeared again
-        RazPreferenceHelper.setFirstTimeFalse(this)
-
         binding.btnSkip.setOnClickListener {
             goToNextActivity()
         }
 
-        binding.labelTitleJargon.text=getString(R.string.title_on_board_1)
-        binding.labelDescJargon.text=getString(R.string.text_on_board_1)
+        binding.labelTitleJargon.text = getString(R.string.title_on_board_1)
+        binding.labelDescJargon.text = getString(R.string.text_on_board_1)
         binding.btnNext.setOnClickListener {
             if (currentItem < 2)
                 binding.viewPager.currentItem = currentItem + 1
@@ -55,6 +51,7 @@ class WalkthroughActivity : BaseActivity() {
     }
 
     private fun goToNextActivity() {
+        RazPreferenceHelper.setFirstTimeFalse(this)
         startActivity(Intent(this, WriteOTPActivity::class.java))
         finish()
     }

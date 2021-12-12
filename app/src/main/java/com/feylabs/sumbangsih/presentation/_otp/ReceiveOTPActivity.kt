@@ -17,6 +17,7 @@ import com.feylabs.sumbangsih.util.BaseActivity
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferencesConst
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferencesConst.HAS_NUMBER
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthProvider
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -33,31 +34,9 @@ class ReceiveOTPActivity : BaseActivity() {
         setContentView(binding.root)
         hideActionBar()
 
-        vm.pokeApi()
-
-        vm.pokeLiveData.observe(this, Observer {
-            when (it) {
-                is ManyunyuRes.Loading -> {
-                    "Loading".showLongToast()
-                }
-                is ManyunyuRes.Success -> {
-                    "${it.data}  ${it.message}".showLongToast()
-                }
-                is ManyunyuRes.Error -> {
-                    "${it.data}  ${it.message}".showLongToast()
-                }
-                else -> {
-                    showToast("Lohe Lohe")
-                }
-            }
-        })
-
         mContext = this
 
-        val number = intent.getStringExtra("mobile")
         val verifId = intent.getStringExtra("verificationId")
-
-
         binding.btnVerif.setOnClickListener {
             binding.apply {
                 val code = "${inputCode1.text}" +
@@ -71,7 +50,7 @@ class ReceiveOTPActivity : BaseActivity() {
                     btnVerif.visibility = View.GONE
 
                     val phoneAuthCredential = PhoneAuthProvider.getCredential(
-                        verifId, code
+                        verifId.toString(), code
                     )
 
                     FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
@@ -86,7 +65,8 @@ class ReceiveOTPActivity : BaseActivity() {
                                 showToast("Kode OTP Salah")
                             }
                         }
-
+                } else {
+                    showToast("Verif ID is Null")
                 }
             }
         }
@@ -96,11 +76,11 @@ class ReceiveOTPActivity : BaseActivity() {
 
     private fun gotoNextActivity() {
 
-        val hasNumber = intent.getBooleanExtra("hasNumber", false)
+        val hasNumber = RazPreferences(this).getPrefBool(HAS_NUMBER)
         val number = intent.getStringExtra("mobile")
 
         if (hasNumber) {
-            RazPreferences(this).save(RazPreferencesConst.HAS_NUMBER, hasNumber)
+            RazPreferences(this).save(HAS_NUMBER, hasNumber)
             RazPreferenceHelper.savePhoneNumber(this, number.toString())
         }
 

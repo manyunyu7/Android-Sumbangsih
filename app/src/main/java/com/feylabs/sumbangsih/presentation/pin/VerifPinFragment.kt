@@ -56,7 +56,7 @@ class VerifPinFragment : BaseFragment() {
 
     private fun proceedLogin(number: String) {
         RazPreferenceHelper.savePhoneNumber(requireContext(), number)
-        RazPreferenceHelper.isLoggedIn(requireContext())
+        RazPreferenceHelper.setLoggedIn(requireContext())
         findNavController().navigate(R.id.navigation_home)
     }
 
@@ -64,6 +64,10 @@ class VerifPinFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         (getActivity() as CommonControllerActivity).hideCustomTopbar()
         initObserver()
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.btnNext.setOnClickListener {
             val text = binding.passCodeView.passCodeText.toString()
