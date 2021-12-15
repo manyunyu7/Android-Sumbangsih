@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.feylabs.sumbangsih.R
@@ -64,9 +65,20 @@ open class BaseFragment : Fragment() {
         }
     }
 
-    fun makeSrlLoading(value:Boolean=false){
+    fun showFullscreenLoading(value: Boolean = false, text: String = "") {
+        val srl = view?.findViewById<ConstraintLayout>(R.id.include_loading)
+        if (srl != null) {
+            if (value) {
+                srl.visibility = View.VISIBLE
+            } else {
+                srl.visibility = View.GONE
+            }
+        }
+    }
+
+    fun makeSrlLoading(value: Boolean = false) {
         val srl = view?.findViewById<SwipeRefreshLayout>(R.id.srl)
-        if(srl!=null){
+        if (srl != null) {
             srl.isRefreshing = value
         }
     }

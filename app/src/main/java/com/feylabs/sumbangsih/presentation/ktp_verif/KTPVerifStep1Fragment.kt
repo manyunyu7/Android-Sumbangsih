@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.KtpVerifStep1FragmentBinding
@@ -64,7 +65,11 @@ class KTPVerifStep1Fragment : BaseFragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_KTPVerifStep1Fragment_to_KTPVerifStep2Fragment)
+            val nik = binding.inputMobile.text.toString()
+            findNavController().navigate(
+                R.id.action_KTPVerifStep1Fragment_to_KTPVerifStep2Fragment,
+                bundleOf("nik" to nik)
+            )
         }
     }
 

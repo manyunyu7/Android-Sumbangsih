@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
@@ -22,8 +23,8 @@ class HomeViewModel(val newsApiClient: NewsApiClient) : ViewModel() {
 
     fun getNews() {
         _newsLiveData.postValue(ManyunyuRes.Loading())
-
         AndroidNetworking.get(BASE_URL + "news/get")
+            .setPriority(Priority.IMMEDIATE)
             .build()
             .getAsString(object : StringRequestListener {
                 override fun onResponse(response: String?) {

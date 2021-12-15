@@ -81,18 +81,21 @@ class CreatePinFragment : BaseFragment() {
         viewModel.loginNumberLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ManyunyuRes.Success -> {
+                    binding.includeLoading.root.makeViewGone()
+                    viewModel.fireLogin()
                     proceedLogin()
                 }
                 is ManyunyuRes.Default -> {
                 }
                 is ManyunyuRes.Empty -> {
-                    showToast("Login Gagal")
+                    binding.includeLoading.root.makeViewGone()
                 }
                 is ManyunyuRes.Error -> {
+                    binding.includeLoading.root.makeViewGone()
                     showToast(it.message)
                 }
                 is ManyunyuRes.Loading -> {
-                    showToast("Loading")
+                    binding.includeLoading.root.makeViewVisible()
                 }
             }
         })
@@ -122,8 +125,8 @@ class CreatePinFragment : BaseFragment() {
         val loggedInNumber =
             RazPreferenceHelper.getPhoneNumber(requireContext())
         binding.apply {
-            tvChangeNumber.makeViewVisible()
-            tvForgotPin.makeViewVisible()
+//            tvChangeNumber.makeViewVisible()
+//            tvForgotPin.makeViewVisible()
             btnGoToVerif.text = "Login"
             this.tvDescPin.text =
                 "Masukkan pin yang telah Anda atur ketika melakukan pendaftaran (${loggedInNumber})"
@@ -134,7 +137,6 @@ class CreatePinFragment : BaseFragment() {
     private fun proceedLogin() {
         showToast("Login Berhasil")
         RazPreferenceHelper.setLoggedIn(requireContext())
-        viewModel.fireLogin()
         findNavController().navigate(R.id.navigation_home)
     }
 

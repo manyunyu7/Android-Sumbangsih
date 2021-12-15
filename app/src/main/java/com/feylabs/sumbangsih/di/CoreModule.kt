@@ -8,6 +8,7 @@ import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
 import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
+import com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifViewModel
 import com.feylabs.sumbangsih.presentation.pin.AuthViewModel
 import com.feylabs.sumbangsih.presentation.ui.home.HomeViewModel
 import com.feylabs.sumbangsih.presentation.ui.home.news.ListAllNewsViewModel
@@ -77,6 +78,7 @@ val viewModelModule = module {
     single { DetailTutorialViewModel() }
     single { HomeViewModel(get()) }
     single { ListAllNewsViewModel() }
+    single { KTPVerifViewModel() }
     viewModel { CommonViewModel(get(), get()) }
 }
 

@@ -131,4 +131,10 @@
         tools:visibility="gone"
         layout="@layout/lshimmer_fragment_create_pin" />
 
+    <include
+        android:id="@+id/include_loading"
+        android:visibility="gone"
+        layout="@layout/layout_loading_screen_full" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

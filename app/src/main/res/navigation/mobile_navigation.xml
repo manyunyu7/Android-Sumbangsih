@@ -116,6 +116,15 @@
         android:label="KTPVerifStep4Fragment"
         tools:layout="@layout/ktp_verif_step_4_fragment"
         >
-       </fragment>
+        <action
+            android:id="@+id/action_nav_KTPVerifStep4Fragment_to_KTPVerifStep5Fragment"
+            app:destination="@id/KTPVerifStep5Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/KTPVerifStep5Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep5Fragment"
+        android:label="KTPVerifStep5Fragment"
+        tools:layout="@layout/ktp_verif_step_5_fragment"
+        />
 
 </navigation>
