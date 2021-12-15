@@ -10,7 +10,10 @@ import kotlinx.parcelize.Parcelize
 data class KTPVerifReq(
     var nik: String,
     var photo_requested: String,
-    var photo_face: String
+    var photo_face: String,
+    var contact: String? = "",
+    var lat: String? = "",
+    var long: String? = "",
 ) : Parcelable
 
 object VerifNIKHelper {

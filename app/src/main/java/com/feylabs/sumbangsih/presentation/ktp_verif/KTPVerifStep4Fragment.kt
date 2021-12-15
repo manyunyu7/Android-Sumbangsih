@@ -16,6 +16,7 @@ import com.feylabs.sumbangsih.util.ImageView
 import org.koin.android.viewmodel.ext.android.viewModel
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.VerifNIKHelper
 
 
@@ -36,9 +37,35 @@ class KTPVerifStep4Fragment : BaseFragment() {
         return binding.root
     }
 
+    fun initObserver() {
+        viewModel.uploadVerifVM.observe(viewLifecycleOwner, {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                    showFullscreenLoading(false)
+                }
+                is ManyunyuRes.Empty -> {
+                    showFullscreenLoading(false)
+                }
+                is ManyunyuRes.Error -> {
+                    showToast(it.message.toString())
+                    showFullscreenLoading(false)
+                }
+                is ManyunyuRes.Loading -> {
+                    showFullscreenLoading(true)
+                }
+                is ManyunyuRes.Success -> {
+                    showToast(it.message.toString())
+                    showFullscreenLoading(false)
+                    viewModel.fireUploadVerifVM()
+                }
+            }
+        })
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initObserver()
 
         objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
 
@@ -65,10 +92,8 @@ class KTPVerifStep4Fragment : BaseFragment() {
                     })
 
                 binding.btnNext.setOnClickListener {
-                    VerifNIKHelper.savePref(requireContext(),objVerif)
-                    findNavController().navigate(
-                        R.id.action_nav_KTPVerifStep4Fragment_to_KTPVerifStep5Fragment,
-                    )
+                    VerifNIKHelper.savePref(requireContext(), objVerif)
+                    viewModel.upload(objVerif!!)
                 }
 
 

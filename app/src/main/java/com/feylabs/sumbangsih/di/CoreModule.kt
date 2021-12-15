@@ -3,6 +3,7 @@ package com.feylabs.sumbangsih.di
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
+import com.feylabs.sumbangsih.data.source.remote.web.CommonApiClient
 import com.feylabs.sumbangsih.data.source.remote.web.NewsApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation.CommonViewModel
@@ -64,6 +65,14 @@ val networkModule = module {
             .build()
         retrofitz.create(NewsApiClient::class.java)
     }
+    single {
+        val retrofitz = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        retrofitz.create(CommonApiClient::class.java)
+    }
 }
 
 
@@ -78,7 +87,7 @@ val viewModelModule = module {
     single { DetailTutorialViewModel() }
     single { HomeViewModel(get()) }
     single { ListAllNewsViewModel() }
-    single { KTPVerifViewModel() }
+    single { KTPVerifViewModel(get()) }
     viewModel { CommonViewModel(get(), get()) }
 }
 
