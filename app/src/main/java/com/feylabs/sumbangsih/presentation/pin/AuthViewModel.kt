@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
+import com.feylabs.sumbangsih.data.source.remote.response.RegisterRes
 import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
 import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
@@ -17,7 +18,7 @@ class AuthViewModel(
 ) : ViewModel() {
 
 
-    private var _regNumberLiveData: MutableLiveData<ManyunyuRes<String?>> =
+    private var _regNumberLiveData: MutableLiveData<ManyunyuRes<RegisterRes?>> =
         MutableLiveData()
     val regNumberLiveData get() = _regNumberLiveData
 
@@ -61,27 +62,25 @@ class AuthViewModel(
                         "user_password" to password
                     )
                 )
-                req?.enqueue(object : Callback<JsonObject?> {
+                req?.enqueue(object : Callback<RegisterRes?> {
                     override fun onResponse(
-                        call: Call<JsonObject?>,
-                        response: Response<JsonObject?>
+                        call: Call<RegisterRes?>,
+                        response: Response<RegisterRes?>
                     ) {
                         if (response.body() != null) {
                             val res = response.body()!!
-                            val message = res.get("message").asString
-                            val statusCode = res.get("status_code").asInt
-                            if (statusCode == 1) {
-                                _regNumberLiveData.postValue(ManyunyuRes.Success(message))
+                            if (res.statusCode == 1) {
+                                _regNumberLiveData.postValue(ManyunyuRes.Success(res))
                             } else {
-                                _regNumberLiveData.postValue(ManyunyuRes.Error(message))
+                                _regNumberLiveData.postValue(ManyunyuRes.Error(res.message))
                             }
                         } else {
                             _regNumberLiveData.postValue(ManyunyuRes.Empty())
                         }
                     }
 
-                    override fun onFailure(call: Call<JsonObject?>, t: Throwable) {
-                        _regNumberLiveData.postValue(ManyunyuRes.Empty())
+                    override fun onFailure(call: Call<RegisterRes?>, t: Throwable) {
+                        _regNumberLiveData.postValue(ManyunyuRes.Error(t.localizedMessage))
                     }
 
                 })

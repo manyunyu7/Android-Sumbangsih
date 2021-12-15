@@ -18,6 +18,7 @@ import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.VerifNIKHelper
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 
 
 class KTPVerifStep4Fragment : BaseFragment() {
@@ -54,7 +55,13 @@ class KTPVerifStep4Fragment : BaseFragment() {
                     showFullscreenLoading(true)
                 }
                 is ManyunyuRes.Success -> {
-                    showToast(it.message.toString())
+                    showToast(it.data.toString())
+                    binding.includeSuccess.root.makeViewVisible()
+                    binding.includeSuccess.apply {
+                        btnAction.setOnClickListener {
+                            findNavController().popBackStack(R.id.navigation_home, true)
+                        }
+                    }
                     showFullscreenLoading(false)
                     viewModel.fireUploadVerifVM()
                 }
@@ -93,6 +100,7 @@ class KTPVerifStep4Fragment : BaseFragment() {
 
                 binding.btnNext.setOnClickListener {
                     VerifNIKHelper.savePref(requireContext(), objVerif)
+                    objVerif!!.contact = RazPreferenceHelper.getPhoneNumber(requireContext())
                     viewModel.upload(objVerif!!)
                 }
 

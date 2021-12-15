@@ -61,6 +61,21 @@ object RazPreferenceHelper {
         }
     }
 
+    fun saveUserId(context: Context, number: String) {
+        Preference(context).apply {
+            save("aidi", number)
+        }
+    }
+
+    fun getUserId(context: Context): String {
+        Preference(context).apply {
+            val data = getPrefString("aidi").orEmpty()
+            return if (data.isNotEmpty())
+                data
+            else ""
+        }
+    }
+
     fun getPhoneNumber(context: Context): String {
         Preference(context).apply {
             val number = getPrefString("CURRENT_PHONE_NUMBER").orEmpty()

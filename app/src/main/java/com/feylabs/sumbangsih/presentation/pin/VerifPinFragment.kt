@@ -8,9 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
+import com.feylabs.sumbangsih.data.source.remote.response.RegisterRes
 import com.feylabs.sumbangsih.databinding.FragmentVerifPinBinding
 import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.util.BaseFragment
+import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -38,8 +40,17 @@ class VerifPinFragment : BaseFragment() {
         viewModel.regNumberLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ManyunyuRes.Success -> {
-                    proceedLogin(it.data.toString())
-                    showToast("Berhasil Membuat Akun")
+                    proceedLogin(it.data)
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Success",
+                        message = "Akun Anda Berhasil Dibuat",
+                        positiveAction = Pair(getString(R.string.dialog_ok), {
+                            proceedLogin(it.data)
+                        }),
+                        autoDismiss = true,
+                        buttonAllCaps = false
+                    )
                 }
                 is ManyunyuRes.Error -> {
                     showToast("Gagal Membuat Akun", true)
@@ -54,8 +65,9 @@ class VerifPinFragment : BaseFragment() {
         })
     }
 
-    private fun proceedLogin(number: String) {
-        RazPreferenceHelper.savePhoneNumber(requireContext(), number)
+    private fun proceedLogin(data: RegisterRes?) {
+        RazPreferenceHelper.saveUserId(requireContext(), data?.resData?.id.toString())
+        RazPreferenceHelper.savePhoneNumber(requireContext(), data?.resData?.number.toString())
         RazPreferenceHelper.setLoggedIn(requireContext())
         findNavController().navigate(R.id.navigation_home)
     }

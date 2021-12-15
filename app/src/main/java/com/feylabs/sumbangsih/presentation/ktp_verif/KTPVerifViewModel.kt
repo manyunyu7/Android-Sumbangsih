@@ -60,9 +60,10 @@ class KTPVerifViewModel(private val commonApiClient: CommonApiClient) : ViewMode
                 Timber.d("bodyyy  $body")
                 val apiCode = body?.statusCode
                 val message = body?.message
+                Timber.d("verif nik message $message")
 
                 if (apiCode == 1) {
-                    _uploadVerifVM.value = ManyunyuRes.Success(body.toString())
+                    _uploadVerifVM.value = ManyunyuRes.Success(message.toString())
                 } else if (apiCode == 0) {
                     _uploadVerifVM.value = ManyunyuRes.Error(message.toString())
                 }else{

@@ -10,16 +10,12 @@ import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
 import com.feylabs.sumbangsih.databinding.FragmentCreatePinBinding
-import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.CommonHelper
 import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
-import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
-import com.feylabs.sumbangsih.util.sharedpref.RazPreferencesConst
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
 class CreatePinFragment : BaseFragment() {
@@ -83,7 +79,7 @@ class CreatePinFragment : BaseFragment() {
                 is ManyunyuRes.Success -> {
                     binding.includeLoading.root.makeViewGone()
                     viewModel.fireLogin()
-                    proceedLogin()
+                    proceedLogin(it.data)
                 }
                 is ManyunyuRes.Default -> {
                 }
@@ -134,8 +130,10 @@ class CreatePinFragment : BaseFragment() {
         }
     }
 
-    private fun proceedLogin() {
+    private fun proceedLogin(data: LoginWithNumberRes?) {
         showToast("Login Berhasil")
+        viewModel.fireLogin()
+        RazPreferenceHelper.saveUserId(requireContext(), data?.user?.id.toString())
         RazPreferenceHelper.setLoggedIn(requireContext())
         findNavController().navigate(R.id.navigation_home)
     }

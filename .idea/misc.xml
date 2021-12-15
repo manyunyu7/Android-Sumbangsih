@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable-v24/ic_checklist_blue.xml" value="0.1015625" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/bg_button_border_red.xml" value="0.16458333333333333" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/bg_button_negative_dialog.xml" value="0.14583333333333334" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/bg_button_positive_dialog.xml" value="0.1015625" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/bg_dialog.xml" value="0.1015625" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/bg_shimmer.xml" value="0.18645833333333334" />
@@ -34,7 +35,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_1_fragment.xml" value="0.12" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_2_fragment.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_3_fragment.xml" value="0.16" />
-        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_4_fragment.xml" value="0.16" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_4_fragment.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_5_fragment.xml" value="0.1453125" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_take_id_photo_fragment.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_account_settings.xml" value="0.25" />
@@ -43,6 +44,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_statistics.xml" value="0.13229166666666667" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_tutor.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_loading_screen_full.xml" value="0.11458333333333333" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_success_screen_full.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/list_all_news_fragment.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_fragment_create_pin.xml" value="0.14" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_news_home.xml" value="0.25" />

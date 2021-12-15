@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
         <LinearLayout
@@ -192,6 +192,16 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/layout_loading_screen_full"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/include_success"
+        layout="@layout/layout_success_verif_nik"
+        android:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.feylabs.sumbangsih.data.source.remote.web
 import com.feylabs.sumbangsih.data.source.remote.response.CheckNumberRes
 import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
 import com.feylabs.sumbangsih.data.source.remote.response.PokeApiRes
+import com.feylabs.sumbangsih.data.source.remote.response.RegisterRes
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -39,7 +40,7 @@ interface AuthApiClient {
 
     @FormUrlEncoded
     @POST("auth/registerNumber")
-    fun registerNumber(@FieldMap params: Map<String?, String?>?): Call<JsonObject?>?
+    fun registerNumber(@FieldMap params: Map<String?, String?>?): Call<RegisterRes?>?
 
 
 }

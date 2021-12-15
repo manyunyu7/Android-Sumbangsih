@@ -1,6 +1,8 @@
 package com.feylabs.sumbangsih.util
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +23,6 @@ object DialogUtils {
         loadingProgress = progress
     }
 
-    fun dismissLoadingDialog() {
-        if (loadingDialog.isShowing)
-            loadingDialog.dismiss()
-    }
 
     fun showCustomDialog(
         context: Context,
@@ -63,6 +61,7 @@ object DialogUtils {
         builder.setView(view)
         builder.setCancelable(autoDismiss)
         dialog = builder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -93,6 +92,7 @@ object DialogUtils {
         builder.setView(view)
         builder.setCancelable(autoDismiss)
         dialog = builder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
