@@ -1,6 +1,5 @@
 package com.feylabs.sumbangsih.presentation.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +12,13 @@ import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.SumbangsihApplication.Companion.URL_VIDEO
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.NewsResponse
+import com.feylabs.sumbangsih.data.source.remote.response.ProfileMainReq
 import com.feylabs.sumbangsih.databinding.FragmentHomeBinding
-import com.feylabs.sumbangsih.presentation.CommonViewModel
+import com.feylabs.sumbangsih.util.AnimUtil.animateFromResource
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -33,6 +32,9 @@ class HomeFragment : BaseFragment() {
     private val mAdapter by lazy { NewsAdapter() }
 
     private fun initUI() {
+
+        setupAnimHome()
+
         binding.tvMenuNews.setOnClickListener {
             homeViewModel.getNews()
         }
@@ -44,7 +46,7 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.action_navigation_home_to_listAllNewsFragment)
         }
 
-        binding.btnCardId.setOnClickListener {
+        binding.profileCard.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_KTPVerifStep1Fragment)
         }
 
@@ -62,13 +64,40 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+
     private fun initData() {
         uiScope.launch(Dispatchers.IO) {
             homeViewModel.getNews()
+            homeViewModel.getProfile(RazPreferenceHelper.getUserId(requireContext()))
         }
     }
 
     private fun initObserver() {
+
+        homeViewModel.profileLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                    setProfileLoading(false)
+                }
+                is ManyunyuRes.Empty -> {
+                    setProfileLoading(false)
+                }
+                is ManyunyuRes.Error -> {
+                    setProfileLoading(false)
+                }
+                is ManyunyuRes.Loading -> {
+                    setProfileLoading(true)
+                }
+                is ManyunyuRes.Success -> {
+                    val data = it.data
+                    if (data != null) {
+                        setupProfileCard(data)
+                    }
+                    setProfileLoading(false)
+                }
+            }
+        })
+
         homeViewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ManyunyuRes.Default -> {
@@ -93,6 +122,20 @@ class HomeFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    private fun setupProfileCard(data: ProfileMainReq) {
+        val ktp = data.resData.ktp
+        val user = data.resData.user
+
+        if (ktp == null) {
+            binding.tvSapa.text = "Halo, +" + user?.contact.toString()
+            binding.tvDesc.text = "Segera lakukan verifikasi NIK"
+        } else {
+            binding.tvSapa.text = "Halo," + ktp.name
+            binding.tvDesc.text = "NIK : " + ktp.nik
+        }
+
     }
 
     private fun setNewsLoading(b: Boolean) {
@@ -130,7 +173,8 @@ class HomeFragment : BaseFragment() {
         }
 
         val number = RazPreferenceHelper.getPhoneNumber(requireContext())
-        binding.tvSapa.text = number
+        binding.tvSapa.text = "Halo, +" + number
+        binding.tvDesc.text = "Segera lakukan verifikasi NIK"
 
         binding.includeHomeTutor.apply {
             btnTutorBlt.setOnClickListener {
@@ -158,4 +202,29 @@ class HomeFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun setProfileLoading(value: Boolean) {
+        if (value) {
+            binding.shimmerProfileCard.root.makeViewVisible()
+            binding.profileCard.makeViewGone()
+        } else {
+            binding.shimmerProfileCard.root.makeViewGone()
+            binding.profileCard.makeViewVisible()
+        }
+    }
+
+
+    private fun setupAnimHome() {
+        binding.apply {
+            includeHomeStatistics.root.makeViewGone()
+            includeHomeTutor.root.makeViewGone()
+
+            animateFromResource(binding.includeHomeStatistics.root, R.anim.anim_slide_in_right)
+            animateFromResource(includeHomeTutor.root, R.anim.anim_slide_in_left)
+
+            includeHomeStatistics.root.makeViewVisible()
+            includeHomeTutor.root.makeViewVisible()
+        }
+    }
+
 }

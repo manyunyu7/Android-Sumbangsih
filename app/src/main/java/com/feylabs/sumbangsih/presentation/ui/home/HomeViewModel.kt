@@ -1,25 +1,45 @@
 package com.feylabs.sumbangsih.presentation.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.NewsResponse
+import com.feylabs.sumbangsih.data.source.remote.response.ProfileMainReq
 import com.feylabs.sumbangsih.data.source.remote.web.NewsApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.google.gson.Gson
-import kotlinx.coroutines.launch
 
 class HomeViewModel(val newsApiClient: NewsApiClient) : ViewModel() {
 
     private var _newsLiveData: MutableLiveData<ManyunyuRes<NewsResponse?>> =
         MutableLiveData()
     val newsLiveData get() = _newsLiveData
+
+    private var _profileLiveData: MutableLiveData<ManyunyuRes<ProfileMainReq?>> =
+        MutableLiveData()
+    val profileLiveData get() = _profileLiveData
+
+    fun getProfile(id: String) {
+        _profileLiveData.postValue(ManyunyuRes.Loading())
+        AndroidNetworking.get(BASE_URL + "user/$id")
+            .setPriority(Priority.HIGH)
+            .build()
+            .getAsString(object : StringRequestListener {
+                override fun onResponse(response: String?) {
+                    val req = Gson().fromJson(response.toString(), ProfileMainReq::class.java)
+                    _profileLiveData.postValue(ManyunyuRes.Success(req))
+                }
+
+                override fun onError(anError: ANError?) {
+                    _profileLiveData.postValue(ManyunyuRes.Error(anError?.localizedMessage.toString()))
+                }
+
+            })
+    }
 
     fun getNews() {
         _newsLiveData.postValue(ManyunyuRes.Loading())
