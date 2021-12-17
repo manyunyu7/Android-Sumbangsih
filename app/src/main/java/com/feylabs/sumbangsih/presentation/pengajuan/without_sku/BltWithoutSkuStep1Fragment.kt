@@ -51,6 +51,17 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
 
         binding.apply {
 
+            val nib = RazPreferences(requireContext()).getPrefString("usaha_nib") ?: ""
+            val name = RazPreferences(requireContext()).getPrefString("usaha_name") ?: ""
+
+            if (nib.isNotBlank()) {
+                binding.inputUsahaNib.setText(nib)
+            }
+
+            if (name.isNotBlank()) {
+                binding.inputUsahaName.setText(name)
+            }
+
             if (photoUri != null) {
                 btnNext.isEnabled = true
                 imgKtp.viewTreeObserver
@@ -76,6 +87,9 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
                     findNavController().navigate(
                         R.id.action_nav_bltWithoutSkuStep1Fragment_to_bltWithoutSkuStep2Fragment,
                     )
+
+                    RazPreferences(requireContext()).removeKey("usaha_name")
+                    RazPreferences(requireContext()).removeKey("usaha_nib")
                 }
 
                 tvDesc.text =
@@ -92,6 +106,12 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
         }
 
         binding.btnTakePhoto.setOnClickListener {
+            val nib = binding.inputUsahaNib.text.toString() ?: ""
+            val name = binding.inputUsahaName.text.toString() ?: ""
+
+            RazPreferences(requireContext()).save("usaha_name", name)
+            RazPreferences(requireContext()).save("usaha_nib", nib)
+
             findNavController().navigate(
                 R.id.nav_take_photo_fragment,
                 bundleOf("type" to "bltnonsku_step1")
@@ -99,6 +119,12 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
         }
 
         binding.btnPhotoAgain.setOnClickListener {
+            val nib = binding.inputUsahaNib.text.toString() ?: ""
+            val name = binding.inputUsahaName.text.toString() ?: ""
+
+            RazPreferences(requireContext()).save("usaha_name", name)
+            RazPreferences(requireContext()).save("usaha_nib", nib)
+
             findNavController().navigate(
                 R.id.nav_take_photo_fragment,
                 bundleOf("type" to "bltnonsku_step1")

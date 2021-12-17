@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@null"
-                    android:hint="88223738XXX"
+                    android:hint="Masukkan NIB Usaha Anda"
                     android:inputType="number" />
 
             </LinearLayout>
@@ -204,10 +204,8 @@
                     android:id="@+id/input_usaha_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
-                    android:hint="88223738XXX"
-                    android:inputType="number" />
+                    android:hint="Masukkan Nama Usaha Anda" />
 
             </LinearLayout>
 

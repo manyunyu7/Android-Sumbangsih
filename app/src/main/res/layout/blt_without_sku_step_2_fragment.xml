@@ -86,7 +86,7 @@
                             android:layout_height="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/rounded_rectangle"
-                            android:backgroundTint="@color/grey_cf" />
+                            android:backgroundTint="@color/redSumbangsih" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -167,9 +167,9 @@
 
                 <EditText
                     android:id="@+id/input_name"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false" />
@@ -184,7 +184,7 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_regular"
                 android:scrollHorizontally="false"
-                android:text="Tempat, Tanggal Lahir * *"
+                android:text="Tempat, Tanggal Lahir*"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -200,9 +200,9 @@
 
                 <EditText
                     android:id="@+id/input_ttl"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false" />
@@ -233,9 +233,9 @@
 
                 <EditText
                     android:id="@+id/input_nik"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false"
@@ -267,9 +267,9 @@
 
                 <EditText
                     android:id="@+id/input_no_kk"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false"
@@ -302,9 +302,9 @@
 
                 <EditText
                     android:id="@+id/input_jk"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false"
@@ -334,14 +334,15 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/input_address"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false"
+                    android:fontFamily="@font/montserrat_regular"
                     android:lines="5"
                   />
 
@@ -371,9 +372,9 @@
 
                 <EditText
                     android:id="@+id/input_contact"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:background="@null"
                     android:clickable="false"
                     android:enabled="false"
@@ -388,6 +389,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_c4"
@@ -410,43 +412,22 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_take_photo"
+            android:id="@+id/btn_ajukan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ambil Foto"
+            android:text="Ajukan"
             android:textAllCaps="false"
             app:cornerRadius="20dp" />
 
-        <LinearLayout
-            android:id="@+id/container_photo_taken"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_photo_again"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:layout_weight="1"
-                android:text="Foto Ulang"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp"
-                app:strokeColor="@color/redSumbangsih" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:text="Selanjutnya"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp" />
-
-        </LinearLayout>
 
     </LinearLayout>
+
+
+    <include
+        android:id="@+id/include_loading"
+        android:visibility="gone"
+        tools:visibility="gone"
+        layout="@layout/layout_loading_screen_full"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
