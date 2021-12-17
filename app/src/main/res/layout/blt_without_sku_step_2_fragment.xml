@@ -102,15 +102,14 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="190dp">
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/img_ktp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:maxHeight="100dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/bg_foto_usaha"
+                        android:src="@drawable/bg_blt_ktp_data"
                         tools:layout_editor_absoluteX="0dp"
                         tools:layout_editor_absoluteY="0dp" />
 
@@ -125,7 +124,7 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_bold"
                 android:scrollHorizontally="false"
-                android:text="Foto Usaha"
+                android:text="Data Diri Terisi Otomatis dari KTP"
                 android:textAlignment="center"
                 android:textColor="@color/redSumbangsih"
                 android:textSize="16sp"
@@ -139,7 +138,7 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_regular"
                 android:scrollHorizontally="false"
-                android:text="Jika foto dirasa kurang pas, anda bisa foto ulang lagi lho"
+                android:text="Data diri sudah otomatis terhubung ke KTP anda."
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -152,7 +151,7 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_regular"
                 android:scrollHorizontally="false"
-                android:text="Masukkan NIB Usaha Anda"
+                android:text="Nama *"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -162,16 +161,118 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/red_border"
+                android:background="@drawable/bg_input_disabled"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
                 <EditText
-                    android:id="@+id/input_usaha_nib"
+                    android:id="@+id/input_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/montserrat_regular"
+                android:scrollHorizontally="false"
+                android:text="Tempat, Tanggal Lahir * *"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input_disabled"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/input_ttl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/montserrat_regular"
+                android:scrollHorizontally="false"
+                android:text="Nomor Induk Kependudukan (NIK) *"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input_disabled"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/input_nik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/montserrat_regular"
+                android:scrollHorizontally="false"
+                android:text="NO KK*"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input_disabled"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/input_no_kk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false"
                     android:hint="88223738XXX"
                     android:inputType="number" />
 
@@ -185,7 +286,7 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_regular"
                 android:scrollHorizontally="false"
-                android:text="Masukkan Nama Usaha Anda"
+                android:text="Jenis Kelamin*"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -195,19 +296,103 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/red_border"
+                android:background="@drawable/bg_input_disabled"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
                 <EditText
-                    android:id="@+id/input_usaha_name"
+                    android:id="@+id/input_jk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:background="@null"
-                    android:hint="88223738XXX"
-                    android:inputType="number" />
+                    android:clickable="false"
+                    android:enabled="false"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/montserrat_regular"
+                android:scrollHorizontally="false"
+                android:text="Alamat Tinggal"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input_disabled"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/input_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:lines="5"
+                  />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/montserrat_regular"
+                android:scrollHorizontally="false"
+                android:text="No. HP*"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input_disabled"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/input_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_c4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Pastikan Data Diri Sudah Terisi Dengan Benar"/>
 
             </LinearLayout>
 

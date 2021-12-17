@@ -145,6 +145,16 @@
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.without_sku.BltWithoutSkuStep1Fragment"
         android:label="BltWithoutSkuStep1Fragment"
         tools:layout="@layout/blt_without_sku_step_1_fragment"
+        >
+        <action
+            android:id="@+id/action_nav_bltWithoutSkuStep1Fragment_to_bltWithoutSkuStep2Fragment"
+            app:destination="@id/nav_bltWithoutSkuStep2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_bltWithoutSkuStep2Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.without_sku.BltWithoutSkuStep2Fragment"
+        android:label="BltWithoutSkuStep2Fragment"
+        tools:layout="@layout/blt_without_sku_step_2_fragment"
         />
 
 </navigation>

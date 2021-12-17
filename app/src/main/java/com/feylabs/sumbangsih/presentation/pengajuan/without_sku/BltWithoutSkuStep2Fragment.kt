@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.BltWithoutSkuStep1FragmentBinding
+import com.feylabs.sumbangsih.databinding.BltWithoutSkuStep2FragmentBinding
 import com.feylabs.sumbangsih.databinding.KtpVerifStep3FragmentBinding
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.KTPVerifReq
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.VerifNIKHelper
@@ -26,10 +27,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.File
 
-class BltWithoutSkuStep1Fragment : BaseFragment() {
+class BltWithoutSkuStep2Fragment : BaseFragment() {
 
-    var _binding: BltWithoutSkuStep1FragmentBinding? = null
-    val binding get() = _binding as BltWithoutSkuStep1FragmentBinding
+    var _binding: BltWithoutSkuStep2FragmentBinding? = null
+    val binding get() = _binding as BltWithoutSkuStep2FragmentBinding
 
     private var objVerif: KTPVerifReq? = null
 
@@ -37,7 +38,7 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BltWithoutSkuStep1FragmentBinding.inflate(inflater)
+        _binding = BltWithoutSkuStep2FragmentBinding.inflate(inflater)
         return binding.root
     }
 
