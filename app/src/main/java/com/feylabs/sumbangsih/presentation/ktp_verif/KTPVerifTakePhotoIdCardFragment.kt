@@ -59,7 +59,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         binding.lottieAnim.makeViewGone()
         if (type != null) {
             when (type) {
-                "bltnonsku_step1" -> {
+                "bltnonsku_step1","bltsku_step2" -> {
                     binding.labelPageTitleTopbar.text = "Ambil Foto Usaha"
                     binding.tvContent.text = "Mohon atur posisi objek agar terdeteksi"
                     Toasty.info(
@@ -71,6 +71,16 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                     binding.lottieAnim.makeViewVisible()
                     binding.ivCropperFrame.makeViewGone()
                     hideSuggestion()
+                }
+                "bltsku_step1" -> {
+                    binding.labelPageTitleTopbar.text = "Ambil Foto Selfie"
+                    binding.tvContent.text = "Pastikan wajah dan KTP anda sudah sesuai posisi"
+                    binding.ivCropperFrame.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_circa_face
+                        )
+                    )
                 }
                 "verifnik_step3" -> {
                     binding.labelPageTitleTopbar.text = "Ambil Foto Selfie"
@@ -143,7 +153,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         binding.lottieAnim.makeViewGone()
         if (type != null) {
             when (type) {
-                "bltnonsku_step1" -> {
+                "bltnonsku_step1","bltsku_step2" -> {
                     imageCapture.targetRotation = Surface.ROTATION_270
                 }
                 else -> {
@@ -213,7 +223,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                 "verifnik_step3" -> {
                     cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
                 }
-                "verifnik_step4" -> {
+                "verifnik_step4","bltsku_step1" -> {
                     cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
                 }
             }
@@ -289,6 +299,18 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                     "bltnonsku_step1" -> {
                         findNavController().navigate(
                             R.id.bltWithoutSkuStep1Fragment,
+                            bundleOf("uri" to imageResCrop.toString())
+                        )
+                    }
+                    "bltsku_step1" -> {
+                        findNavController().navigate(
+                            R.id.bltSkuStep1Fragment,
+                            bundleOf("uri" to imageResCrop.toString())
+                        )
+                    }
+                    "bltsku_step2" -> {
+                        findNavController().navigate(
+                            R.id.bltSkuStep2Fragment,
                             bundleOf("uri" to imageResCrop.toString())
                         )
                     }

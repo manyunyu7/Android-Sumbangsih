@@ -53,7 +53,7 @@
                         android:ellipsize="none"
                         android:fontFamily="@font/montserrat_bold"
                         android:scrollHorizontally="false"
-                        android:text="Pengajuan (Tanpa Membuat SKU)"
+                        android:text="Pengajuan"
                         android:textColor="@color/redSumbangsih"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -65,7 +65,7 @@
                         android:ellipsize="none"
                         android:fontFamily="@font/poppins_light"
                         android:scrollHorizontally="false"
-                        android:text="Langkah 2/2 Isi Form Pengajuan BLT UMKM"
+                        android:text="Langkah 3/3 Isi Form Pengajuan BLT UMKM"
                         android:textAlignment="viewStart"
                         android:textSize="15sp" />
 
@@ -73,6 +73,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_rectangle" />
 
                         <View
                             android:layout_width="match_parent"

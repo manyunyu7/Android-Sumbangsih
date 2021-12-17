@@ -123,7 +123,7 @@
         android:id="@+id/navigation_pengajuanBLTFragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.PengajuanBLTFragment"
         android:label="PengajuanBLTFragment"
-        tools:layout="@layout/pengajuan_blt_fragment" >
+        tools:layout="@layout/pengajuan_blt_fragment">
         <action
             android:id="@+id/action_navigation_pengajuanBLTFragment_to_pengajuanBLTStepInitialFragment"
             app:destination="@id/nav_pengajuanBLTStepInitialFragment" />
@@ -133,19 +133,20 @@
         android:id="@+id/nav_pengajuanBLTStepInitialFragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.PengajuanBLTStepInitialFragment"
         android:label="PengajuanBLTStepInitialFragment"
-        tools:layout="@layout/pengajuan_blt_step_initial_fragment"
-        >
+        tools:layout="@layout/pengajuan_blt_step_initial_fragment">
         <action
             android:id="@+id/action_nav_pengajuanBLTStepInitialFragment_to_bltWithoutSkuStep1Fragment"
             app:destination="@id/bltWithoutSkuStep1Fragment" />
+        <action
+            android:id="@+id/action_nav_pengajuanBLTStepInitialFragment_to_bltSkuStep1Fragment"
+            app:destination="@id/bltSkuStep1Fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/bltWithoutSkuStep1Fragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.without_sku.BltWithoutSkuStep1Fragment"
         android:label="BltWithoutSkuStep1Fragment"
-        tools:layout="@layout/blt_without_sku_step_1_fragment"
-        >
+        tools:layout="@layout/blt_without_sku_step_1_fragment">
         <action
             android:id="@+id/action_nav_bltWithoutSkuStep1Fragment_to_bltWithoutSkuStep2Fragment"
             app:destination="@id/nav_bltWithoutSkuStep2Fragment" />
@@ -154,7 +155,30 @@
         android:id="@+id/nav_bltWithoutSkuStep2Fragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.without_sku.BltWithoutSkuStep2Fragment"
         android:label="BltWithoutSkuStep2Fragment"
-        tools:layout="@layout/blt_without_sku_step_2_fragment"
-        />
+        tools:layout="@layout/blt_without_sku_step_2_fragment" />
+    <fragment
+        android:id="@+id/bltSkuStep1Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.with_sku.BltSkuStep1Fragment"
+        android:label="BltSkuStep1Fragment"
+        tools:layout="@layout/blt_sku_step_1_fragment">
+        <action
+            android:id="@+id/action_nav_bltSkuStep1Fragment_to_bltSkuStep2Fragment"
+            app:destination="@id/bltSkuStep2Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bltSkuStep2Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.with_sku.BltSkuStep2Fragment"
+        android:label="BltSkuStep2Fragment"
+        tools:layout="@layout/blt_sku_step_2_fragment">
+        <action
+            android:id="@+id/action_nav_bltSkuStep2Fragment_to_bltSkuStep3Fragment"
+            app:destination="@id/bltSkuStep3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bltSkuStep3Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.with_sku.BltSkuStep3Fragment"
+        android:label="BltSkuStep3Fragment"
+        tools:layout="@layout/blt_sku_step_3_fragment" />
 
 </navigation>

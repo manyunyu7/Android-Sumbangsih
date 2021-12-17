@@ -34,6 +34,10 @@ class PengajuanBLTStepInitialFragment : BaseFragment() {
             findNavController().navigate(R.id.action_nav_pengajuanBLTStepInitialFragment_to_bltWithoutSkuStep1Fragment)
         }
 
+        binding.btnSku.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_pengajuanBLTStepInitialFragment_to_bltSkuStep1Fragment)
+        }
+
     }
 
 

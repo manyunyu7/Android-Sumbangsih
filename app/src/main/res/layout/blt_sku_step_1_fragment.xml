@@ -9,10 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/container_bottom"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +51,7 @@
                         android:ellipsize="none"
                         android:fontFamily="@font/montserrat_bold"
                         android:scrollHorizontally="false"
-                        android:text="Pengajuan (Tanpa Membuat SKU)"
+                        android:text="Pengajuan"
                         android:textColor="@color/redSumbangsih"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -65,7 +63,7 @@
                         android:ellipsize="none"
                         android:fontFamily="@font/poppins_light"
                         android:scrollHorizontally="false"
-                        android:text="Langkah 1/2 Upload Foto Usaha"
+                        android:text="Langkah 1/3 - Upload Foto Selfie"
                         android:textAlignment="viewStart"
                         android:textSize="15sp" />
 
@@ -84,6 +82,14 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_rectangle"
+                            android:backgroundTint="@color/grey_cf" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/rounded_rectangle"
                             android:backgroundTint="@color/grey_cf" />
@@ -94,27 +100,27 @@
 
             </RelativeLayout>
 
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="190dp">
+                    android:layout_height="350dp">
 
                     <ImageView
-                        android:id="@+id/img_ktp"
+                        android:id="@+id/img_face"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:maxHeight="100dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/bg_foto_usaha"
+                        android:src="@drawable/bg_blt_selfie"
                         tools:layout_editor_absoluteX="0dp"
                         tools:layout_editor_absoluteY="0dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -125,91 +131,69 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_bold"
                 android:scrollHorizontally="false"
-                android:text="Foto Usaha"
+                android:text="Pengambilan Foto Selfie"
                 android:textAlignment="center"
                 android:textColor="@color/redSumbangsih"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginHorizontal="20dp"
-                android:ellipsize="none"
-                android:fontFamily="@font/montserrat_regular"
-                android:scrollHorizontally="false"
-                android:text="Jika foto dirasa kurang pas, anda bisa foto ulang lagi lho"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/desc_take_photo_face_verif_ktp"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/label_nib"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:ellipsize="none"
-                android:fontFamily="@font/montserrat_regular"
-                android:scrollHorizontally="false"
-                android:text="Masukkan NIB Usaha Anda"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
             <LinearLayout
-                android:id="@+id/container_nib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/red_border"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-                <EditText
-                    android:id="@+id/input_usaha_nib"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_take_photo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
-                    android:hint="Masukkan NIB Usaha Anda"
-                    android:inputType="number" />
+                    android:layout_weight="1"
+                    android:text="Ambil Foto"
+                    android:textAllCaps="false"
+                    app:cornerRadius="20dp" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/label_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:ellipsize="none"
-                android:fontFamily="@font/montserrat_regular"
-                android:scrollHorizontally="false"
-                android:text="Masukkan Nama Usaha Anda"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/containerName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/red_border"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <EditText
-                    android:id="@+id/input_usaha_name"
+                <LinearLayout
+                    android:id="@+id/container_photo_taken"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="Masukkan Nama Usaha Anda" />
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_photo_again"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:text="Foto Ulang"
+                        android:textAllCaps="false"
+                        app:cornerRadius="20dp"
+                        app:strokeColor="@color/redSumbangsih" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_next"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:text="Ya"
+                        android:textAllCaps="false"
+                        app:cornerRadius="20dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -217,53 +201,15 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/container_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/layout_loading_screen_full"
+        android:visibility="gone" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_take_photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ambil Foto"
-            android:textAllCaps="false"
-            app:cornerRadius="20dp" />
+    <include
+        android:id="@+id/include_success"
+        layout="@layout/layout_success_verif_nik"
+        android:visibility="gone" />
 
-        <LinearLayout
-            android:id="@+id/container_photo_taken"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_photo_again"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:layout_weight="1"
-                android:text="Foto Ulang"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp"
-                app:strokeColor="@color/redSumbangsih" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:text="Selanjutnya"
-                android:textAllCaps="false"
-                app:cornerRadius="20dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

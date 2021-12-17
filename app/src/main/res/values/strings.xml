@@ -50,7 +50,7 @@ Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan
     <string name="dialog_ok">Oke</string>
     <string name="dialog_cancel">Batalkan</string>
     <string name="desc_take_photo_verif_ktp">Pada tahap selanjutnya akan anda diharuskan untuk foto KTP dan foto selfie bersama KTP dari rumah. Tahapan tersebut dibutuhkan untuk memverifikasi data diri pengguna.</string>
-    <string name="desc_take_photo_face_verif_ktp">Silahkan lakukan foto selfie bersama KTP dari alamat sesuai KTP</string>
+    <string name="desc_take_photo_face_verif_ktp">Silahkan lakukan foto selfie bersama KTP dan alamat sesuai KTP</string>
     <string name="desc_photo_frame_verif_nik_step3">Pastikan e-KTP Anda berada dalam area dan cukup jelas untuk dibaca</string>
     <string name="desc_photo_frame_verif_nik_step4">\"Pastikan wajah dan ktp anda sudah sesuai posisi \"</string>
     <string name="desc_step_info_usaha">Upload Foto Usaha, seperti Tampak depan Toko, pembuatan produk atau foto lain yang mewakili kegiatan usaha</string>
