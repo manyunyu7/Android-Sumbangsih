@@ -50,7 +50,7 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
 
         val photoUri: Uri? = arguments?.getString("uri")?.toUri()
 
-        objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
+//        objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
 
         binding.apply {
 
@@ -69,7 +69,7 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
                                 width = width,
                                 height = height
                             )
-                            objVerif?.photo_requested = bitmapImage!!
+//                            objVerif?.photo_requested = bitmapImage!!
                         }
                     })
 

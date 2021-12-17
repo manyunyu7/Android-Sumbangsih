@@ -23,7 +23,7 @@ object VerifNIKHelper {
         RazPreferences(context).save("nik_verif", obj)
     }
 
-    fun getKTPVerifReq(context: Context): KTPVerifReq {
+    fun getKTPVerifReq(context: Context): KTPVerifReq? {
         val objPref = RazPreferences(context).getPrefString("nik_verif")
         val obj = Gson().fromJson(objPref, KTPVerifReq::class.java)
         return obj

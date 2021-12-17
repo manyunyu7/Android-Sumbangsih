@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -25,6 +26,7 @@ import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.CommonHelper
 import com.feylabs.sumbangsih.util.CommonHelper.REQUIRED_PERMISSIONS_PHOTO_KTP
 import com.yalantis.ucrop.UCrop
+import es.dmoral.toasty.Toasty
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
@@ -54,17 +56,24 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         type = arguments?.getString("type") ?: ""
-
+        binding.lottieAnim.makeViewGone()
         if (type != null) {
             when (type) {
                 "bltnonsku_step1" -> {
+                    binding.labelPageTitleTopbar.text = "Ambil Foto Usaha"
                     binding.tvContent.text = "Mohon atur posisi objek agar terdeteksi"
-//                    Glide.with(this).asGif().load(R.raw.sbg_phone_rotation)
-//                        .into(binding.ivCropperFrame)
+                    Toasty.info(
+                        requireContext(),
+                        "Miringkan ponsel anda ke arah kanan",
+                        Toast.LENGTH_LONG,
+                        true
+                    ).show();
+                    binding.lottieAnim.makeViewVisible()
                     binding.ivCropperFrame.makeViewGone()
                     hideSuggestion()
                 }
                 "verifnik_step3" -> {
+                    binding.labelPageTitleTopbar.text = "Ambil Foto Selfie"
                     binding.tvContent.text = getString(R.string.desc_photo_frame_verif_nik_step3)
                     binding.ivCropperFrame.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -74,6 +83,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                     )
                 }
                 "verifnik_step4" -> {
+                    binding.labelPageTitleTopbar.text = "Ambil Foto Selfie"
                     binding.tvContent.text = getString(R.string.desc_photo_frame_verif_nik_step4)
                     binding.ivCropperFrame.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -109,8 +119,8 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
     private fun hideSuggestion() {
         Handler(Looper.getMainLooper()).postDelayed(Runnable {
             binding.ivCropperFrame.makeViewGone()
+            binding.lottieAnim.makeViewGone()
         }, 3000)
-
     }
 
     private fun getOutputDirectory(): File? {
@@ -128,7 +138,19 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-        imageCapture.targetRotation = Surface.ROTATION_90
+
+        type = arguments?.getString("type") ?: ""
+        binding.lottieAnim.makeViewGone()
+        if (type != null) {
+            when (type) {
+                "bltnonsku_step1" -> {
+                    imageCapture.targetRotation = Surface.ROTATION_270
+                }
+                else -> {
+                    // Do Nothing
+                }
+            }
+        }
 
         val photoFile = File(
             outputDirectory,
@@ -159,11 +181,8 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
-
         cameraProviderFuture.addListener({
-
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
             val previewView = Preview.Builder()
                 .build()
                 .also { mPreview ->
