@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.feylabs.sumbangsih.presentation.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_navigation_detailTutorialFragment"
             app:destination="@id/navigation_detailTutorialFragment" />
@@ -22,35 +22,34 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_detailNewsFragment"
             app:destination="@id/navigation_detailNewsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_pengajuanBLTFragment"
+            app:destination="@id/navigation_pengajuanBLTFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_createPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.pin.CreatePinFragment"
         android:label="CreatePinFragment"
-        tools:layout="@layout/fragment_create_pin"
-        />
+        tools:layout="@layout/fragment_create_pin" />
 
     <fragment
         android:id="@+id/navigation_verifPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.pin.VerifPinFragment"
         android:label="VerifPinFragment"
-        tools:layout="@layout/fragment_verif_pin"
-        />
+        tools:layout="@layout/fragment_verif_pin" />
 
     <fragment
         android:id="@+id/navigation_videoPlayerFragment"
         android:name="com.feylabs.sumbangsih.presentation.video.VideoPlayerFragment"
         android:label="VideoPlayerFragment"
-        tools:layout="@layout/fragment_video_player"
-        />
+        tools:layout="@layout/fragment_video_player" />
 
     <fragment
         android:id="@+id/navigation_detailTutorialFragment"
         android:name="com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialFragment"
         android:label="DetailTutorialFragment"
-        tools:layout="@layout/detail_tutorial_fragment"
-        />
+        tools:layout="@layout/detail_tutorial_fragment" />
     <fragment
         android:id="@+id/navigation_profileFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.profile.ProfileFragment"
@@ -60,13 +59,12 @@
         android:id="@+id/navigation_detailNewsFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.home.news.DetailNewsFragment"
         android:label="DetailNewsFragment"
-        tools:layout="@layout/fragment_detail_news"
-        />
+        tools:layout="@layout/fragment_detail_news" />
     <fragment
         android:id="@+id/navigation_listAllNewsFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.home.news.ListAllNewsFragment"
         android:label="list_all_news_fragment"
-        tools:layout="@layout/list_all_news_fragment" >
+        tools:layout="@layout/list_all_news_fragment">
         <action
             android:id="@+id/action_navigation_listAllNewsFragment_to_navigation_detailNewsFragment"
             app:destination="@id/navigation_detailNewsFragment" />
@@ -76,8 +74,7 @@
         android:id="@+id/nav_KTPVerifStep1Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep1Fragment"
         android:label="KTPVerifStep1Fragment"
-        tools:layout="@layout/ktp_verif_step_1_fragment"
-        >
+        tools:layout="@layout/ktp_verif_step_1_fragment">
         <action
             android:id="@+id/action_KTPVerifStep1Fragment_to_KTPVerifStep2Fragment"
             app:destination="@id/nav_KTPVerifStep2Fragment" />
@@ -86,8 +83,7 @@
         android:id="@+id/nav_KTPVerifStep2Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep2Fragment"
         android:label="KTPVerifStep2Fragment"
-        tools:layout="@layout/ktp_verif_step_2_fragment"
-        >
+        tools:layout="@layout/ktp_verif_step_2_fragment">
         <action
             android:id="@+id/action_KTPVerifStep2Fragment_to_KTPVerifStep3Fragment"
             app:destination="@id/nav_KTPVerifStep3Fragment" />
@@ -96,8 +92,7 @@
         android:id="@+id/nav_KTPVerifStep3Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep3Fragment"
         android:label="KTPVerifStep3Fragment"
-        tools:layout="@layout/ktp_verif_step_3_fragment"
-        >
+        tools:layout="@layout/ktp_verif_step_3_fragment">
 
         <action
             android:id="@+id/action_nav_KTPVerifStep3Fragment_to_KTPVerifStep4Fragment"
@@ -108,14 +103,12 @@
         android:id="@+id/nav_take_photo_fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifTakePhotoIdCardFragment"
         android:label="KTPVerifTakePhotoIdCardFragment"
-        tools:layout="@layout/ktp_verif_take_id_photo_fragment"
-        />
+        tools:layout="@layout/ktp_verif_take_id_photo_fragment" />
     <fragment
         android:id="@+id/nav_KTPVerifStep4Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep4Fragment"
         android:label="KTPVerifStep4Fragment"
-        tools:layout="@layout/ktp_verif_step_4_fragment"
-        >
+        tools:layout="@layout/ktp_verif_step_4_fragment">
         <action
             android:id="@+id/action_nav_KTPVerifStep4Fragment_to_KTPVerifStep5Fragment"
             app:destination="@id/KTPVerifStep5Fragment" />
@@ -124,7 +117,34 @@
         android:id="@+id/KTPVerifStep5Fragment"
         android:name="com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifStep5Fragment"
         android:label="KTPVerifStep5Fragment"
-        tools:layout="@layout/ktp_verif_step_5_fragment"
+        tools:layout="@layout/ktp_verif_step_5_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_pengajuanBLTFragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.PengajuanBLTFragment"
+        android:label="PengajuanBLTFragment"
+        tools:layout="@layout/pengajuan_blt_fragment" >
+        <action
+            android:id="@+id/action_navigation_pengajuanBLTFragment_to_pengajuanBLTStepInitialFragment"
+            app:destination="@id/nav_pengajuanBLTStepInitialFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pengajuanBLTStepInitialFragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.PengajuanBLTStepInitialFragment"
+        android:label="PengajuanBLTStepInitialFragment"
+        tools:layout="@layout/pengajuan_blt_step_initial_fragment"
+        >
+        <action
+            android:id="@+id/action_nav_pengajuanBLTStepInitialFragment_to_bltWithoutSkuStep1Fragment"
+            app:destination="@id/bltWithoutSkuStep1Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bltWithoutSkuStep1Fragment"
+        android:name="com.feylabs.sumbangsih.presentation.pengajuan.without_sku.BltWithoutSkuStep1Fragment"
+        android:label="BltWithoutSkuStep1Fragment"
+        tools:layout="@layout/blt_without_sku_step_1_fragment"
         />
 
 </navigation>

@@ -48,6 +48,10 @@ data class ProfileMainReq(
             val photoFace: String,
             @SerializedName("photo_requested")
             val photoRequested: String,
+            @SerializedName("verification_status")
+            val verificationStatus: Int?,
+            @SerializedName("verification_notes")
+            val verificationNotes: String?,
             @SerializedName("photo_stored")
             val photoStored: Any,
             @SerializedName("updated_at")

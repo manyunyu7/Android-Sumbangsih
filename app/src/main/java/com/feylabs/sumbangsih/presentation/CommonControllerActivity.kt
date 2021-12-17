@@ -42,7 +42,9 @@ class CommonControllerActivity : BaseActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_profileFragment
+                R.id.navigation_home,
+                R.id.navigation_profileFragment,
+                R.id.navigation_pengajuanBLTFragment
             )
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
@@ -69,6 +71,7 @@ class CommonControllerActivity : BaseActivity() {
                 R.id.navigation_createPinFragment, R.id.navigation_verifPinFragment,
                 R.id.navigation_detailTutorialFragment, R.id.navigation_videoPlayerFragment
                 -> {
+                    hideCustomTopbar()
                     hideNavView()
                     hideActionBar()
                 }
@@ -82,6 +85,10 @@ class CommonControllerActivity : BaseActivity() {
                 R.id.navigation_listAllNewsFragment -> {
                     hideCustomTopbar()
                 }
+                R.id.navigation_pengajuanBLTFragment -> {
+                    showCustomTopbar()
+                    showNavView()
+                }
                 else -> {
                     showNavView()
                     showActionBar()
@@ -92,7 +99,7 @@ class CommonControllerActivity : BaseActivity() {
             Show Topbar and NavView only on main menu
              */
             when (getCurrentNav()) {
-                R.id.navigation_home, R.id.navigation_profileFragment -> {
+                R.id.navigation_home, R.id.navigation_profileFragment, R.id.navigation_pengajuanBLTFragment -> {
                     showNavView()
                     showCustomTopbar()
                 }
@@ -138,12 +145,48 @@ class CommonControllerActivity : BaseActivity() {
         }
     }
 
+    fun overrideBottomMenu(isDisabled: Boolean = false, title: String = "", reason: String = "") {
+        binding.navView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_pengajuanBLTFragment -> {
+                    if (isDisabled) {
+                        DialogUtils.showCustomDialog(
+                            context = this,
+                            title = title,
+                            message = reason,
+                            positiveAction = Pair(getString(R.string.dialog_ok), {
+
+                            }),
+                            autoDismiss = true,
+                            buttonAllCaps = false
+                        )
+                    } else {
+                        getNavController().navigate(R.id.navigation_pengajuanBLTFragment)
+                    }
+                }
+                R.id.navigation_home -> {
+                    getNavController().navigate(R.id.navigation_home)
+                }
+                R.id.navigation_profileFragment -> {
+                    getNavController().navigate(R.id.navigation_profileFragment)
+                }
+            }
+
+            return@setOnItemSelectedListener true
+        }
+    }
+
+    fun getNavController(): NavController {
+        return findNavController(R.id.nav_host_fragment_activity_common_controller)
+    }
+
     fun hideCustomTopbar() {
         findViewById<Toolbar>(R.id.toolbar).makeViewGone()
         binding.toolbar.makeViewGone()
     }
 
     fun showCustomTopbar() {
+        findViewById<Toolbar>(R.id.toolbar).makeViewVisible()
         binding.toolbar.makeViewVisible()
     }
 

@@ -30,6 +30,7 @@
             android:id="@+id/tvMessage"
             style="@style/Montserrat.Black2.14sp"
             android:layout_width="0dp"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"

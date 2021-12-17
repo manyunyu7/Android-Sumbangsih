@@ -17,152 +17,167 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/profile_card"
+            <LinearLayout
+                android:id="@+id/container_profile"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@color/redSumbangsih"
-                app:cardCornerRadius="20dp"
-                tools:visibility="visible">
+                android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profile_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/redSumbangsih"
+                    app:cardCornerRadius="20dp"
+                    tools:visibility="visible">
 
-                    <ImageView
-                        android:id="@+id/img_profile"
-                        android:layout_width="54dp"
-                        android:layout_height="54dp"
-                        android:src="@drawable/bg_ic_account"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
                         android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/btn_verif_nik_card"
-                        app:layout_constraintStart_toEndOf="@id/img_profile"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:padding="10dp">
 
-                        <TextView
-                            android:id="@+id/tv_sapa"
-                            style="@style/Montserrat.Bold.White.14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:text="Hallo 6288223738709" />
+                        <ImageView
+                            android:id="@+id/img_profile"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:src="@drawable/bg_ic_account"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_desc"
-                            style="@style/Montserrat.White.14sp"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Silakan Melakukan Verifikasi NIK"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="10dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/btn_verif_nik_card"
                             app:layout_constraintStart_toEndOf="@id/img_profile"
-                            app:layout_constraintTop_toBottomOf="@id/tv_sapa"
-                            tools:text="Hallo 6288223738709" />
-                    </LinearLayout>
+                            app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/btn_verif_nik_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/white" />
+                            <TextView
+                                android:id="@+id/tv_sapa"
+                                style="@style/Montserrat.Bold.White.14sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:text="Hallo 6288223738709" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                            <TextView
+                                android:id="@+id/tv_desc"
+                                style="@style/Montserrat.White.14sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Silakan Melakukan Verifikasi NIK"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/img_profile"
+                                app:layout_constraintTop_toBottomOf="@id/tv_sapa"
+                                tools:text="Hallo 6288223738709" />
+                        </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/btn_verif_nik_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
-            <include
-                android:id="@+id/shimmer_profile_card"
-                layout="@layout/lshimmer_home_card_profile"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <include
+                    android:id="@+id/shimmer_profile_card"
+                    layout="@layout/lshimmer_home_card_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone" />
+            </LinearLayout>
 
             <include
                 android:id="@+id/include_home_statistics"
                 layout="@layout/layout_home_statistics" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
+                android:id="@+id/container_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_menu_news"
-                    style="@style/Montserrat.Bold.Black1.14sp"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="Berita Terkini"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/grey_darken3"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_news_all"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp">
 
-                <TextView
-                    android:id="@+id/tv_news_all"
-                    style="@style/Montserrat.RedSumbangsih.12sp"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tv_menu_news"
+                        style="@style/Montserrat.Bold.Black1.14sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="Berita Terkini"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/grey_darken3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_news_all"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_news_all"
+                        style="@style/Montserrat.RedSumbangsih.12sp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="5dp"
+                        android:text="Lihat Semua"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/grey_darken3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_news_all"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/btn_news_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_news_all"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_news_all"
+                        app:tint="@color/redSumbangsih" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_news"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"
-                    android:text="Lihat Semua"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/grey_darken3"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_news_all"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_news" />
 
-                <ImageView
-                    android:id="@+id/btn_news_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_news_all"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_news_all"
-                    app:tint="@color/redSumbangsih" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_news"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_news" />
-
-            <include
-                android:id="@+id/rv_news_placeholder"
-                layout="@layout/lshimmer_news_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                tools:visibility="gone" />
+                <include
+                    android:id="@+id/rv_news_placeholder"
+                    layout="@layout/lshimmer_news_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    tools:visibility="gone" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

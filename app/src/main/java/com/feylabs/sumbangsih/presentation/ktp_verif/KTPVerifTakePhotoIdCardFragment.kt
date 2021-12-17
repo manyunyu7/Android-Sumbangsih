@@ -3,9 +3,13 @@ package com.feylabs.sumbangsih.presentation.ktp_verif
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
+import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.*
@@ -14,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.KtpVerifTakeIdPhotoFragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
@@ -24,6 +29,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
 
@@ -51,6 +57,13 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
 
         if (type != null) {
             when (type) {
+                "bltnonsku_step1" -> {
+                    binding.tvContent.text = "Mohon atur posisi objek agar terdeteksi"
+//                    Glide.with(this).asGif().load(R.raw.sbg_phone_rotation)
+//                        .into(binding.ivCropperFrame)
+                    binding.ivCropperFrame.makeViewGone()
+                    hideSuggestion()
+                }
                 "verifnik_step3" -> {
                     binding.tvContent.text = getString(R.string.desc_photo_frame_verif_nik_step3)
                     binding.ivCropperFrame.setImageDrawable(
@@ -93,6 +106,13 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         }
     }
 
+    private fun hideSuggestion() {
+        Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            binding.ivCropperFrame.makeViewGone()
+        }, 3000)
+
+    }
+
     private fun getOutputDirectory(): File? {
         return if (activity != null) {
             val mediaDir = activity?.externalMediaDirs?.firstOrNull()?.let { mFile ->
@@ -108,6 +128,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
+        imageCapture.targetRotation = Surface.ROTATION_90
 
         val photoFile = File(
             outputDirectory,
@@ -210,7 +231,6 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
         if (requestCode == CommonHelper.REQUEST_CODE_PERMISSION) {
             if (allPermissionGranted()) {
                 startCamera()
@@ -237,12 +257,20 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                 when (type) {
                     "verifnik_step3" -> {
                         findNavController().navigate(
-                            R.id.nav_KTPVerifStep3Fragment, bundleOf("ktp_uri" to imageResCrop.toString())
+                            R.id.nav_KTPVerifStep3Fragment,
+                            bundleOf("ktp_uri" to imageResCrop.toString())
                         )
                     }
                     "verifnik_step4" -> {
                         findNavController().navigate(
-                            R.id.nav_KTPVerifStep4Fragment, bundleOf("face_uri" to imageResCrop.toString())
+                            R.id.nav_KTPVerifStep4Fragment,
+                            bundleOf("face_uri" to imageResCrop.toString())
+                        )
+                    }
+                    "bltnonsku_step1" -> {
+                        findNavController().navigate(
+                            R.id.bltWithoutSkuStep1Fragment,
+                            bundleOf("uri" to imageResCrop.toString())
                         )
                     }
                 }

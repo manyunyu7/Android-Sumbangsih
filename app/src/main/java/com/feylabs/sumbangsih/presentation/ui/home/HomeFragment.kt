@@ -10,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.SumbangsihApplication.Companion.URL_VIDEO
+import com.feylabs.sumbangsih.data.source.local.NewsSeeder
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.NewsResponse
 import com.feylabs.sumbangsih.data.source.remote.response.ProfileMainReq
 import com.feylabs.sumbangsih.databinding.FragmentHomeBinding
+import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.util.AnimUtil.animateFromResource
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
@@ -105,10 +107,12 @@ class HomeFragment : BaseFragment() {
                 }
                 is ManyunyuRes.Empty -> {
                     setNewsLoading(false)
+                    mAdapter.setWholeData(NewsSeeder.getNewsSeeder())
                     showToast("Tidak Ada Data")
                 }
                 is ManyunyuRes.Error -> {
                     setNewsLoading(false)
+                    mAdapter.setWholeData(NewsSeeder.getNewsSeeder())
                     showToast(it.message.toString())
                 }
                 is ManyunyuRes.Loading -> {
@@ -116,8 +120,15 @@ class HomeFragment : BaseFragment() {
                 }
                 is ManyunyuRes.Success -> {
                     setNewsLoading(false)
+                    val isNewsEmpty = it?.data?.isEmpty() ?: true
+
                     it.data?.toMutableList()?.let { data ->
                         mAdapter.setWholeData(data)
+                    }
+
+                    // if news above is empty
+                    if (isNewsEmpty) {
+                        mAdapter.setWholeData(NewsSeeder.getNewsSeeder())
                     }
                 }
             }
@@ -125,15 +136,55 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupProfileCard(data: ProfileMainReq) {
-        val ktp = data.resData.ktp
+        val mKtp = data.resData.ktp
         val user = data.resData.user
 
-        if (ktp == null) {
-            binding.tvSapa.text = "Halo, +" + user?.contact.toString()
+        if (mKtp == null) {
+            binding.tvSapa.text = "Halo, +" + RazPreferenceHelper.getPhoneNumber(requireContext())
             binding.tvDesc.text = "Segera lakukan verifikasi NIK"
+
+            (getActivity() as CommonControllerActivity).overrideBottomMenu(
+                true, "Perhatian", "Silakan Melakukan Verifikasi NIK terlebih dahulu"
+            )
+
         } else {
-            binding.tvSapa.text = "Halo," + ktp.name
-            binding.tvDesc.text = "NIK : " + ktp.nik
+            binding.profileCard.setOnClickListener {
+                findNavController().navigate(R.id.navigation_profileFragment)
+            }
+            binding.tvSapa.text = "Halo, " + mKtp.name
+            binding.tvDesc.text = "NIK : " + mKtp.nik
+
+            if (mKtp.verificationStatus == null) {
+                val messageShown = "Pengajuan NIK Anda belum disetujui, "
+
+                (getActivity() as CommonControllerActivity).overrideBottomMenu(
+                    true, "Perhatian", messageShown
+                )
+            }
+
+            if (mKtp.verificationStatus == 0) {
+                var messageShown = "Pengajuan NIK Anda tidak memenuhi persyaratan, "
+                var messageFromServer = mKtp.verificationNotes
+
+                if (messageFromServer != null) {
+                    messageShown += "dengan catatan :\n $messageFromServer. \n\nSilakan Melakukan Verifikasi NIK Kembali"
+                }
+
+                binding.profileCard.setOnClickListener {
+                    findNavController().navigate(R.id.action_navigation_home_to_KTPVerifStep1Fragment)
+                }
+
+                (getActivity() as CommonControllerActivity).overrideBottomMenu(
+                    true, "Perhatian", messageShown
+                )
+            }
+
+            if (mKtp.verificationStatus == 1) {
+                (getActivity() as CommonControllerActivity).overrideBottomMenu(
+                    false
+                )
+            }
+
         }
 
     }
@@ -218,12 +269,27 @@ class HomeFragment : BaseFragment() {
         binding.apply {
             includeHomeStatistics.root.makeViewGone()
             includeHomeTutor.root.makeViewGone()
+            btnTutorialVideo.makeViewGone()
+            tvVideo.makeViewGone()
+            tvTutor.makeViewGone()
+            containerNews.makeViewGone()
+            containerProfile.makeViewGone()
 
+            animateFromResource(containerProfile, R.anim.anim_slide_in_right)
+            animateFromResource(containerNews, R.anim.anim_slide_in_left)
             animateFromResource(binding.includeHomeStatistics.root, R.anim.anim_slide_in_right)
             animateFromResource(includeHomeTutor.root, R.anim.anim_slide_in_left)
+            animateFromResource(tvTutor, R.anim.anim_slide_in_right)
+            animateFromResource(tvVideo, R.anim.anim_slide_in_left)
+            animateFromResource(btnTutorialVideo, R.anim.anim_slide_in_left)
 
+            containerProfile.makeViewVisible()
+            tvVideo.makeViewVisible()
+            tvTutor.makeViewVisible()
+            btnTutorialVideo.makeViewVisible()
             includeHomeStatistics.root.makeViewVisible()
             includeHomeTutor.root.makeViewVisible()
+            containerNews.makeViewVisible()
         }
     }
 
