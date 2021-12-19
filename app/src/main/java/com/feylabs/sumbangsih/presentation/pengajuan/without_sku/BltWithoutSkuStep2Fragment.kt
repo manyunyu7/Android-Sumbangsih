@@ -79,14 +79,7 @@ class BltWithoutSkuStep2Fragment : BaseFragment() {
                     showFullscreenLoading(true)
                 }
                 is ManyunyuRes.Success -> {
-                    DialogUtils.showCustomDialog(
-                        context = requireContext(),
-                        title = "Berhasil",
-                        message = "${it.data}",
-                        positiveAction = Pair(getString(R.string.dialog_ok), {}),
-                        autoDismiss = true,
-                        buttonAllCaps = false
-                    )
+                    showSuccess()
                     showToast(it.message.toString())
                     showFullscreenLoading(false)
                     pengajuanViewModel.fireUploadVerifVM()
@@ -189,6 +182,13 @@ class BltWithoutSkuStep2Fragment : BaseFragment() {
 
     private fun initData() {
         viewModel.getProfile(RazPreferenceHelper.getUserId(requireContext()))
+    }
+
+    private fun showSuccess(){
+        binding.includeSuccess.root.makeViewVisible()
+        binding.includeSuccess.btnAction.setOnClickListener {
+            findNavController().popBackStack(R.id.navigation_home,true)
+        }
     }
 
 

@@ -31,12 +31,8 @@ class PengajuanBLTFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        showLoading(false)
         initData()
-    }
-
-
-    fun initUi() {
-
     }
 
     fun initData() {
@@ -99,8 +95,8 @@ class PengajuanBLTFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUi()
         initObserver()
+        initData()
 
 
         binding.indicatorBltActive.makeViewVisible()

@@ -35,37 +35,34 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
 
     fun activeEvent() {
         _activeEventVm.postValue(ManyunyuRes.Loading())
-        viewModelScope.launch {
-            val req = commonApiClient.getActiveEvent()
+        val req = commonApiClient.getActiveEvent()
 
-            req.enqueue(object : Callback<CheckActiveEventRes> {
-                override fun onResponse(
-                    call: Call<CheckActiveEventRes>,
-                    response: Response<CheckActiveEventRes>
-                ) {
-                    val apiCode = response.body()?.apiCode ?: 0
-                    val message = response.body()?.messageId ?: ""
+        req.enqueue(object : Callback<CheckActiveEventRes> {
+            override fun onResponse(
+                call: Call<CheckActiveEventRes>,
+                response: Response<CheckActiveEventRes>
+            ) {
+                val apiCode = response.body()?.apiCode ?: 0
+                val message = response.body()?.messageId ?: ""
 
 
-                    when (apiCode) {
-                        1 -> {
-                            _activeEventVm.value = ManyunyuRes.Success(response.body(), message)
-                        }
-                        0 -> {
-                            _activeEventVm.value = ManyunyuRes.Error(message)
-                        }
-                        else -> {
-                            _activeEventVm.value = ManyunyuRes.Error(message)
-                        }
+                when (apiCode) {
+                    1 -> {
+                        _activeEventVm.value = ManyunyuRes.Success(response.body(), message)
+                    }
+                    0 -> {
+                        _activeEventVm.value = ManyunyuRes.Error(message)
+                    }
+                    else -> {
+                        _activeEventVm.value = ManyunyuRes.Error(message)
                     }
                 }
+            }
 
-                override fun onFailure(call: Call<CheckActiveEventRes>, t: Throwable) {
-                    _uploadPengajuanVM.value = ManyunyuRes.Error(t.message.toString())
-                }
-
-            })
-        }
+            override fun onFailure(call: Call<CheckActiveEventRes>, t: Throwable) {
+                _uploadPengajuanVM.value = ManyunyuRes.Error(t.message.toString())
+            }
+        })
     }
 
     fun upload(obj: Map<String, Any>) {
@@ -89,7 +86,8 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
                 Timber.d("NRYX $message")
 
                 if (apiCode == 1) {
-                    _uploadPengajuanVM.value = ManyunyuRes.Success(message.toString(),message.toString())
+                    _uploadPengajuanVM.value =
+                        ManyunyuRes.Success(message.toString(), message.toString())
                 } else if (apiCode == 0) {
                     _uploadPengajuanVM.value = ManyunyuRes.Error(message.toString())
                 } else {

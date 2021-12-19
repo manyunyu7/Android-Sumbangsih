@@ -430,4 +430,10 @@
         tools:visibility="gone"
         layout="@layout/layout_loading_screen_full"/>
 
+    <include
+        android:id="@+id/include_success"
+        android:visibility="gone"
+        tools:visibility="visible"
+        layout="@layout/layout_success_pengajuan"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
