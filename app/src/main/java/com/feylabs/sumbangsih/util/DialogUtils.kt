@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.LayoutDialogBinding
+import com.feylabs.sumbangsih.databinding.LayoutDialogConfPengajuanBinding
 import com.feylabs.sumbangsih.databinding.LayoutDialogSingleButtonImageBinding
 import com.feylabs.sumbangsih.util.ImageView.loadImage
 
@@ -32,6 +33,7 @@ object DialogUtils {
         negativeAction: Pair<String, (() -> Unit)?>? = null,
         autoDismiss: Boolean = false,
         buttonAllCaps: Boolean = true,
+        onDismiss: (() -> Unit)? = null
     ) {
         val view = LayoutInflater.from(context)
             .inflate(R.layout.layout_dialog, null as ViewGroup?, false)
@@ -58,6 +60,9 @@ object DialogUtils {
             }
         }
         builder = AlertDialog.Builder(context)
+        builder.setOnDismissListener {
+            onDismiss?.invoke()
+        }
         builder.setView(view)
         builder.setCancelable(autoDismiss)
         dialog = builder.create()
@@ -96,6 +101,49 @@ object DialogUtils {
         dialog.show()
     }
 
+    fun showTosPengajuanDialog(
+        context: Context,
+        title: String="",
+        message: String="",
+        negativeAction: Pair<String, (() -> Unit)?>? = null,
+        positiveAction: Pair<String, (() -> Unit)?>,
+        autoDismiss: Boolean = false,
+        buttonAllCaps: Boolean = true,
+        img: Int = R.drawable.ic_checklist_red
+    ) {
+        val view = LayoutInflater.from(context)
+            .inflate(R.layout.layout_dialog_conf_pengajuan, null as ViewGroup?, false)
+        val binding = LayoutDialogConfPengajuanBinding.bind(view)
+//        binding.tvTitle.text = title
+//        binding.tvMessage.text = message
+        binding.btnPositive.let {
+//            it.text = positiveAction.first
+            it.setOnClickListener {
+                dialog.dismiss()
+                positiveAction.second?.invoke()
+            }
+            it.isAllCaps = buttonAllCaps
+        }
+
+        negativeAction?.let { pair ->
+            binding.btnNegative.let {
+                it.visibility = View.VISIBLE
+//                it.text = pair.first
+                it.setOnClickListener {
+                    dialog.dismiss()
+                    pair.second?.invoke()
+                }
+                it.isAllCaps = buttonAllCaps
+            }
+        }
+
+        builder = AlertDialog.Builder(context)
+        builder.setView(view)
+        builder.setCancelable(autoDismiss)
+        dialog = builder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+    }
 
 
 }

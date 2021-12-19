@@ -5,17 +5,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toolbar
-import androidx.activity.viewModels
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.feylabs.sumbangsih.R
-import com.feylabs.sumbangsih.SharedViewModel
 import com.feylabs.sumbangsih.databinding.ActivityCommonControllerBinding
-import com.feylabs.sumbangsih.util.AnimUtil
 import com.feylabs.sumbangsih.util.BaseActivity
 import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper

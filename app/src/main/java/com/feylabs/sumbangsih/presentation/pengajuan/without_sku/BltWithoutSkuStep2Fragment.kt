@@ -19,8 +19,13 @@ import com.feylabs.sumbangsih.databinding.BltWithoutSkuStep2FragmentBinding
 import com.feylabs.sumbangsih.databinding.KtpVerifStep3FragmentBinding
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.KTPVerifReq
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.VerifNIKHelper
+import com.feylabs.sumbangsih.presentation.pengajuan.PengajuanViewModel
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanSKUObjectHelper
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanWithoutSKU
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanWithoutSKUObjectHelper
 import com.feylabs.sumbangsih.presentation.ui.home.HomeViewModel
 import com.feylabs.sumbangsih.util.BaseFragment
+import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.ImageView
 import com.feylabs.sumbangsih.util.ImageView.convertViewToBase64
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
@@ -37,8 +42,9 @@ class BltWithoutSkuStep2Fragment : BaseFragment() {
     val binding get() = _binding as BltWithoutSkuStep2FragmentBinding
 
     private val viewModel: HomeViewModel by viewModel()
+    private val pengajuanViewModel: PengajuanViewModel by viewModel()
 
-    private var objVerif: KTPVerifReq? = null
+    private var objWithoutSKU: PengajuanWithoutSKU? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +55,45 @@ class BltWithoutSkuStep2Fragment : BaseFragment() {
     }
 
     private fun initObserver() {
+        pengajuanViewModel.uploadPengajuanVm.observe(viewLifecycleOwner, {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                    showFullscreenLoading(false)
+                }
+                is ManyunyuRes.Empty -> {
+                    showFullscreenLoading(false)
+                }
+                is ManyunyuRes.Error -> {
+                    showToast(it.message.toString())
+                    showFullscreenLoading(false)
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Gagal",
+                        message = "Terjadi Kesalahan ketika mengupload data : ${it.message}",
+                        positiveAction = Pair(getString(R.string.dialog_ok), {}),
+                        autoDismiss = true,
+                        buttonAllCaps = false
+                    )
+                }
+                is ManyunyuRes.Loading -> {
+                    showFullscreenLoading(true)
+                }
+                is ManyunyuRes.Success -> {
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Berhasil",
+                        message = "${it.data}",
+                        positiveAction = Pair(getString(R.string.dialog_ok), {}),
+                        autoDismiss = true,
+                        buttonAllCaps = false
+                    )
+                    showToast(it.message.toString())
+                    showFullscreenLoading(false)
+                    pengajuanViewModel.fireUploadVerifVM()
+                }
+            }
+        })
+
         viewModel.profileLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ManyunyuRes.Default -> {
@@ -113,11 +158,28 @@ class BltWithoutSkuStep2Fragment : BaseFragment() {
 
         val photoUri: Uri? = arguments?.getString("uri")?.toUri()
 
-//        objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
+        objWithoutSKU = PengajuanWithoutSKUObjectHelper.getObject(requireContext())
 
         binding.btnAjukan.isEnabled = false
         binding.checkbox.setOnCheckedChangeListener { compoundButton, b ->
             binding.btnAjukan.isEnabled = compoundButton.isChecked
+        }
+
+        binding.btnAjukan.setOnClickListener {
+            objWithoutSKU?.type="nosku"
+            PengajuanWithoutSKUObjectHelper.savePref(requireContext(), objWithoutSKU)
+
+            DialogUtils.showTosPengajuanDialog(
+                context = requireContext(),
+                positiveAction = Pair("OK", {
+                    pengajuanViewModel.upload(PengajuanWithoutSKUObjectHelper.asMap(requireContext()))
+                }),
+                negativeAction = Pair(
+                    "Tutup Aplikasi",
+                    { }),
+                autoDismiss = true,
+                buttonAllCaps = false
+            )
         }
 
         binding.btnBack.setOnClickListener {

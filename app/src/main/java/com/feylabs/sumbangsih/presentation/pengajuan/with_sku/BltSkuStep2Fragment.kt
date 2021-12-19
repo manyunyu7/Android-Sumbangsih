@@ -21,7 +21,8 @@ class BltSkuStep2Fragment : BaseFragment() {
     var _binding: BltSkuStep2FragmentBinding? = null
     val binding get() = _binding as BltSkuStep2FragmentBinding
 
-    private var objVerif: KTPVerifReq? = null
+    private var objVerif: PengajuanSKU? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +37,10 @@ class BltSkuStep2Fragment : BaseFragment() {
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         val photoUri: Uri? = arguments?.getString("uri")?.toUri()
+        val latPhoto = arguments?.getString("lat")
+        val longPhoto = arguments?.getString("long")
 
-//        objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
+        objVerif = PengajuanSKUObjectHelper.getObject(requireContext())
 
         binding.apply {
 
@@ -51,25 +54,33 @@ class BltSkuStep2Fragment : BaseFragment() {
                 hideInputTextForm(false)
                 btnNext.isEnabled = true
                 setupTvListener()
-                imgKtp.viewTreeObserver
+                ivPhoto.viewTreeObserver
                     .addOnGlobalLayoutListener(object :
                         ViewTreeObserver.OnGlobalLayoutListener {
                         override fun onGlobalLayout() {
-                            val width: Int = imgKtp.getWidth()
-                            val height: Int = imgKtp.getHeight()
+                            val width: Int = ivPhoto.getWidth()
+                            val height: Int = ivPhoto.getHeight()
                             //you can add your code here on what you want to do to the height and width you can pass it as parameter or make width and height a global variable
-                            imgKtp.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            ivPhoto.viewTreeObserver.removeOnGlobalLayoutListener(this)
                             val bitmapImage = ImageView.convertViewToBase64(
-                                binding.imgKtp,
+                                binding.ivPhoto,
                                 width = width,
                                 height = height
                             )
-//                            objVerif?.photo_requested = bitmapImage!!
+                            objVerif?.photo_usaha = bitmapImage
+                            if (latPhoto != null) {
+                                objVerif?.lat_usaha = latPhoto
+                            }
+                            if (longPhoto != null) {
+                                objVerif?.long_usaha = longPhoto
+                            }
+
                         }
                     })
 
                 binding.btnNext.setOnClickListener {
-                    VerifNIKHelper.savePref(requireContext(), objVerif)
+                    objVerif?.nama_usaha = binding.inputUsahaName.text.toString()
+                    PengajuanSKUObjectHelper.savePref(requireContext(), objVerif)
                     findNavController().navigate(
                         R.id.action_nav_bltSkuStep2Fragment_to_bltSkuStep3Fragment,
                     )
@@ -78,7 +89,7 @@ class BltSkuStep2Fragment : BaseFragment() {
                 }
 
                 tvDesc.text = "Jika foto dirasa kurang pas, anda bisa foto ulang lagi lho!"
-                imgKtp.setImageURI(photoUri)
+                ivPhoto.setImageURI(photoUri)
                 btnTakePhoto.makeViewGone()
                 containerPhotoTaken.makeViewVisible()
             } else {

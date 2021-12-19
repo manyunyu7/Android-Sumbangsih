@@ -98,5 +98,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buffer_zone" />
 
+    <include
+        android:id="@+id/include_loading"
+        android:visibility="gone"
+        layout="@layout/layout_loading_screen_full"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

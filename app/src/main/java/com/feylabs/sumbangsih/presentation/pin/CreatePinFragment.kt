@@ -47,6 +47,7 @@ class CreatePinFragment : BaseFragment() {
                 }
                 is ManyunyuRes.Error -> {
                     setLoadingNumber(false)
+                    binding.includeShimmerPage.root.makeViewGone()
                     DialogUtils.showCustomDialog(
                         context = requireContext(),
                         title = "Terjadi Kesalahan",

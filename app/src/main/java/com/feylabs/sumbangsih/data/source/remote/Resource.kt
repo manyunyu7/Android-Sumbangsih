@@ -6,7 +6,7 @@ This class will sealed network response from API
 sealed class ManyunyuRes<T>(val data: T? = null, val message: String? = null) {
     class Empty<T>(message: String = "", data: T? = null) : ManyunyuRes<T>(data, message)
     class Default<T>(data: T? = null) : ManyunyuRes<T>(data)
-    class Success<T>(data: T) : ManyunyuRes<T>(data)
+    class Success<T>(data: T, message: String = "") : ManyunyuRes<T>(data, message)
     class Loading<T>(message: String = "", data: T? = null) : ManyunyuRes<T>(data, message)
     class Error<T>(message: String, data: T? = null) : ManyunyuRes<T>(data, message)
 }

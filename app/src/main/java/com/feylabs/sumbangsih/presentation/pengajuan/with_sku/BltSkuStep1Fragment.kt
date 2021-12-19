@@ -22,6 +22,7 @@ import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.databinding.BltSkuStep1FragmentBinding
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.VerifNIKHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
 
 
 class BltSkuStep1Fragment : BaseFragment() {
@@ -30,7 +31,7 @@ class BltSkuStep1Fragment : BaseFragment() {
     var _binding: BltSkuStep1FragmentBinding? = null
     val binding get() = _binding as BltSkuStep1FragmentBinding
 
-//    private var objVerif: KTPVerifReq? = null
+    private var objVerif: PengajuanSKU? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +44,17 @@ class BltSkuStep1Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
+        val idEvent = RazPreferences(requireContext()).getPrefString("event_id") ?: ""
+
+        objVerif = PengajuanSKU(
+            event_id = idEvent,
+            user_id = RazPreferenceHelper.getUserId(requireContext())
+        )
 
         val photoUri: Uri? = arguments?.getString("uri")?.toUri()
+        val latSelfie = arguments?.getString("lat")
+        val longSelfie = arguments?.getString("long")
+
 
         binding.apply {
             if (photoUri != null) {
@@ -63,15 +72,22 @@ class BltSkuStep1Fragment : BaseFragment() {
                                 width = width,
                                 height = height
                             )
-//                            objVerif?.photo_face = bitmapImage!!
+
+                            objVerif?.photo_selfie = bitmapImage
+                            if (latSelfie != null) {
+                                objVerif!!.lat_selfie = latSelfie
+                            }
+                            if (longSelfie != null) {
+                                objVerif!!.long_selfie = longSelfie
+                            }
                         }
                     })
 
+
+
                 binding.btnNext.setOnClickListener {
                     findNavController().navigate(R.id.action_nav_bltSkuStep1Fragment_to_bltSkuStep2Fragment)
-//                    VerifNIKHelper.savePref(requireContext(), objVerif)
-//                    objVerif!!.contact = RazPreferenceHelper.getPhoneNumber(requireContext())
-//                    viewModel.upload(objVerif!!)
+                    PengajuanSKUObjectHelper.savePref(requireContext(), objVerif)
                 }
 
                 tvDesc.text =

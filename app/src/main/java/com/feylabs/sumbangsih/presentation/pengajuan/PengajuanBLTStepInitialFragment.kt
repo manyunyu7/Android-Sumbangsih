@@ -17,7 +17,7 @@ class PengajuanBLTStepInitialFragment : BaseFragment() {
     private var _binding: PengajuanBltStepInitialFragmentBinding? = null
     private val binding get() = _binding as PengajuanBltStepInitialFragmentBinding
 
-    private lateinit var viewModel: PengajuanBLTViewModel
+    private lateinit var viewModel: PengajuanViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

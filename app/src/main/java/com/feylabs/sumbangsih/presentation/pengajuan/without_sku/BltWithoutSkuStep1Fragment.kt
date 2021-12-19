@@ -18,9 +18,14 @@ import com.feylabs.sumbangsih.databinding.BltWithoutSkuStep1FragmentBinding
 import com.feylabs.sumbangsih.databinding.KtpVerifStep3FragmentBinding
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.KTPVerifReq
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.VerifNIKHelper
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanSKU
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanSKUObjectHelper
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanWithoutSKU
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanWithoutSKUObjectHelper
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.ImageView
 import com.feylabs.sumbangsih.util.ImageView.convertViewToBase64
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
 import com.google.gson.Gson
 import com.yalantis.ucrop.UCrop
@@ -33,7 +38,7 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
     var _binding: BltWithoutSkuStep1FragmentBinding? = null
     val binding get() = _binding as BltWithoutSkuStep1FragmentBinding
 
-    private var objVerif: KTPVerifReq? = null
+    private var objWithoutSKU: PengajuanWithoutSKU? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +54,12 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
 
         val photoUri: Uri? = arguments?.getString("uri")?.toUri()
 
-//        objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
+        val idEvent = RazPreferences(requireContext()).getPrefString("event_id") ?: ""
+
+        objWithoutSKU = PengajuanWithoutSKU(
+            event_id = idEvent,
+            user_id = RazPreferenceHelper.getUserId(requireContext())
+        )
 
         binding.apply {
 
@@ -65,6 +75,10 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
             }
 
             if (photoUri != null) {
+
+                val latPhoto = arguments?.getString("lat")
+                val longPhoto = arguments?.getString("long")
+
                 hideInputTextForm(false)
                 btnNext.isEnabled = true
                 setupTvListener()
@@ -81,12 +95,21 @@ class BltWithoutSkuStep1Fragment : BaseFragment() {
                                 width = width,
                                 height = height
                             )
-//                            objVerif?.photo_requested = bitmapImage!!
+                            objWithoutSKU?.photo_usaha = bitmapImage!!
+                            if (latPhoto != null) {
+                                objWithoutSKU?.lat_usaha = latPhoto
+                            }
+                            if (longPhoto != null) {
+                                objWithoutSKU?.long_usaha = longPhoto
+                            }
                         }
                     })
 
                 binding.btnNext.setOnClickListener {
-//                    VerifNIKHelper.savePref(requireContext(), objVerif)
+                    objWithoutSKU?.nama_usaha = binding.inputUsahaName.text.toString()
+                    objWithoutSKU?.nib = binding.inputUsahaNib.text.toString()
+                    PengajuanWithoutSKUObjectHelper.savePref(requireContext(), objWithoutSKU)
+
                     findNavController().navigate(
                         R.id.action_nav_bltWithoutSkuStep1Fragment_to_bltWithoutSkuStep2Fragment,
                     )

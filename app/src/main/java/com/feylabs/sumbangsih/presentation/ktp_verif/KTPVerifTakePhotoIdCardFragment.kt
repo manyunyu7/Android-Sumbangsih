@@ -83,7 +83,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                     )
                 }
                 "verifnik_step3" -> {
-                    binding.labelPageTitleTopbar.text = "Ambil Foto Selfie"
+                    binding.labelPageTitleTopbar.text = "Ambil Foto KTP"
                     binding.tvContent.text = getString(R.string.desc_photo_frame_verif_nik_step3)
                     binding.ivCropperFrame.setImageDrawable(
                         ContextCompat.getDrawable(
