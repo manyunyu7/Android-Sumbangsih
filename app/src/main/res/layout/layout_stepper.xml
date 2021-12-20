@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_red_stepper">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_step_1_sku" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="-20dp"
+            android:background="@drawable/rounded_rectangle"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_red_stepper">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_step_2_sku" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="-20dp"
+            android:backgroundTint="@color/grey_cf"
+            android:background="@drawable/rectangle_rounded_right"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_red_stepper">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_step_3_sku" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="-20dp"
+            android:backgroundTint="@color/grey_cf"
+            android:background="@drawable/rectangle_rounded_right"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_red_stepper">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_step_4_sku" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="-20dp"
+            android:backgroundTint="@color/grey_cf"
+            android:background="@drawable/rectangle_rounded_right"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_red_stepper">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_step_5_sku" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/grey_cf"
+            android:background="@drawable/rectangle_rounded_right"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

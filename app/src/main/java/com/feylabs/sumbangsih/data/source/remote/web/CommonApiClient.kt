@@ -34,4 +34,9 @@ interface CommonApiClient {
         @Query("id") id: String,
     ): Call<SelfCheckPengajuanRes>
 
+    @GET("pengajuan/history")
+    fun getHistoryResponse(
+        @Query("user_id") id: String,
+    ): Call<GetHistoryResponse>
+
 }

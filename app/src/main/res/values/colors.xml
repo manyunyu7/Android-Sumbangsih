@@ -47,5 +47,6 @@
     <color name="chipDisabledBackgroundColor">#F4F4F4</color>
     <color name="chipDisabledBackgroundText">#CCCCCC</color>
     <color name="grey_separator">#757575</color>
+    <color name="grey_darker">#484747</color>
 
 </resources>

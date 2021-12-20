@@ -8,10 +8,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
-import com.feylabs.sumbangsih.data.source.remote.response.CheckActiveEventRes
-import com.feylabs.sumbangsih.data.source.remote.response.CommonResponse
-import com.feylabs.sumbangsih.data.source.remote.response.FindNIKResponse
-import com.feylabs.sumbangsih.data.source.remote.response.SelfCheckPengajuanRes
+import com.feylabs.sumbangsih.data.source.remote.response.*
 import com.feylabs.sumbangsih.data.source.remote.web.CommonApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.KTPVerifReq
@@ -38,6 +35,10 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
         MutableLiveData<ManyunyuRes<SelfCheckPengajuanRes>>(ManyunyuRes.Default())
     val selfCheckVm get() = _selfCheckVm as LiveData<ManyunyuRes<SelfCheckPengajuanRes>>
 
+    private var _historyVm =
+        MutableLiveData<ManyunyuRes<GetHistoryResponse>>(ManyunyuRes.Default())
+    val historyVm get() = _historyVm as LiveData<ManyunyuRes<GetHistoryResponse>>
+
     fun selfCheckEvent(userId: String) {
         _selfCheckVm.postValue(ManyunyuRes.Loading())
         val req = commonApiClient.selfCheckPengajuan(userId)
@@ -57,6 +58,30 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
 
             override fun onFailure(call: Call<SelfCheckPengajuanRes>, t: Throwable) {
                 _selfCheckVm.value = ManyunyuRes.Error(t.localizedMessage.toString())
+            }
+
+        })
+    }
+
+    fun fetchHistory(userId: String) {
+        _historyVm.postValue(ManyunyuRes.Loading())
+        val req = commonApiClient.getHistoryResponse(userId)
+
+        req.enqueue(object : Callback<GetHistoryResponse> {
+            override fun onResponse(
+                call: Call<GetHistoryResponse>,
+                response: Response<GetHistoryResponse>
+            ) {
+                val body = response.body()
+                if (body != null) {
+                    _historyVm.value = ManyunyuRes.Success(body)
+                } else {
+                    _historyVm.value = ManyunyuRes.Error("Request Kosong")
+                }
+            }
+
+            override fun onFailure(call: Call<GetHistoryResponse>, t: Throwable) {
+                _historyVm.value = ManyunyuRes.Error(t.localizedMessage.toString())
             }
 
         })

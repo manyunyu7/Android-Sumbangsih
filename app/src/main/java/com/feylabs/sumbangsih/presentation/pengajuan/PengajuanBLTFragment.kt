@@ -73,29 +73,34 @@ class PengajuanBLTFragment : BaseFragment() {
                 }
                 is ManyunyuRes.Success -> {
                     val data = it.data
-                    if (data?.apiCode == 3) {
-                        binding.includeActive.tvTitle.text="Pengajuan BLT UMKM"
-                        binding.includeActive.btnAction.makeViewGone()
-                        binding.includeActive.tvDesc.text =
-                            "Pengajuan anda sedang dalam proses. Silahkan lihat halaman Riwayat. Anda dapat mengajukan komplain mengenai BLT UMKM."
-                    }
+                    binding.apply {
+                        if (data?.apiCode == 3) {
+                            includeHistory.includeEmptyHistory.btnAction.makeViewGone()
+                            includeActive.tvTitle.text = "Pengajuan BLT UMKM"
+                            includeActive.btnAction.makeViewGone()
+                            includeActive.tvDesc.text =
+                                "Pengajuan anda sedang dalam proses. Silahkan lihat halaman Riwayat. Anda dapat mengajukan komplain mengenai BLT UMKM."
+                        }
 
-                    if (data?.apiCode == 4) {
-                        binding.includeActive.btnAction.makeViewGone()
-                        binding.includeActive.tvTitle.text = "Maaf, Pengajuan BLT Anda Ditolak"
-                        binding.includeActive.tvDesc.text =
-                            "Pengajuan anda ditolak, silahkan lihat halaman riwayat untuk tracking status pengajuan Anda"
-                    }
+                        if (data?.apiCode == 4) {
+                            includeHistory.includeEmptyHistory.btnAction.makeViewGone()
+                            includeActive.btnAction.makeViewGone()
+                            includeActive.tvTitle.text = "Maaf, Pengajuan BLT Anda Ditolak"
+                            includeActive.tvDesc.text =
+                                "Pengajuan anda ditolak, silahkan lihat halaman riwayat untuk tracking status pengajuan Anda"
+                        }
 
-                    if (data?.apiCode == 1) {
-                        binding.includeActive.btnAction.makeViewGone()
-                        binding.includeActive.tvDesc.text = "Pengajuan BLT Diterima"
-                        binding.includeActive.tvDesc.text =
-                            "Pengajuan Anda telah diterima, silahkan pergi ke bank yang telah terdaftar untuk mencairkan uang"
-                    }
+                        if (data?.apiCode == 1) {
+                            includeHistory.includeEmptyHistory.btnAction.makeViewGone()
+                            includeActive.btnAction.makeViewGone()
+                            includeActive.tvDesc.text = "Pengajuan BLT Diterima"
+                            includeActive.tvDesc.text =
+                                "Pengajuan Anda telah diterima, silahkan pergi ke bank yang telah terdaftar untuk mencairkan uang"
+                        }
 
-                    if (data?.apiCode == 0) {
-                        binding.includeActive.btnAction.makeViewVisible()
+                        if (data?.apiCode == 0) {
+                            includeActive.btnAction.makeViewVisible()
+                        }
                     }
 
                     showLoading(false)
@@ -153,6 +158,26 @@ class PengajuanBLTFragment : BaseFragment() {
                 }
             }
         })
+
+        viewModel.historyVm.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                    showLoading(false)
+                }
+                is ManyunyuRes.Empty -> {
+                    showLoading(false)
+                }
+                is ManyunyuRes.Error -> {
+                    showLoading(false)
+                }
+                is ManyunyuRes.Loading -> {
+                    showLoading(true)
+                }
+                is ManyunyuRes.Success -> {
+                    showLoading(false)
+                }
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -183,6 +208,11 @@ class PengajuanBLTFragment : BaseFragment() {
         binding.includeActive.btnAction.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_pengajuanBLTFragment_to_pengajuanBLTStepInitialFragment)
         }
+
+        binding.includeHistory.includeEmptyHistory.btnAction.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_pengajuanBLTFragment_to_pengajuanBLTStepInitialFragment)
+        }
+
     }
 
     private fun showLoading(b: Boolean) {
