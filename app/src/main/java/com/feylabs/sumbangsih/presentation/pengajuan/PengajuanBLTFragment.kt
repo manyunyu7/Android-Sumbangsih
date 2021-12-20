@@ -1,9 +1,11 @@
 package com.feylabs.sumbangsih.presentation.pengajuan
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
@@ -11,6 +13,7 @@ import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.databinding.PengajuanBltFragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.DialogUtils
+import com.feylabs.sumbangsih.util.ImageView.loadImage
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -40,6 +43,7 @@ class PengajuanBLTFragment : BaseFragment() {
     fun initData() {
         viewModel.selfCheckEvent(RazPreferenceHelper.getUserId(requireContext()))
         viewModel.activeEvent()
+        viewModel.fetchHistory(RazPreferenceHelper.getUserId(requireContext()))
     }
 
     fun initObserver() {
@@ -185,6 +189,11 @@ class PengajuanBLTFragment : BaseFragment() {
         initObserver()
         initData()
 
+        setupStepper(5)
+        binding.includeHistory.includeStepper.root.setOnClickListener {
+            val num = (1 until 6).random()
+            setupStepper(num)
+        }
 
         binding.indicatorBltActive.makeViewVisible()
         binding.indicatorBltHistory.makeViewGone()
@@ -221,6 +230,184 @@ class PengajuanBLTFragment : BaseFragment() {
         } else {
             binding.includeLoading.root.makeViewGone()
         }
+    }
+
+    private fun setupStepper(counter: Int) {
+        binding.includeHistory.apply {
+
+            when (counter) {
+                1 -> {
+                    includeStepper.apply {
+                        val list = arrayOf(card2, card3, card4, card5)
+                        val listImage = arrayOf(image2, image3, image4, image5)
+                        val listStepper = arrayOf(indicator2, indicator3, indicator4, indicator5)
+
+                        listStepper.forEachIndexed { index, view ->
+                            view.background = ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.rectangle_rounded_right
+                            )
+                            mSetTint(view, R.color.grey_cf)
+                        }
+
+                        listImage.forEachIndexed { index, imageView ->
+                            imageView.setImageDrawable(null)
+                        }
+
+                        list.forEachIndexed { index, linearLayout ->
+                            linearLayout.background =
+                                ContextCompat.getDrawable(requireContext(), R.color.grey_cf)
+                        }
+
+                        mSetTint(indicator1, R.color.redSumbangsih)
+                        mSetupCardBackground(card1, R.drawable.gradient_red_stepper)
+                        image1.loadImage(requireContext(), R.drawable.ic_step_1_sku)
+                    }
+                }
+
+                2 -> {
+                    includeStepper.apply {
+                        val list = arrayOf(card3, card4, card5)
+                        val listImage = arrayOf(image3, image4, image5)
+                        val listStepper = arrayOf(indicator3, indicator4, indicator5)
+
+                        listStepper.forEachIndexed { index, view ->
+                            view.background = ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.rectangle_rounded_right
+                            )
+
+                            mSetTint(view, R.color.grey_cf)
+                        }
+
+
+                        listImage.forEachIndexed { index, imageView ->
+                            imageView.setImageDrawable(null)
+                        }
+
+                        list.forEachIndexed { index, linearLayout ->
+                            linearLayout.background =
+                                ContextCompat.getDrawable(requireContext(), R.color.grey_cf)
+                        }
+
+                        mSetTint(indicator1, R.color.redSumbangsih)
+                        mSetTint(indicator2, R.color.redSumbangsih)
+                        mSetupCardBackground(card1, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card2, R.drawable.gradient_red_stepper)
+                        image1.loadImage(requireContext(), R.drawable.ic_step_1_sku)
+                        image2.loadImage(requireContext(), R.drawable.ic_step_2_sku)
+                    }
+                }
+
+                3 -> {
+                    includeStepper.apply {
+                        val list = arrayOf(card4, card5)
+                        val listImage = arrayOf(image4, image5)
+                        val listStepper = arrayOf(indicator3, indicator4, indicator5)
+
+                        listStepper.forEachIndexed { index, view ->
+                            view.background = ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.rectangle_rounded_right
+                            )
+
+                            mSetTint(view, R.color.grey_cf)
+                        }
+
+                        listImage.forEachIndexed { index, imageView ->
+                            imageView.setImageDrawable(null)
+                        }
+
+                        list.forEachIndexed { index, linearLayout ->
+                            linearLayout.background =
+                                ContextCompat.getDrawable(requireContext(), R.color.grey_cf)
+                        }
+
+                        mSetTint(indicator1, R.color.redSumbangsih)
+                        mSetTint(indicator2, R.color.redSumbangsih)
+                        mSetTint(indicator3, R.color.redSumbangsih)
+                        mSetupCardBackground(card1, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card2, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card3, R.drawable.gradient_red_stepper)
+                        image1.loadImage(requireContext(), R.drawable.ic_step_1_sku)
+                        image2.loadImage(requireContext(), R.drawable.ic_step_2_sku)
+                        image3.loadImage(requireContext(), R.drawable.ic_step_3_sku)
+                    }
+                }
+
+                4 -> {
+                    includeStepper.apply {
+                        val list = arrayOf(card5)
+                        val listImage = arrayOf(image5)
+                        val listStepper = arrayOf(indicator5)
+
+                        listStepper.forEachIndexed { index, view ->
+                            view.background = ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.rectangle_rounded_right
+                            )
+                            mSetTint(view, R.color.grey_cf)
+                        }
+
+                        listImage.forEachIndexed { index, imageView ->
+                            imageView.setImageDrawable(null)
+                        }
+
+                        list.forEachIndexed { index, linearLayout ->
+                            linearLayout.background =
+                                ContextCompat.getDrawable(requireContext(), R.color.grey_cf)
+                        }
+
+                        mSetTint(indicator1, R.color.redSumbangsih)
+                        mSetTint(indicator2, R.color.redSumbangsih)
+                        mSetTint(indicator3, R.color.redSumbangsih)
+                        mSetTint(indicator4, R.color.redSumbangsih)
+                        mSetupCardBackground(card1, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card2, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card3, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card4, R.drawable.gradient_red_stepper)
+                        image1.loadImage(requireContext(), R.drawable.ic_step_1_sku)
+                        image2.loadImage(requireContext(), R.drawable.ic_step_2_sku)
+                        image3.loadImage(requireContext(), R.drawable.ic_step_3_sku)
+                        image4.loadImage(requireContext(), R.drawable.ic_step_4_sku)
+                    }
+                }
+
+                5 -> {
+                    includeStepper.apply {
+                        mSetTint(indicator1, R.color.redSumbangsih)
+                        mSetTint(indicator2, R.color.redSumbangsih)
+                        mSetTint(indicator3, R.color.redSumbangsih)
+                        mSetTint(indicator4, R.color.redSumbangsih)
+                        mSetTint(indicator5, R.color.redSumbangsih)
+                        mSetupCardBackground(card1, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card2, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card3, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card4, R.drawable.gradient_red_stepper)
+                        mSetupCardBackground(card5, R.drawable.gradient_red_stepper)
+                        image1.loadImage(requireContext(), R.drawable.ic_step_1_sku)
+                        image2.loadImage(requireContext(), R.drawable.ic_step_2_sku)
+                        image3.loadImage(requireContext(), R.drawable.ic_step_3_sku)
+                        image4.loadImage(requireContext(), R.drawable.ic_step_4_sku)
+                        image5.loadImage(requireContext(), R.drawable.ic_step_5_sku)
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun mSetupCardBackground(card: View, res: Int) {
+        val sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            card.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), res));
+        } else {
+            card.background = ContextCompat.getDrawable(requireContext(), res);
+        }
+    }
+
+    fun mSetTint(view: View, color: Int) {
+        view.background.setTint(ContextCompat.getColor(requireContext(), color))
     }
 
 }
