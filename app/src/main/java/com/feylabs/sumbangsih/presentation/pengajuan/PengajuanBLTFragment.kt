@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.databinding.PengajuanBltFragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.DialogUtils
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -36,10 +38,70 @@ class PengajuanBLTFragment : BaseFragment() {
     }
 
     fun initData() {
+        viewModel.selfCheckEvent(RazPreferenceHelper.getUserId(requireContext()))
         viewModel.activeEvent()
     }
 
     fun initObserver() {
+        viewModel.selfCheckVm.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                    showLoading(false)
+                }
+                is ManyunyuRes.Empty -> {
+                    showLoading(false)
+                }
+                is ManyunyuRes.Error -> {
+                    showLoading(false)
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Perhatian",
+                        message = "Terjadi Kesalahan ${it.message}, Silakan Coba Kembali Nanti",
+                        positiveAction = Pair(getString(R.string.dialog_ok), {
+                            findNavController().navigate(R.id.navigation_home)
+                        }),
+                        autoDismiss = true,
+                        onDismiss = {
+
+                        },
+                        buttonAllCaps = false
+                    )
+
+                }
+                is ManyunyuRes.Loading -> {
+                    showLoading(true)
+                }
+                is ManyunyuRes.Success -> {
+                    val data = it.data
+                    if (data?.apiCode == 3) {
+                        binding.includeActive.tvTitle.text="Pengajuan BLT UMKM"
+                        binding.includeActive.btnAction.makeViewGone()
+                        binding.includeActive.tvDesc.text =
+                            "Pengajuan anda sedang dalam proses. Silahkan lihat halaman Riwayat. Anda dapat mengajukan komplain mengenai BLT UMKM."
+                    }
+
+                    if (data?.apiCode == 4) {
+                        binding.includeActive.btnAction.makeViewGone()
+                        binding.includeActive.tvTitle.text = "Maaf, Pengajuan BLT Anda Ditolak"
+                        binding.includeActive.tvDesc.text =
+                            "Pengajuan anda ditolak, silahkan lihat halaman riwayat untuk tracking status pengajuan Anda"
+                    }
+
+                    if (data?.apiCode == 1) {
+                        binding.includeActive.btnAction.makeViewGone()
+                        binding.includeActive.tvDesc.text = "Pengajuan BLT Diterima"
+                        binding.includeActive.tvDesc.text =
+                            "Pengajuan Anda telah diterima, silahkan pergi ke bank yang telah terdaftar untuk mencairkan uang"
+                    }
+
+                    if (data?.apiCode == 0) {
+                        binding.includeActive.btnAction.makeViewVisible()
+                    }
+
+                    showLoading(false)
+                }
+            }
+        })
         viewModel.activeEventVm.observe(viewLifecycleOwner, {
             when (it) {
                 is ManyunyuRes.Default -> {

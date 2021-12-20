@@ -11,6 +11,7 @@ import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.CheckActiveEventRes
 import com.feylabs.sumbangsih.data.source.remote.response.CommonResponse
 import com.feylabs.sumbangsih.data.source.remote.response.FindNIKResponse
+import com.feylabs.sumbangsih.data.source.remote.response.SelfCheckPengajuanRes
 import com.feylabs.sumbangsih.data.source.remote.web.CommonApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.KTPVerifReq
@@ -32,6 +33,34 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
 
     private var _uploadPengajuanVM = MutableLiveData<ManyunyuRes<String>>(ManyunyuRes.Default())
     val uploadPengajuanVm get() = _uploadPengajuanVM as LiveData<ManyunyuRes<String>>
+
+    private var _selfCheckVm =
+        MutableLiveData<ManyunyuRes<SelfCheckPengajuanRes>>(ManyunyuRes.Default())
+    val selfCheckVm get() = _selfCheckVm as LiveData<ManyunyuRes<SelfCheckPengajuanRes>>
+
+    fun selfCheckEvent(userId: String) {
+        _selfCheckVm.postValue(ManyunyuRes.Loading())
+        val req = commonApiClient.selfCheckPengajuan(userId)
+
+        req.enqueue(object : Callback<SelfCheckPengajuanRes> {
+            override fun onResponse(
+                call: Call<SelfCheckPengajuanRes>,
+                response: Response<SelfCheckPengajuanRes>
+            ) {
+                val body = response.body()
+                if (body != null) {
+                    _selfCheckVm.value = ManyunyuRes.Success(body)
+                } else {
+                    _selfCheckVm.value = ManyunyuRes.Error("Request Kosong")
+                }
+            }
+
+            override fun onFailure(call: Call<SelfCheckPengajuanRes>, t: Throwable) {
+                _selfCheckVm.value = ManyunyuRes.Error(t.localizedMessage.toString())
+            }
+
+        })
+    }
 
     fun activeEvent() {
         _activeEventVm.postValue(ManyunyuRes.Loading())

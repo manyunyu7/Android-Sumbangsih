@@ -29,4 +29,9 @@ interface CommonApiClient {
     @POST("pengajuan/activeEvent")
     fun getActiveEvent(): Call<CheckActiveEventRes>
 
+    @GET("pengajuan/self-check")
+    fun selfCheckPengajuan(
+        @Query("id") id: String,
+    ): Call<SelfCheckPengajuanRes>
+
 }
