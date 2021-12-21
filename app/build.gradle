@@ -121,4 +121,7 @@ dependencies {
 
     implementation 'com.zekapp.library:progreswheelview:1.1.5'
 
+    //QR Generator
+    implementation 'com.google.zxing:core:3.4.0'
+
 }

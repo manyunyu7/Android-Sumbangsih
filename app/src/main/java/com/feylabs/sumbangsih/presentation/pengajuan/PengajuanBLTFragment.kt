@@ -14,6 +14,8 @@ import com.feylabs.sumbangsih.databinding.PengajuanBltFragmentBinding
 import com.feylabs.sumbangsih.presentation.pengajuan.history.HistoryTimelineAdapter
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.DialogUtils
+import com.feylabs.sumbangsih.util.ImageView
+import com.feylabs.sumbangsih.util.ImageView.getBitmapQRfromString
 import com.feylabs.sumbangsih.util.ImageView.loadImage
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferences
@@ -43,9 +45,7 @@ class PengajuanBLTFragment : BaseFragment() {
     }
 
     fun initData() {
-        viewModel.selfCheckEvent(RazPreferenceHelper.getUserId(requireContext()))
         viewModel.activeEvent()
-        viewModel.fetchHistory(RazPreferenceHelper.getUserId(requireContext()))
     }
 
     fun initObserver() {
@@ -88,24 +88,74 @@ class PengajuanBLTFragment : BaseFragment() {
                                 "Pengajuan anda sedang dalam proses. Silahkan lihat halaman Riwayat. Anda dapat mengajukan komplain mengenai BLT UMKM."
                         }
 
-                        if (data?.apiCode == 4) {
-                            includeHistory.includeEmptyHistory.btnAction.makeViewGone()
-                            includeActive.btnAction.makeViewGone()
-                            includeActive.tvTitle.text = "Maaf, Pengajuan BLT Anda Ditolak"
-                            includeActive.tvDesc.text =
-                                "Pengajuan anda ditolak, silahkan lihat halaman riwayat untuk tracking status pengajuan Anda"
-                        }
-
-                        if (data?.apiCode == 1) {
-                            includeHistory.includeEmptyHistory.btnAction.makeViewGone()
-                            includeActive.btnAction.makeViewGone()
-                            includeActive.tvDesc.text = "Pengajuan BLT Diterima"
-                            includeActive.tvDesc.text =
-                                "Pengajuan Anda telah diterima, silahkan pergi ke bank yang telah terdaftar untuk mencairkan uang"
-                        }
-
                         if (data?.apiCode == 0) {
                             includeActive.btnAction.makeViewVisible()
+                        }
+
+                        val pengajuanData = data?.resData
+
+                        if (pengajuanData != null) {
+                            val eventData = data?.resData.eventData
+
+                            if (eventData.showAnnouncement != "") {
+
+                                // IF SUDAH DICAIRKAN
+                                if (pengajuanData.isDisbursed.toString() == "1"
+                                ) {
+                                    binding.includeActive.tvTitle.text = "Pengajuan BLT Diterima"
+                                    binding.includeActive.tvDesc.text =
+                                        "Pengajuan Anda telah diterima, silakan pergi ke bank yang telah terdaftar untuk mencairkan uang"
+                                    val bm = getBitmapQRfromString(
+                                        "${pengajuanData.id}${pengajuanData.ktpData.nik}"
+                                    )
+                                    binding.includeActive.iv.setImageBitmap(bm)
+                                    binding.includeActive.btnAction.makeViewGone()
+                                }
+
+                                // IF SUDAH DISETUJUI
+                                if (pengajuanData.isFinish.toString() == "2"
+                                ) {
+                                    binding.includeActive.tvTitle.text = "Pengajuan BLT Diterima"
+                                    binding.includeActive.tvDesc.text =
+                                        "Pengajuan Anda telah diterima, silakan pergi ke bank yang telah terdaftar untuk mencairkan uang"
+                                    val bm = getBitmapQRfromString(
+                                        "${pengajuanData.id}${pengajuanData.ktpData.nik}"
+                                    )
+                                    binding.includeActive.btnAction.makeViewGone()
+                                    binding.includeActive.iv.setImageBitmap(bm)
+                                }
+
+                                // IF DITOLAK OLEH KELURAHAN ATAU KECAMATAN
+                                if (pengajuanData.approvedKecamatan.toString() == "0"
+                                    || pengajuanData.approvedKelurahan.toString() == "0"
+                                    || pengajuanData.isFinish.toString() == "3"
+                                ) {
+
+                                    binding.includeActive.iv.loadImage(
+                                        requireContext(), R.drawable.bg_blt_active
+                                    )
+
+                                    includeActive.btnAction.makeViewGone()
+
+                                    binding.includeActive.tvTitle.text =
+                                        "Maaf, Pengajuan BLT Anda Ditolak"
+                                    binding.includeActive.tvDesc.text =
+                                        "Pengajuan anda ditolak, Silakan lihat halaman riwayat untuk tracking status pengajuan anda"
+                                }
+                            } else {
+
+                                binding.includeActive.iv.loadImage(
+                                    requireContext(), R.drawable.bg_blt_active
+                                )
+
+                                includeActive.tvTitle.text = "Pengajuan BLT UMKM"
+                                includeActive.btnAction.makeViewGone()
+                                includeActive.tvDesc.text =
+                                    "Pengajuan anda sedang dalam proses. Silahkan lihat halaman Riwayat. Anda dapat mengajukan komplain mengenai BLT UMKM."
+
+                                // if pengajuan belum diumumkan
+                            }
+
                         }
                     }
 
@@ -137,6 +187,7 @@ class PengajuanBLTFragment : BaseFragment() {
                         },
                         buttonAllCaps = false
                     )
+                    viewModel.selfCheckEvent(RazPreferenceHelper.getUserId(requireContext()))
                 }
                 is ManyunyuRes.Loading -> {
                     showLoading(true)
@@ -160,6 +211,7 @@ class PengajuanBLTFragment : BaseFragment() {
                         }
                     }
                     showLoading(false)
+                    viewModel.selfCheckEvent(RazPreferenceHelper.getUserId(requireContext()))
                 }
             }
         })
@@ -214,6 +266,7 @@ class PengajuanBLTFragment : BaseFragment() {
                     }
 
                     viewModel.fireHistoryVm()
+                    viewModel.selfCheckEvent(RazPreferenceHelper.getUserId(requireContext()))
                     showLoading(false)
                     makeSrlLoading(false)
                 }
@@ -244,8 +297,12 @@ class PengajuanBLTFragment : BaseFragment() {
                     "10" -> {
                         setupStepper(5)
                     }
+                    "199" -> {
+                        setupStepper(4)
+                    }
                 }
             }
+
         }
 
     }
@@ -283,6 +340,8 @@ class PengajuanBLTFragment : BaseFragment() {
         }
 
         binding.tvHistory.setOnClickListener {
+            viewModel.fetchHistory(RazPreferenceHelper.getUserId(requireContext()))
+
             binding.indicatorBltHistory.makeViewVisible()
             binding.indicatorBltActive.makeViewGone()
 

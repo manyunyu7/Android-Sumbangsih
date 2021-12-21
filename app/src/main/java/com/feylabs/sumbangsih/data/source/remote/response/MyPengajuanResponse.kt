@@ -3,7 +3,7 @@ package com.feylabs.sumbangsih.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class SelfCheckPengajuanRes(
+data class MyPengajuanResponse(
     @SerializedName("api_code")
     val apiCode: Int,
     @SerializedName("http_response")
@@ -21,9 +21,9 @@ data class SelfCheckPengajuanRes(
 ) {
     data class ResData(
         @SerializedName("approved_kecamatan")
-        val approvedKecamatan: Int?=null,
+        val approvedKecamatan: Int,
         @SerializedName("approved_kelurahan")
-        val approvedKelurahan: Int?=null,
+        val approvedKelurahan: Int,
         @SerializedName("created_at")
         val createdAt: String,
         @SerializedName("event_data")
@@ -33,15 +33,15 @@ data class SelfCheckPengajuanRes(
         @SerializedName("id")
         val id: Int,
         @SerializedName("isDisbursed")
-        val isDisbursed: String? = "",
+        val isDisbursed: Any,
         @SerializedName("isFinish")
-        val isFinish: String? = "",
+        val isFinish: Any,
         @SerializedName("ktp_data")
         val ktpData: KtpData,
         @SerializedName("lat_selfie")
-        val latSelfie: Any?,
+        val latSelfie: Any,
         @SerializedName("lat_usaha")
-        val latUsaha: Any?,
+        val latUsaha: Any,
         @SerializedName("long_selfie")
         val longSelfie: Any,
         @SerializedName("long_usaha")
@@ -73,7 +73,7 @@ data class SelfCheckPengajuanRes(
             @SerializedName("name")
             val name: String,
             @SerializedName("show_announcement")
-            val showAnnouncement: String = "",
+            val showAnnouncement: Any,
             @SerializedName("status")
             val status: String,
             @SerializedName("time_end")

@@ -19,6 +19,9 @@ import timber.log.Timber
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.Base64
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
+import com.google.zxing.qrcode.QRCodeWriter
 import java.io.ByteArrayOutputStream
 import java.lang.IllegalArgumentException
 
@@ -118,6 +121,22 @@ object ImageView {
         val canvas = Canvas(bitmap)
         canvas.drawColor(defaultColor)
         view.draw(canvas)
+        return bitmap
+    }
+
+    fun getBitmapQRfromString(content: String, width: Int = 512, height: Int = 512): Bitmap {
+        val hintMap = mapOf(EncodeHintType.MARGIN to 0)
+        val writer = QRCodeWriter()
+        val bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, width, height, hintMap)
+        val mWidth = bitMatrix.width
+        val mHeight = bitMatrix.height
+        val bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.RGB_565)
+        for (x in 0 until mWidth) {
+            for (y in 0 until mHeight) {
+                bitmap.setPixel(x, y, if (bitMatrix.get(x, y)) Color.BLACK else Color.WHITE)
+            }
+        }
+
         return bitmap
     }
 

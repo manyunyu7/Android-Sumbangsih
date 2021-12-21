@@ -3,9 +3,14 @@ package com.feylabs.sumbangsih.presentation.pengajuan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.*
 import com.feylabs.sumbangsih.data.source.remote.web.CommonApiClient
+import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,9 +29,36 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
         MutableLiveData<ManyunyuRes<SelfCheckPengajuanRes>>(ManyunyuRes.Default())
     val selfCheckVm get() = _selfCheckVm as LiveData<ManyunyuRes<SelfCheckPengajuanRes>>
 
+    private var _myPengajuanVm =
+        MutableLiveData<ManyunyuRes<MyPengajuanResponse>>(ManyunyuRes.Default())
+    val myPengajuanVm get() = _myPengajuanVm as LiveData<ManyunyuRes<MyPengajuanResponse>>
+
     private var _historyVm =
         MutableLiveData<ManyunyuRes<GetHistoryResponse>>(ManyunyuRes.Default())
     val historyVm get() = _historyVm as LiveData<ManyunyuRes<GetHistoryResponse>>
+
+    fun myPengajuanVm(userId: String) {
+        _myPengajuanVm.postValue(ManyunyuRes.Loading())
+
+        AndroidNetworking.get(BASE_URL + "pengajuan/currentUser?user_id=$userId")
+            .build()
+            .getAsString(object : StringRequestListener {
+                override fun onResponse(response: String?) {
+                    try {
+                        val req = Gson().fromJson(response, MyPengajuanResponse::class.java)
+                        _myPengajuanVm.postValue(ManyunyuRes.Success(req))
+                    } catch (e: Exception) {
+                        _myPengajuanVm.postValue(ManyunyuRes.Error(e.localizedMessage))
+                    }
+                }
+
+                override fun onError(anError: ANError?) {
+                    _myPengajuanVm.postValue(ManyunyuRes.Error(anError?.localizedMessage.toString()))
+                }
+
+            })
+
+    }
 
     fun selfCheckEvent(userId: String) {
         _selfCheckVm.postValue(ManyunyuRes.Loading())
