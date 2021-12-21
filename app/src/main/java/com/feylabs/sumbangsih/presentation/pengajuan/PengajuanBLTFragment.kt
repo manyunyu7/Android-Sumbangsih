@@ -1,6 +1,5 @@
 package com.feylabs.sumbangsih.presentation.pengajuan
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.databinding.PengajuanBltFragmentBinding
+import com.feylabs.sumbangsih.presentation.pengajuan.history.HistoryTimelineAdapter
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.ImageView.loadImage
@@ -23,6 +24,7 @@ class PengajuanBLTFragment : BaseFragment() {
 
     private var _binding: PengajuanBltFragmentBinding? = null
     private val binding get() = _binding as PengajuanBltFragmentBinding
+    private val adapter by lazy { HistoryTimelineAdapter() }
 
     val viewModel: PengajuanViewModel by viewModel()
 
@@ -166,34 +168,100 @@ class PengajuanBLTFragment : BaseFragment() {
         viewModel.historyVm.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ManyunyuRes.Default -> {
+                    makeSrlLoading(false)
                     showLoading(false)
                 }
                 is ManyunyuRes.Empty -> {
+                    makeSrlLoading(false)
                     showLoading(false)
                 }
                 is ManyunyuRes.Error -> {
+                    makeSrlLoading(false)
                     showLoading(false)
                 }
                 is ManyunyuRes.Loading -> {
+                    makeSrlLoading(true)
                     showLoading(true)
                 }
                 is ManyunyuRes.Success -> {
+                    it.data?.resData?.toMutableList()?.let { data ->
+                        adapter.setWholeData(
+                            data
+                        )
+
+                        val listRole = mutableListOf<String>()
+                        val listStatus = mutableListOf<String>()
+
+                        listRole.clear()
+                        listStatus.clear()
+
+                        data.forEachIndexed { index, resData ->
+                            listRole.add(resData.role)
+                            listStatus.add(resData.status)
+                        }
+
+                        setupCardStepper(listRole, listStatus)
+
+                    }
+                    viewModel.fireHistoryVm()
                     showLoading(false)
+                    makeSrlLoading(false)
                 }
             }
         })
+    }
+
+    private fun setupCardStepper(listRole: MutableList<String>, status: MutableList<String>) {
+        when (listRole.first()) {
+            "0" -> {
+                setupStepper(1)
+            }
+            "4" -> {
+                setupStepper(2)
+            }
+            "5" -> {
+                setupStepper(3)
+            }
+            else -> {
+                //is admin
+            }
+        }
+
+        when (status.first()) {
+            "2" -> {
+                // if status is Admin - Proses Seleksi / Pending
+                setupStepper(3)
+            }
+            "3" -> {
+                setupStepper(4)
+            }
+            "10" -> {
+                setupStepper(5)
+            }
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
         initData()
+        initUi()
+    }
 
-        setupStepper(5)
-        binding.includeHistory.includeStepper.root.setOnClickListener {
-            val num = (1 until 6).random()
-            setupStepper(num)
+    private fun initUi() {
+
+        binding.includeHistory.rvTimeline.let {
+            it.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            it.adapter = adapter
+            it.setHasFixedSize(true)
         }
+
+        binding.includeHistory.srl.setOnRefreshListener {
+            viewModel.fetchHistory(RazPreferenceHelper.getUserId(requireContext()))
+        }
+
 
         binding.indicatorBltActive.makeViewVisible()
         binding.indicatorBltHistory.makeViewGone()

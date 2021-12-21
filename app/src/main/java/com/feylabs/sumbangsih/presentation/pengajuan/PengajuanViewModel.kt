@@ -3,20 +3,9 @@ package com.feylabs.sumbangsih.presentation.pengajuan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.androidnetworking.AndroidNetworking
-import com.androidnetworking.error.ANError
-import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
 import com.feylabs.sumbangsih.data.source.remote.response.*
 import com.feylabs.sumbangsih.data.source.remote.web.CommonApiClient
-import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
-import com.feylabs.sumbangsih.presentation.ktp_verif.model_json.KTPVerifReq
-import com.google.android.gms.common.internal.service.Common
-import com.google.gson.Gson
-import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,9 +52,9 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
         })
     }
 
-    fun fetchHistory(userId: String) {
+    fun fetchHistory(pengajuanId: String) {
         _historyVm.postValue(ManyunyuRes.Loading())
-        val req = commonApiClient.getHistoryResponse(userId)
+        val req = commonApiClient.getHistoryResponse(pengajuanId)
 
         req.enqueue(object : Callback<GetHistoryResponse> {
             override fun onResponse(
@@ -162,6 +151,10 @@ class PengajuanViewModel(private val commonApiClient: CommonApiClient) : ViewMod
 
     fun fireCheckBLT() {
         _activeEventVm.postValue(ManyunyuRes.Default())
+    }
+
+    fun fireHistoryVm() {
+        _historyVm.value = ManyunyuRes.Default()
     }
 
 }

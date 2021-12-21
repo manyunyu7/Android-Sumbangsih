@@ -42,6 +42,8 @@ class CreatePinFragment : BaseFragment() {
                         val apiCode = it.data.apiCode
                         if (apiCode == 1) {
                             setViewHasNumber()
+                        }else{
+//                            setViewDontHaveNumber()
                         }
                     }
                 }
@@ -96,6 +98,10 @@ class CreatePinFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    private fun setViewDontHaveNumber() {
+
     }
 
     private fun setLoadingNumber(b: Boolean) {

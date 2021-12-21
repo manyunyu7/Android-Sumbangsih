@@ -35,7 +35,7 @@ data class GetHistoryResponse(
         @SerializedName("status")
         val status: String,
         @SerializedName("title")
-        val title: Any,
+        val title: String,
         @SerializedName("updated_at")
         val updatedAt: String,
         @SerializedName("updated_by")

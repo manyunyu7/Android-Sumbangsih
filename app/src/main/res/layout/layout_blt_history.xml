@@ -5,76 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <com.app.progresviews.ProgressLine
-                android:id="@+id/progress_line"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_weight="0.9"
-                app:definition="daily steps"
-                app:lineBarWidth="7dp"
-                app:lineProgressColor="#43bd9f"
-                app:underLineColor="@android:color/darker_gray"
-                app:value="10,000"
-                app:valueDefTextSize="20sp"
-                app:valuePercentage="55" />
 
-            <include
-                android:id="@+id/include_stepper"
-                android:layout_marginTop="20dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                layout="@layout/layout_stepper"/>
+                android:layout_gravity="top"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Status Pengajuan"
-                android:textAlignment="viewStart"
-                android:textColor="@color/grey_darker"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/indicator_circle" />
+                <com.app.progresviews.ProgressLine
+                    android:id="@+id/progress_line"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="0.9"
+                    app:definition="daily steps"
+                    app:lineBarWidth="7dp"
+                    app:lineProgressColor="#43bd9f"
+                    app:underLineColor="@android:color/darker_gray"
+                    app:value="10,000"
+                    app:valueDefTextSize="20sp"
+                    app:valuePercentage="55" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginHorizontal="20dp"
-                android:background="@color/grey_cf" />
+                <include
+                    android:id="@+id/include_stepper"
+                    layout="@layout/layout_stepper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="15dp"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_timeline_history">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Status Pengajuan"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/grey_darker"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/indicator_circle" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/grey_cf" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_timeline"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="15dp"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_timeline_history">
+
+                </androidx.recyclerview.widget.RecyclerView>
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
         android:id="@+id/include_empty_history"
-        android:visibility="gone"
-        layout="@layout/layout_empty_history" />
+        layout="@layout/layout_empty_history"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
