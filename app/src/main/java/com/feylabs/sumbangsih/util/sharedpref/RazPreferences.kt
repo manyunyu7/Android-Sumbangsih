@@ -47,15 +47,17 @@ class RazPreferences(context: Context) {
     }
 
     fun clearPreferences() {
-        val keys = sharedPref.all
-        keys.forEach {
-            if(it.key=="IS_LOGGEDn"){
-
-            }else{
-                editor.remove(it.key)
-                editor.commit()
-            }
-        }
+        editor.clear()
+        editor.commit()
+//        val keys = sharedPref.all
+//        keys.forEach {
+//            if(it.key=="IS_LOGGEDn"){
+//
+//            }else{
+//                editor.remove(it.key)
+//                editor.commit()
+//            }
+//        }
     }
 
 }

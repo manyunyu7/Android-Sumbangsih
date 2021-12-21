@@ -66,6 +66,11 @@ class WriteOTPActivity : BaseActivity() {
         hideActionBar()
         initObserver()
 
+        binding.btnBack.setOnClickListener {
+            finish()
+            super.onBackPressed()
+        }
+
         mContext = this
 
         binding.btnSendOtpCode.setOnClickListener {

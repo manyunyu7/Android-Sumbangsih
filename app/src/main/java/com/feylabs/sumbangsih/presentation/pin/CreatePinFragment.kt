@@ -43,7 +43,7 @@ class CreatePinFragment : BaseFragment() {
                         if (apiCode == 1) {
                             setViewHasNumber()
                         }else{
-//                            setViewDontHaveNumber()
+                            setViewDontHaveNumber()
                         }
                     }
                 }
@@ -69,6 +69,7 @@ class CreatePinFragment : BaseFragment() {
                     setLoadingNumber(true)
                 }
                 is ManyunyuRes.Empty -> {
+                    setViewDontHaveNumber()
                     setLoadingNumber(false)
                 }
                 is ManyunyuRes.Default -> {
@@ -81,7 +82,6 @@ class CreatePinFragment : BaseFragment() {
             when (it) {
                 is ManyunyuRes.Success -> {
                     binding.includeLoading.root.makeViewGone()
-                    viewModel.fireLogin()
                     proceedLogin(it.data)
                 }
                 is ManyunyuRes.Default -> {
@@ -101,6 +101,28 @@ class CreatePinFragment : BaseFragment() {
     }
 
     private fun setViewDontHaveNumber() {
+        val loggedInNumber =
+            RazPreferenceHelper.getPhoneNumber(requireContext())
+        binding.apply {
+//            tvChangeNumber.makeViewVisible()
+//            tvForgotPin.makeViewVisible()
+            btnGoToVerif.text = "Selanjutnya"
+            this.tvDescPin.text =
+                "Masukkan Pin Yang Akan Anda Gunakan Untuk Akun Dengan Nomor (${loggedInNumber})"
+            this.tvTitlePin.text = "Masukkan Pin Anda"
+        }
+        binding.btnGoToVerif.setOnClickListener {
+            val text = binding.passCodeView.passCodeText.toString().length
+            if (text < 6) {
+                "Lengkapi Inputan".showLongToast()
+            } else {
+                findNavController().navigate(
+                    R.id.navigation_verifPinFragment, bundleOf(
+                        "firstPin" to binding.passCodeView.passCodeText
+                    )
+                )
+            }
+        }
 
     }
 
@@ -117,11 +139,7 @@ class CreatePinFragment : BaseFragment() {
     private fun setViewHasNumber() {
         val number = RazPreferenceHelper.getPhoneNumber(requireContext())
         binding.btnBack.makeViewGone()
-        binding.passCodeView.setOnTextChangeListener {
-            if (it.length == 6) {
-                viewModel.loginNumber(number, binding.passCodeView.passCodeText)
-            }
-        }
+
         binding.btnGoToVerif.setOnClickListener {
             viewModel.loginNumber(number, binding.passCodeView.passCodeText)
         }

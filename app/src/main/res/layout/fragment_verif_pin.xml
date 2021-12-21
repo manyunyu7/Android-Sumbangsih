@@ -76,7 +76,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_background"
             android:backgroundTint="@color/redSumbangsih"
-            android:text="Next"
+            android:text="Selanjutnya"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

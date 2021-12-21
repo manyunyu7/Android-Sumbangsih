@@ -11,6 +11,7 @@ import com.feylabs.sumbangsih.databinding.ProfileFragmentBinding
 import com.feylabs.sumbangsih.presentation.CommonControllerActivity
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.CommonHelper.logout
+import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 
 class ProfileFragment : BaseFragment() {
 
