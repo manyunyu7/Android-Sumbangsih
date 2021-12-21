@@ -124,4 +124,7 @@ dependencies {
     //QR Generator
     implementation 'com.google.zxing:core:3.4.0'
 
+    // For developers using AndroidX in their applications
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 }

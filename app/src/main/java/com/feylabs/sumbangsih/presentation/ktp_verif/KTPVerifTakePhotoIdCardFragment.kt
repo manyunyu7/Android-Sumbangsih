@@ -1,9 +1,11 @@
 package com.feylabs.sumbangsih.presentation.ktp_verif
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -15,16 +17,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.feylabs.sumbangsih.R
 import com.feylabs.sumbangsih.databinding.KtpVerifTakeIdPhotoFragmentBinding
 import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.CommonHelper
 import com.feylabs.sumbangsih.util.CommonHelper.REQUIRED_PERMISSIONS_PHOTO_KTP
+import com.feylabs.sumbangsih.util.CommonHelper.startInstalledAppDetailsActivity
+import com.feylabs.sumbangsih.util.DialogUtils
+import com.google.android.gms.location.*
 import com.yalantis.ucrop.UCrop
 import es.dmoral.toasty.Toasty
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -43,6 +46,16 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
     var _binding: KtpVerifTakeIdPhotoFragmentBinding? = null
     val binding get() = _binding as KtpVerifTakeIdPhotoFragmentBinding
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            val location: Location = locationResult.lastLocation
+            viewModel.latVm.value = (location.latitude.toString())
+            viewModel.longVm.value = (location.longitude.toString())
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,11 +68,14 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+
         type = arguments?.getString("type") ?: ""
         binding.lottieAnim.makeViewGone()
         if (type != null) {
             when (type) {
-                "bltnonsku_step1","bltsku_step2" -> {
+                "bltnonsku_step1", "bltsku_step2" -> {
                     binding.labelPageTitleTopbar.text = "Ambil Foto Usaha"
                     binding.tvContent.text = "Mohon atur posisi objek agar terdeteksi"
                     Toasty.info(
@@ -112,13 +128,27 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         }
 
         if (allPermissionGranted()) {
+            getCurrentLocation()
             startCamera()
         } else {
-            showToast("Permission Requested")
-            ActivityCompat.requestPermissions(
-                requireActivity(), REQUIRED_PERMISSIONS_PHOTO_KTP,
-                CommonHelper.REQUEST_CODE_PERMISSION
+            DialogUtils.showCustomDialog(
+                context = requireContext(),
+                title = "Izin Diperlukan",
+                message = "Kami memerlukan izin anda untuk mengakses penggunaan kamera, lokasi, dan penyimpanan.",
+                positiveAction = Pair("Beri Izin", {
+                    requestPermissions(
+                        REQUIRED_PERMISSIONS_PHOTO_KTP,
+                        CommonHelper.REQUEST_CODE_PERMISSION
+                    )
+                }),
+                negativeAction = Pair(
+                    "Tutup Aplikasi",
+                    { CommonHelper.logout(requireContext()) }),
+                autoDismiss = true,
+                buttonAllCaps = false
             )
+
+
         }
 
         binding.btnBack.setOnClickListener {
@@ -153,7 +183,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         binding.lottieAnim.makeViewGone()
         if (type != null) {
             when (type) {
-                "bltnonsku_step1","bltsku_step2" -> {
+                "bltnonsku_step1", "bltsku_step2" -> {
                     imageCapture.targetRotation = Surface.ROTATION_270
                 }
                 else -> {
@@ -223,7 +253,7 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                 "verifnik_step3" -> {
                     cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
                 }
-                "verifnik_step4","bltsku_step1" -> {
+                "verifnik_step4", "bltsku_step1" -> {
                     cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
                 }
             }
@@ -262,19 +292,49 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CommonHelper.REQUEST_CODE_PERMISSION) {
             if (allPermissionGranted()) {
+                getCurrentLocation()
                 startCamera()
             } else {
+                DialogUtils.showCustomDialog(
+                    context = requireContext(),
+                    title = "Izin Diperlukan",
+                    message = "Kami memerlukan izin anda untuk mengakses penggunaan kamera, lokasi, dan penyimpanan.",
+                    positiveAction = Pair("Beri Izin Manual", {
+                        startInstalledAppDetailsActivity(requireActivity())
+                    }),
+                    negativeAction = Pair(
+                        "Tutup Aplikasi",
+                        { CommonHelper.logout(requireContext()) }),
+                    autoDismiss = true,
+                    buttonAllCaps = false
+                )
             }
         }
     }
 
-    private fun allPermissionGranted(): Boolean =
-        REQUIRED_PERMISSIONS_PHOTO_KTP.all {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                it
-            ) == PackageManager.PERMISSION_GRANTED
+    private fun allPermissionGranted(): Boolean {
+
+        val z = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        var checker = true
+        z.forEachIndexed { index, s ->
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    s
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+
+            } else {
+                checker = false
+            }
         }
+
+        return checker
+    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -287,31 +347,51 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
                     "verifnik_step3" -> {
                         findNavController().navigate(
                             R.id.nav_KTPVerifStep3Fragment,
-                            bundleOf("ktp_uri" to imageResCrop.toString())
+                            bundleOf(
+                                "ktp_uri" to imageResCrop.toString(),
+                                "lat" to viewModel.latVm.value.toString(),
+                                "long" to viewModel.longVm.value.toString(),
+                            )
                         )
                     }
                     "verifnik_step4" -> {
                         findNavController().navigate(
                             R.id.nav_KTPVerifStep4Fragment,
-                            bundleOf("face_uri" to imageResCrop.toString())
+                            bundleOf(
+                                "face_uri" to imageResCrop.toString(),
+                                "lat" to viewModel.latVm.value.toString(),
+                                "long" to viewModel.longVm.value.toString(),
+                            )
                         )
                     }
                     "bltnonsku_step1" -> {
                         findNavController().navigate(
                             R.id.bltWithoutSkuStep1Fragment,
-                            bundleOf("uri" to imageResCrop.toString())
+                            bundleOf(
+                                "uri" to imageResCrop.toString(),
+                                "lat" to viewModel.latVm.value.toString(),
+                                "long" to viewModel.longVm.value.toString(),
+                            )
                         )
                     }
                     "bltsku_step1" -> {
                         findNavController().navigate(
                             R.id.bltSkuStep1Fragment,
-                            bundleOf("uri" to imageResCrop.toString())
+                            bundleOf(
+                                "uri" to imageResCrop.toString(),
+                                "lat" to viewModel.latVm.value.toString(),
+                                "long" to viewModel.longVm.value.toString()
+                            )
                         )
                     }
                     "bltsku_step2" -> {
                         findNavController().navigate(
                             R.id.bltSkuStep2Fragment,
-                            bundleOf("uri" to imageResCrop.toString())
+                            bundleOf(
+                                "uri" to imageResCrop.toString(),
+                                "lat" to viewModel.latVm.value.toString(),
+                                "long" to viewModel.longVm.value.toString()
+                            )
                         )
                     }
                 }
@@ -348,6 +428,29 @@ class KTPVerifTakePhotoIdCardFragment : BaseFragment() {
         )
         options.setToolbarTitle("Edit Photo")
         return options
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getCurrentLocation() {
+        fusedLocationClient.lastLocation.addOnCompleteListener { task ->
+            val location = task.result
+            if (location == null) {
+                val locationRequest = LocationRequest.create().apply {
+                    priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+                    interval = 0
+                    fastestInterval = 0
+                    numUpdates = 1
+                }
+
+                fusedLocationClient.requestLocationUpdates(
+                    locationRequest, locationCallback,
+                    Looper.myLooper() ?: Looper.getMainLooper()
+                )
+            } else {
+                viewModel.latVm.value = (location.latitude.toString())
+                viewModel.longVm.value = (location.longitude.toString())
+            }
+        }
     }
 
 

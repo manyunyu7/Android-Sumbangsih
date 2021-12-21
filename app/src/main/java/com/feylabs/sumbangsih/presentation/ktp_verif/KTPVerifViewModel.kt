@@ -23,6 +23,9 @@ import timber.log.Timber
 
 class KTPVerifViewModel(private val commonApiClient: CommonApiClient) : ViewModel() {
 
+    val latVm = MutableLiveData<String>()
+    val longVm = MutableLiveData<String>()
+
     private var _findKTPVm = MutableLiveData<ManyunyuRes<FindNIKResponse>>(ManyunyuRes.Default())
     val findKTPVm get() = _findKTPVm as MutableLiveData<ManyunyuRes<FindNIKResponse>>
 

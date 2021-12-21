@@ -50,6 +50,8 @@ class KTPVerifStep3Fragment : BaseFragment() {
 
 
         val photoUri: Uri? = arguments?.getString("ktp_uri")?.toUri()
+        val lat = arguments?.getString("lat")?.toString()
+        val long = arguments?.getString("long")?.toString()
 
         objVerif = VerifNIKHelper.getKTPVerifReq(requireContext())
 
@@ -70,6 +72,8 @@ class KTPVerifStep3Fragment : BaseFragment() {
                                 width = width,
                                 height = height
                             )
+                            objVerif?.lat = lat
+                            objVerif?.long = long
                             objVerif?.photo_requested = bitmapImage!!
                         }
                     })
