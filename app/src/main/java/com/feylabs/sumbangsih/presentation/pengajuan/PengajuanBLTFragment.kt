@@ -137,7 +137,6 @@ class PengajuanBLTFragment : BaseFragment() {
                         },
                         buttonAllCaps = false
                     )
-
                 }
                 is ManyunyuRes.Loading -> {
                     showLoading(true)
@@ -172,12 +171,16 @@ class PengajuanBLTFragment : BaseFragment() {
                     showLoading(false)
                 }
                 is ManyunyuRes.Empty -> {
+                    binding.includeHistory.includeEmptyHistory.root.makeViewVisible()
                     makeSrlLoading(false)
                     showLoading(false)
                 }
                 is ManyunyuRes.Error -> {
+                    binding.includeHistory.includeEmptyHistory.root.makeViewVisible()
+                    showToast("Error : ${it.message}")
                     makeSrlLoading(false)
                     showLoading(false)
+                    viewModel.fireHistoryVm()
                 }
                 is ManyunyuRes.Loading -> {
                     makeSrlLoading(true)
@@ -203,6 +206,13 @@ class PengajuanBLTFragment : BaseFragment() {
                         setupCardStepper(listRole, listStatus)
 
                     }
+
+                    if (it.data?.apiCode == 3) {
+                        binding.includeHistory.includeEmptyHistory.root.makeViewVisible()
+                    } else {
+                        binding.includeHistory.includeEmptyHistory.root.makeViewGone()
+                    }
+
                     viewModel.fireHistoryVm()
                     showLoading(false)
                     makeSrlLoading(false)
@@ -213,7 +223,7 @@ class PengajuanBLTFragment : BaseFragment() {
 
     private fun setupCardStepper(listRole: MutableList<String>, status: MutableList<String>) {
         when (listRole.first()) {
-            "0" -> {
+            "100" -> {
                 setupStepper(1)
             }
             "4" -> {
@@ -223,20 +233,18 @@ class PengajuanBLTFragment : BaseFragment() {
                 setupStepper(3)
             }
             else -> {
-                //is admin
-            }
-        }
-
-        when (status.first()) {
-            "2" -> {
-                // if status is Admin - Proses Seleksi / Pending
-                setupStepper(3)
-            }
-            "3" -> {
-                setupStepper(4)
-            }
-            "10" -> {
-                setupStepper(5)
+                when (status.first()) {
+                    "2" -> {
+                        // if status is Admin - Proses Seleksi / Pending
+                        setupStepper(3)
+                    }
+                    "3" -> {
+                        setupStepper(4)
+                    }
+                    "10" -> {
+                        setupStepper(5)
+                    }
+                }
             }
         }
 

@@ -15,7 +15,7 @@ data class GetHistoryResponse(
     @SerializedName("message_id")
     val messageId: String,
     @SerializedName("res_data")
-    val resData: List<ResData>,
+    val resData: List<ResData>?,
     @SerializedName("status_code")
     val statusCode: Int
 ) {
