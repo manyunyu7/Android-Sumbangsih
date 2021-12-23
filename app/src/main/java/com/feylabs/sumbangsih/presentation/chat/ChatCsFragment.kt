@@ -2,6 +2,8 @@ package com.feylabs.sumbangsih.presentation.chat
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.feylabs.sumbangsih.util.BaseFragment
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
 class ChatCsFragment : BaseFragment() {
@@ -26,6 +29,16 @@ class ChatCsFragment : BaseFragment() {
     private val mAdapter by lazy { RsChatAdapter() }
 
     val viewModel: ChatCsViewModel by viewModel()
+
+    private var myHandler: Handler? = null
+
+    lateinit var timer: Timer
+
+    override fun onDestroy() {
+        myHandler?.removeCallbacks({})
+        super.onDestroy()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -111,11 +124,15 @@ class ChatCsFragment : BaseFragment() {
 
     private fun initUI() {
         binding.btnRefresh.makeViewGone()
-        fixedRateTimer("timer", false, 0L, 10 * 1000) {
-            requireActivity().runOnUiThread {
+
+        timer = Timer()
+        val delay = 0L // delay for 0 sec.
+        val period = 10000L // repeat every 10 sec.
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
                 viewModel.fetchChatByUserId(RazPreferenceHelper.getUserId(requireContext()))
             }
-        }
+        }, delay, period)
 
         binding.rvChat.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -160,6 +177,12 @@ class ChatCsFragment : BaseFragment() {
             binding.rvChat.makeViewVisible()
             binding.includeLoadingChat.root.makeViewGone()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        timer.cancel()
+        timer.purge()
     }
 
 }
