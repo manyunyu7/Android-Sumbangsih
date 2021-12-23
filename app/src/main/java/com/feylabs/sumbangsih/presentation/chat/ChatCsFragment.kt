@@ -30,12 +30,10 @@ class ChatCsFragment : BaseFragment() {
 
     val viewModel: ChatCsViewModel by viewModel()
 
-    private var myHandler: Handler? = null
 
     lateinit var timer: Timer
 
     override fun onDestroy() {
-        myHandler?.removeCallbacks({})
         super.onDestroy()
     }
 

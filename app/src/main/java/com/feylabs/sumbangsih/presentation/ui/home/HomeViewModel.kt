@@ -7,6 +7,7 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
+import com.feylabs.sumbangsih.data.source.remote.response.HomeStatsResponse
 import com.feylabs.sumbangsih.data.source.remote.response.NewsResponse
 import com.feylabs.sumbangsih.data.source.remote.response.ProfileMainReq
 import com.feylabs.sumbangsih.data.source.remote.web.NewsApiClient
@@ -19,9 +20,31 @@ class HomeViewModel(val newsApiClient: NewsApiClient) : ViewModel() {
         MutableLiveData()
     val newsLiveData get() = _newsLiveData
 
+    private var _statsLiveData: MutableLiveData<ManyunyuRes<HomeStatsResponse?>> =
+        MutableLiveData()
+    val statsLiveData get() = _statsLiveData
+
     private var _profileLiveData: MutableLiveData<ManyunyuRes<ProfileMainReq?>> =
         MutableLiveData()
     val profileLiveData get() = _profileLiveData
+
+    fun getStatsData() {
+        _statsLiveData.postValue(ManyunyuRes.Loading())
+
+        AndroidNetworking.get(BASE_URL + "stats")
+            .build()
+            .getAsString(object : StringRequestListener {
+                override fun onResponse(response: String?) {
+                    val res = Gson().fromJson(response, HomeStatsResponse::class.java)
+                    _statsLiveData.postValue(ManyunyuRes.Success(res))
+                }
+
+                override fun onError(anError: ANError?) {
+                    _statsLiveData.postValue(ManyunyuRes.Error(anError?.localizedMessage.toString()))
+                }
+
+            })
+    }
 
     fun getProfile(id: String) {
         _profileLiveData.postValue(ManyunyuRes.Loading())

@@ -36,6 +36,7 @@ class HomeFragment : BaseFragment() {
     private fun initUI() {
 
         setupAnimHome()
+        setCardStatsLoading(true)
 
         binding.tvMenuNews.setOnClickListener {
             homeViewModel.getNews()
@@ -69,12 +70,41 @@ class HomeFragment : BaseFragment() {
 
     private fun initData() {
         uiScope.launch(Dispatchers.IO) {
+            homeViewModel.getStatsData()
             homeViewModel.getNews()
             homeViewModel.getProfile(RazPreferenceHelper.getUserId(requireContext()))
         }
     }
 
     private fun initObserver() {
+
+        homeViewModel.statsLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                    setCardStatsLoading(false)
+                }
+                is ManyunyuRes.Empty -> {
+                    setCardStatsLoading(false)
+                }
+                is ManyunyuRes.Error -> {
+                    setCardStatsLoading(false)
+                }
+                is ManyunyuRes.Loading -> {
+                    setCardStatsLoading(true)
+                }
+                is ManyunyuRes.Success -> {
+                    setCardStatsLoading(false)
+                    val data = it.data
+                    data?.let {
+                        binding.includeHomeStatistics.apply {
+                            tvPenerima.text = data.resData.penerima.toString()
+                            tvPengajuan.text = data.resData.pengajuan.toString()
+                            tvSisaKuota.text = data.resData.sisaKuota.toString()
+                        }
+                    }
+                }
+            }
+        })
 
         homeViewModel.profileLiveData.observe(viewLifecycleOwner, {
             when (it) {
@@ -134,6 +164,7 @@ class HomeFragment : BaseFragment() {
             }
         })
     }
+
 
     private fun setupProfileCard(data: ProfileMainReq) {
         val mKtp = data.resData.ktp
@@ -196,6 +227,17 @@ class HomeFragment : BaseFragment() {
         } else {
             binding.rvNews.makeViewVisible()
             binding.rvNewsPlaceholder.root.makeViewGone()
+        }
+    }
+
+
+    private fun setCardStatsLoading(b: Boolean) {
+        if (b) {
+            binding.shimmerStatsCard.root.makeViewVisible()
+            binding.includeHomeStatistics.root.makeViewGone()
+        } else {
+            binding.shimmerStatsCard.root.makeViewGone()
+            binding.includeHomeStatistics.root.makeViewVisible()
         }
     }
 
@@ -267,7 +309,7 @@ class HomeFragment : BaseFragment() {
 
     private fun setupAnimHome() {
         binding.apply {
-            includeHomeStatistics.root.makeViewGone()
+            //includeHomeStatistics.root.makeViewGone()
             includeHomeTutor.root.makeViewGone()
             btnTutorialVideo.makeViewGone()
             tvVideo.makeViewGone()
@@ -277,7 +319,7 @@ class HomeFragment : BaseFragment() {
 
             animateFromResource(containerProfile, R.anim.anim_slide_in_right)
             animateFromResource(containerNews, R.anim.anim_slide_in_left)
-            animateFromResource(binding.includeHomeStatistics.root, R.anim.anim_slide_in_right)
+            //animateFromResource(binding.includeHomeStatistics.root, R.anim.anim_slide_in_right)
             animateFromResource(includeHomeTutor.root, R.anim.anim_slide_in_left)
             animateFromResource(tvTutor, R.anim.anim_slide_in_right)
             animateFromResource(tvVideo, R.anim.anim_slide_in_left)
@@ -287,7 +329,7 @@ class HomeFragment : BaseFragment() {
             tvVideo.makeViewVisible()
             tvTutor.makeViewVisible()
             btnTutorialVideo.makeViewVisible()
-            includeHomeStatistics.root.makeViewVisible()
+            //includeHomeStatistics.root.makeViewVisible()
             includeHomeTutor.root.makeViewVisible()
             containerNews.makeViewVisible()
         }

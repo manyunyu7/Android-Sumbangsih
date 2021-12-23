@@ -103,8 +103,13 @@
             </LinearLayout>
 
             <include
+                tools:visibility="gone"
                 android:id="@+id/include_home_statistics"
                 layout="@layout/layout_home_statistics" />
+
+            <include
+                android:id="@+id/shimmer_stats_card"
+                layout="@layout/lshimmer_home_card_stats" />
 
 
             <LinearLayout

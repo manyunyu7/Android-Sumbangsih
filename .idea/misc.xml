@@ -62,7 +62,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_dialog_single_button_image.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_empty_chat.xml" value="0.209375" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_empty_history.xml" value="0.14" />
-        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_statistics.xml" value="0.13229166666666667" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_statistics.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_tutor.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_loading_screen_full.xml" value="0.11458333333333333" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_stepper.xml" value="0.22" />
@@ -72,6 +72,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_chat.xml" value="0.15" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_fragment_create_pin.xml" value="0.14" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_home_card_profile.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_home_card_stats.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/lshimmer_news_home.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/pengajuan_blt_fragment.xml" value="0.15" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/pengajuan_blt_step_initial_fragment.xml" value="0.16" />
