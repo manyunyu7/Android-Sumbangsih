@@ -8,6 +8,7 @@ import com.feylabs.sumbangsih.data.source.remote.web.NewsApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
+import com.feylabs.sumbangsih.presentation.chat.ChatCsViewModel
 import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
 import com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifViewModel
 import com.feylabs.sumbangsih.presentation.pengajuan.PengajuanViewModel
@@ -90,6 +91,7 @@ val viewModelModule = module {
     single { ListAllNewsViewModel() }
     single { KTPVerifViewModel(get()) }
     single { PengajuanViewModel(get()) }
+    single { ChatCsViewModel(get()) }
     viewModel { CommonViewModel(get(), get()) }
 }
 

@@ -1,5 +1,8 @@
 package com.feylabs.sumbangsih.util
 
+import android.content.Context
+import com.feylabs.sumbangsih.presentation.pengajuan.with_sku.PengajuanSKUObjectHelper
+import com.feylabs.sumbangsih.util.ObjectHelperCommon.serializeToMap
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -21,6 +24,10 @@ object ObjectHelperCommon {
     inline fun <I, reified O> I.convert(): O {
         val json = gson.toJson(this)
         return gson.fromJson(json, object : TypeToken<O>() {}.type)
+    }
+
+    fun asMap(context: Context): Map<String, Any> {
+        return PengajuanSKUObjectHelper.getObject(context).serializeToMap()
     }
 
 }

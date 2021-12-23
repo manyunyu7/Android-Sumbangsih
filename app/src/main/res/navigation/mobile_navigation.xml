@@ -54,7 +54,11 @@
         android:id="@+id/navigation_profileFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_navigation_profileFragment_to_nav_chatCsFragment"
+            app:destination="@id/nav_chatCsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_detailNewsFragment"
         android:name="com.feylabs.sumbangsih.presentation.ui.home.news.DetailNewsFragment"
@@ -180,5 +184,11 @@
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.with_sku.BltSkuStep3Fragment"
         android:label="BltSkuStep3Fragment"
         tools:layout="@layout/blt_sku_step_3_fragment" />
+    <fragment
+        android:id="@+id/nav_chatCsFragment"
+        android:name="com.feylabs.sumbangsih.presentation.chat.ChatCsFragment"
+        android:label="ChatCsFragment"
+        tools:layout="@layout/chat_cs_fragment"
+        />
 
 </navigation>
