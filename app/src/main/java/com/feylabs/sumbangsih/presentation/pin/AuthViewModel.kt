@@ -7,8 +7,10 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
 import com.feylabs.sumbangsih.data.source.remote.ManyunyuRes
+import com.feylabs.sumbangsih.data.source.remote.response.CommonResponse
 import com.feylabs.sumbangsih.data.source.remote.response.LoginWithNumberRes
 import com.feylabs.sumbangsih.data.source.remote.response.RegisterRes
+import com.feylabs.sumbangsih.data.source.remote.response.SimpleRes
 import com.feylabs.sumbangsih.data.source.remote.web.AuthApiClient
 import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.google.gson.Gson
@@ -32,13 +34,30 @@ class AuthViewModel(
         MutableLiveData()
     val loginNumberLiveData get() = _loginNumberLiveData
 
+    private var _changePwLiveData: MutableLiveData<ManyunyuRes<CommonResponse?>> =
+        MutableLiveData()
+    val changePwLiveData get() = _changePwLiveData
+
+    private var _checkPinLiveData: MutableLiveData<ManyunyuRes<SimpleRes?>> =
+        MutableLiveData()
+    val checkPinLiveData get() = _checkPinLiveData
+
     fun fireLogin() {
         _loginNumberLiveData.value = ManyunyuRes.Default()
+    }
+
+    fun fireCheckPin() {
+        _checkPinLiveData.value = ManyunyuRes.Default()
+    }
+
+    fun fireChangePass() {
+        _changePwLiveData.value = ManyunyuRes.Default()
     }
 
     fun loginNumber(number: String, password: String) {
         Timber.d("OASA login, $number")
         Timber.d("OASA login, $password")
+        _loginNumberLiveData.postValue(ManyunyuRes.Loading())
         AndroidNetworking.post(BASE_URL + "auth/login")
             .addBodyParameter("contact", number)
             .addBodyParameter("password", password)
@@ -54,7 +73,43 @@ class AuthViewModel(
                 }
 
                 override fun onError(anError: ANError?) {
-                    _loginNumberLiveData.postValue(ManyunyuRes.Error("Terjadi Kesalahan ${anError?.localizedMessage.toString()}"))
+                    _loginNumberLiveData.postValue(ManyunyuRes.Error("Terjadi Kesalahan"))
+                }
+
+            })
+    }
+
+    fun checkPassword(userId: String, password: String) {
+        _checkPinLiveData.postValue(ManyunyuRes.Loading())
+        AndroidNetworking.post(BASE_URL + "user/$userId/checkPassword")
+            .addBodyParameter("password", password)
+            .build()
+            .getAsString(object : StringRequestListener {
+                override fun onResponse(response: String?) {
+                    val req = Gson().fromJson(response, SimpleRes::class.java)
+                    _checkPinLiveData.value = (ManyunyuRes.Success(req))
+                }
+
+                override fun onError(anError: ANError?) {
+                    _checkPinLiveData.value = (ManyunyuRes.Error("Terjadi Kesalahan ${anError?.localizedMessage.toString()}"))
+                }
+
+            })
+    }
+
+    fun updatePasswordCompact(userId: String, password: String) {
+        _changePwLiveData.postValue(ManyunyuRes.Loading())
+        AndroidNetworking.post(BASE_URL + "user/$userId/updatePasswordCompact")
+            .addBodyParameter("password", password)
+            .build()
+            .getAsString(object : StringRequestListener {
+                override fun onResponse(response: String?) {
+                    val req = Gson().fromJson(response, CommonResponse::class.java)
+                    _changePwLiveData.postValue(ManyunyuRes.Success(req))
+                }
+
+                override fun onError(anError: ANError?) {
+                    _changePwLiveData.postValue(ManyunyuRes.Error("Terjadi Kesalahan ${anError?.localizedMessage.toString()}"))
                 }
 
             })

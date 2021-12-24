@@ -40,6 +40,7 @@ class VerifPinFragment : BaseFragment() {
         viewModel.regNumberLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ManyunyuRes.Success -> {
+                    setLoadingNumber(false)
                     proceedLogin(it.data)
                     DialogUtils.showCustomDialog(
                         context = requireContext(),
@@ -53,12 +54,23 @@ class VerifPinFragment : BaseFragment() {
                     )
                 }
                 is ManyunyuRes.Error -> {
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Login Tidak Berhasil",
+                        message = "Periksa kembali username dan password anda, atau coba kembali nanti",
+                        positiveAction = Pair(getString(R.string.dialog_ok), {
+                        }),
+                        autoDismiss = true,
+                        buttonAllCaps = false
+                    )
+                    setLoadingNumber(false)
                     showToast("Gagal Membuat Akun", true)
                 }
                 is ManyunyuRes.Loading -> {
-                    showToast("Loading")
+                    setLoadingNumber(true)
                 }
                 is ManyunyuRes.Empty -> {
+                    setLoadingNumber(false)
                     showToast("Gagal Membuat Akun", true)
                 }
             }
@@ -71,6 +83,15 @@ class VerifPinFragment : BaseFragment() {
         RazPreferenceHelper.setLoggedIn(requireContext())
         findNavController().navigate(R.id.navigation_home)
     }
+
+    private fun setLoadingNumber(b: Boolean) {
+        if (b) {
+            binding.includeShimmerPage.root.makeViewVisible()
+        } else {
+            binding.includeShimmerPage.root.makeViewGone()
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -90,6 +90,15 @@ class CreatePinFragment : BaseFragment() {
                     binding.includeLoading.root.makeViewGone()
                 }
                 is ManyunyuRes.Error -> {
+                    DialogUtils.showCustomDialog(
+                        context = requireContext(),
+                        title = "Login Tidak Berhasil",
+                        message = "Periksa kembali username dan password anda, atau coba kembali nanti",
+                        positiveAction = Pair(getString(R.string.dialog_ok), {
+                        }),
+                        autoDismiss = true,
+                        buttonAllCaps = false
+                    )
                     binding.includeLoading.root.makeViewGone()
                     showToast(it.message)
                 }

@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:fillViewport="true">
 
@@ -35,7 +34,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Verifikasi PIN"
+                android:text="Konfirmasi Pin"
                 android:textAlignment="viewStart"
                 android:textColor="@color/redSumbangsih"
                 android:textSize="20sp"
@@ -79,18 +78,6 @@
             android:backgroundTint="@color/redSumbangsih"
             android:text="Selanjutnya"
             app:layout_constraintBottom_toBottomOf="parent" />
-
-        <include
-            android:id="@+id/include_shimmer_page"
-            tools:visibility="gone"
-            android:visibility="gone"
-            layout="@layout/lshimmer_fragment_create_pin" />
-
-        <include
-            android:id="@+id/include_loading"
-            android:visibility="gone"
-            layout="@layout/layout_loading_screen_full" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
