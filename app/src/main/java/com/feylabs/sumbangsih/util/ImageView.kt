@@ -115,13 +115,33 @@ object ImageView {
         return returnedBitmap
     }
 
-    fun getBitmapFromView(view: View, defaultColor: Int): Bitmap? {
-        val bitmap =
+
+    fun getBitmapFromView(view: View): Bitmap? {
+        var bitmap =
             Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
+        var canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    fun getBitmapFromView(view: View, defaultColor: Int): Bitmap? {
+        var bitmap =
+            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        var canvas = Canvas(bitmap)
         canvas.drawColor(defaultColor)
         view.draw(canvas)
         return bitmap
+    }
+
+    fun convertImageToStringForServer(imageBitmap: Bitmap?): String? {
+        val stream = ByteArrayOutputStream()
+        return if (imageBitmap != null) {
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 60, stream)
+            val byteArray = stream.toByteArray()
+            Base64.encodeToString(byteArray, Base64.DEFAULT)
+        } else {
+            null
+        }
     }
 
     fun getBitmapQRfromString(content: String, width: Int = 512, height: Int = 512): Bitmap {

@@ -36,6 +36,8 @@ import java.io.File
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.util.Base64
+import com.feylabs.sumbangsih.util.ImageView.convertImageToStringForServer
+import com.feylabs.sumbangsih.util.ImageView.getBitmapFromView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -166,7 +168,15 @@ class KomplainFragment : BaseFragment() {
 
             GlobalScope.launch {
 
-                var bitmapImage: String? = null
+                var bitmapImage: Bitmap? = null
+
+                binding.ivBukti.buildDrawingCache()
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    bitmapImage = getBitmapFromView(binding.ivBukti, R.color.white)
+                } else {
+                    bitmapImage = getBitmapFromView(binding.ivBukti)
+                }
 
                 val obj = KomplainRequestBody(
                     type = binding.dropdownType.text.toString(),
@@ -175,7 +185,9 @@ class KomplainFragment : BaseFragment() {
                     dana_excess = binding.etJmlDana.editText?.text.toString(),
                     rejected_at = binding.etRejectionAt.editText?.text.toString(),
                     feedback = binding.etFeedback.editText?.text.toString(),
-                    photo = uriToBase64(viewModel.imageUriVm.value),
+                    photo = convertImageToStringForServer(
+                        bitmapImage
+                    ),
                     notes = null
                 )
 
