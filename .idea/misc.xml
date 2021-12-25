@@ -12,6 +12,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/bg_shimmer.xml" value="0.18645833333333334" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/button_background.xml" value="0.18854166666666666" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/gradient_red_stepper.xml" value="0.22552083333333334" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/grey_border.xml" value="0.1734375" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_checklist_blue.xml" value="0.10677083333333333" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_circle_grey.xml" value="0.16510416666666666" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_circle_red.xml" value="0.16510416666666666" />
@@ -42,11 +43,13 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_dashboard.xml" value="0.16822916666666668" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_detail_news.xml" value="0.17" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_komplain.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_on_board.xml" value="0.16" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_pengajuan_blt.xml" value="0.16458333333333333" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_proceed_pin.xml" value="0.13541666666666666" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_verif_pin.xml" value="0.12" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_video_player.xml" value="0.10989583333333333" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_dropdown_list.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_news.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_news_compact.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_rschat.xml" value="0.22" />

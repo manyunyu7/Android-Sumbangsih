@@ -26,6 +26,12 @@ interface CommonApiClient {
         @Body dynamicFormData: Map<String, Any>
     ): Call<CommonResponse>
 
+    @POST("komplain/upload")
+    @JvmSuppressWildcards
+    fun uploadKomplain(
+        @Body dynamicFormData: Map<String, Any>
+    ): Call<CommonResponse>
+
     @POST("pengajuan/activeEvent")
     fun getActiveEvent(): Call<CheckActiveEventRes>
 

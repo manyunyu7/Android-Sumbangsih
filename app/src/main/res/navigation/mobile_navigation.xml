@@ -134,6 +134,9 @@
         <action
             android:id="@+id/action_navigation_pengajuanBLTFragment_to_pengajuanBLTStepInitialFragment"
             app:destination="@id/nav_pengajuanBLTStepInitialFragment" />
+        <action
+            android:id="@+id/action_navigation_pengajuanBLTFragment_to_komplainFragment"
+            app:destination="@id/komplainFragment" />
     </fragment>
 
     <fragment
@@ -147,6 +150,7 @@
         <action
             android:id="@+id/action_nav_pengajuanBLTStepInitialFragment_to_bltSkuStep1Fragment"
             app:destination="@id/bltSkuStep1Fragment" />
+
     </fragment>
 
     <fragment
@@ -214,5 +218,10 @@
         android:id="@+id/changePinFragment"
         android:name="com.feylabs.sumbangsih.presentation.change_credential.ChangePinFragment"
         android:label="ChangePinFragment" />
+    <fragment
+        android:id="@+id/komplainFragment"
+        android:name="com.feylabs.sumbangsih.presentation.komplain.KomplainFragment"
+        android:label="fragment_komplain"
+        tools:layout="@layout/fragment_komplain" />
 
 </navigation>

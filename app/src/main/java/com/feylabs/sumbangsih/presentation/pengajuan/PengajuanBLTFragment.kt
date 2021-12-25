@@ -316,6 +316,10 @@ class PengajuanBLTFragment : BaseFragment() {
 
     private fun initUi() {
 
+        binding.includeActive.btnComplain.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_pengajuanBLTFragment_to_komplainFragment)
+        }
+
         binding.includeHistory.rvTimeline.let {
             it.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

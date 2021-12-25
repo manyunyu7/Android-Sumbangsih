@@ -440,7 +440,6 @@
     <include
         android:id="@+id/include_success"
         android:visibility="gone"
-        tools:visibility="visible"
         layout="@layout/layout_success_pengajuan"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
