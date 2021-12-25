@@ -42,7 +42,7 @@
                 android:ellipsize="none"
                 android:fontFamily="@font/montserrat_bold"
                 android:scrollHorizontally="false"
-                android:text="Mulai Ajukan"
+                android:text="Komplain"
                 android:textColor="@color/redSumbangsih"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -187,12 +187,6 @@
                     android:layout_height="150dp"
                     android:scaleType="fitCenter" />
 
-                <ImageView
-                    android:id="@+id/ivBuktiPcl"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_choose_bukti" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -222,5 +216,17 @@
                 app:cornerRadius="20dp" />
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/include_loading"
+        android:visibility="gone"
+        tools:visibility="gone"
+        layout="@layout/layout_loading_screen_full"/>
+
+    <include
+        android:id="@+id/include_success"
+        android:visibility="gone"
+        tools:visibility="gone"
+        layout="@layout/layout_success_komplain"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

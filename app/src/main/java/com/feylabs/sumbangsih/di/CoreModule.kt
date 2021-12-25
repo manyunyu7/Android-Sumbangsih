@@ -10,6 +10,7 @@ import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
 import com.feylabs.sumbangsih.presentation.chat.ChatCsViewModel
 import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
+import com.feylabs.sumbangsih.presentation.komplain.KomplainViewModel
 import com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifViewModel
 import com.feylabs.sumbangsih.presentation.pengajuan.PengajuanViewModel
 import com.feylabs.sumbangsih.presentation.pin.AuthViewModel
@@ -92,6 +93,7 @@ val viewModelModule = module {
     single { KTPVerifViewModel(get()) }
     single { PengajuanViewModel(get()) }
     single { ChatCsViewModel(get()) }
+    single { KomplainViewModel(get()) }
     viewModel { CommonViewModel(get(), get()) }
 }
 

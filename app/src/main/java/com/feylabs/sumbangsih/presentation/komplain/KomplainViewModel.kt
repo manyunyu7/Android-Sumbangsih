@@ -1,5 +1,6 @@
 package com.feylabs.sumbangsih.presentation.komplain
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,7 @@ class KomplainViewModel(private val commonApiClient: CommonApiClient) : ViewMode
     private var _uploadPengajuanVM = MutableLiveData<ManyunyuRes<String>>(ManyunyuRes.Default())
     val uploadPengajuanVm get() = _uploadPengajuanVM as LiveData<ManyunyuRes<String>>
 
+    var imageUriVm = MutableLiveData<Uri>()
 
     fun upload(obj: Map<String, Any>) {
 
