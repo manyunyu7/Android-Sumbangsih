@@ -34,6 +34,8 @@ data class ProfileMainReq(
             val birthPlace: String,
             @SerializedName("created_at")
             val createdAt: String,
+            @SerializedName("photo_ktp_full_path")
+            val photoKtpFullPath: String,
             @SerializedName("id")
             val id: Int,
             @SerializedName("jk")

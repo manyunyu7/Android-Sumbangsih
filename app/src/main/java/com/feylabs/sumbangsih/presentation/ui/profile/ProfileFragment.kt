@@ -45,35 +45,55 @@ class ProfileFragment : BaseFragment() {
                 is ManyunyuRes.Empty -> {
                 }
                 is ManyunyuRes.Error -> {
+                    setupProfileCard(isError = true)
                 }
                 is ManyunyuRes.Loading -> {
                 }
                 is ManyunyuRes.Success -> {
                     val data = it.data
                     if (data != null) {
-                        setupProfileCard(data)
+                        setupProfileCard(data,false)
+                    } else {
+                        setupProfileCard(isError = true)
                     }
                 }
             }
         })
     }
 
-    private fun setupProfileCard(data: ProfileMainReq) {
-        val mKtp = data.resData.ktp
-        val user = data.resData.user
+    private fun setupProfileCard(data: ProfileMainReq?=null,isError:Boolean=false) {
+        val mKtp = data?.resData?.ktp
+        val user = data?.resData?.user
 
         if (mKtp == null) {
+            binding.includeListMenu.tvMenu1.setOnClickListener {
+                showToast("NIK Anda Belum Diverifikasi, Silakan melakukan pengajuan NIK")
+            }
             binding.tvMain.text = "Halo, +" + RazPreferenceHelper.getPhoneNumber(requireContext())
             binding.tvDesc.text = "Segera lakukan verifikasi NIK"
         } else {
             binding.tvMain.text = "Halo, " + mKtp.name
             binding.tvDesc.text = "NIK : " + mKtp.nik
+            binding.includeListMenu.tvMenu1.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_profileFragment_to_dataDiriFragment)
+            }
         }
+
+        if (isError){
+            binding.tvMain.text = "Halo, +" + RazPreferenceHelper.getPhoneNumber(requireContext())
+            binding.tvDesc.text = "Segera lakukan verifikasi NIK"
+            binding.includeListMenu.tvMenu1.setOnClickListener {
+                showToast("NIK Anda Belum Diverifikasi, Silakan melakukan pengajuan NIK")
+            }
+        }
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideActionBar()
+        initUi()
         initData()
         initObserver()
         (getActivity() as CommonControllerActivity).hideCustomTopbar()
@@ -91,6 +111,9 @@ class ProfileFragment : BaseFragment() {
                 logout()
             }
         }
+    }
+
+    private fun initUi() {
     }
 
 

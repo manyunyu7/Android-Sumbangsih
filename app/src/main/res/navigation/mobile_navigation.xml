@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_navigation_profileFragment_to_checkPinFragment"
             app:destination="@id/checkPinFragment" />
+        <action
+            android:id="@+id/action_navigation_profileFragment_to_dataDiriFragment"
+            app:destination="@id/dataDiriFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_detailNewsFragment"
@@ -162,11 +165,13 @@
             android:id="@+id/action_nav_bltWithoutSkuStep1Fragment_to_bltWithoutSkuStep2Fragment"
             app:destination="@id/nav_bltWithoutSkuStep2Fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_bltWithoutSkuStep2Fragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.without_sku.BltWithoutSkuStep2Fragment"
         android:label="BltWithoutSkuStep2Fragment"
         tools:layout="@layout/blt_without_sku_step_2_fragment" />
+
     <fragment
         android:id="@+id/bltSkuStep1Fragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.with_sku.BltSkuStep1Fragment"
@@ -186,17 +191,20 @@
             android:id="@+id/action_nav_bltSkuStep2Fragment_to_bltSkuStep3Fragment"
             app:destination="@id/bltSkuStep3Fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/bltSkuStep3Fragment"
         android:name="com.feylabs.sumbangsih.presentation.pengajuan.with_sku.BltSkuStep3Fragment"
         android:label="BltSkuStep3Fragment"
         tools:layout="@layout/blt_sku_step_3_fragment" />
+
     <fragment
         android:id="@+id/nav_chatCsFragment"
         android:name="com.feylabs.sumbangsih.presentation.chat.ChatCsFragment"
         android:label="ChatCsFragment"
         tools:layout="@layout/chat_cs_fragment"
         />
+
     <fragment
         android:id="@+id/checkPinFragment"
         tools:layout="@layout/fragment_check_pin"
@@ -206,6 +214,7 @@
             android:id="@+id/action_checkPinFragment_to_proceedPinFragment"
             app:destination="@id/proceedPinFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/proceedPinFragment"
         android:name="com.feylabs.sumbangsih.presentation.change_credential.ProceedPinFragment"
@@ -214,14 +223,23 @@
             android:id="@+id/action_proceedPinFragment_to_changePinFragment"
             app:destination="@id/changePinFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/changePinFragment"
         android:name="com.feylabs.sumbangsih.presentation.change_credential.ChangePinFragment"
         android:label="ChangePinFragment" />
+
     <fragment
         android:id="@+id/komplainFragment"
         android:name="com.feylabs.sumbangsih.presentation.komplain.KomplainFragment"
         android:label="fragment_komplain"
         tools:layout="@layout/fragment_komplain" />
+
+    <fragment
+        android:id="@+id/dataDiriFragment"
+        android:name="com.feylabs.sumbangsih.presentation.data_diri.DataDiriFragment"
+        android:label="DataDiriFragment"
+        tools:layout="@layout/fragment_data_diri"
+        />
 
 </navigation>

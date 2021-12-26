@@ -9,6 +9,7 @@ import com.feylabs.sumbangsih.di.ServiceLocator.BASE_URL
 import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.presentation._otp.ReceiveOTPViewModel
 import com.feylabs.sumbangsih.presentation.chat.ChatCsViewModel
+import com.feylabs.sumbangsih.presentation.data_diri.DataDiriViewModel
 import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
 import com.feylabs.sumbangsih.presentation.komplain.KomplainViewModel
 import com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifViewModel
@@ -94,6 +95,7 @@ val viewModelModule = module {
     single { PengajuanViewModel(get()) }
     single { ChatCsViewModel(get()) }
     single { KomplainViewModel(get()) }
+    single { DataDiriViewModel(get()) }
     viewModel { CommonViewModel(get(), get()) }
 }
 

@@ -36,6 +36,7 @@ object ImageView {
     ) {
         Glide.with(this)
             .load(url)
+            .thumbnail(Glide.with(context).load(R.raw.ic_loading_google).fitCenter())
             .apply(
                 if (isSaveCache) requestOptionStandart(placeholder) else requestOptionStandartNoSaveCache(
                     placeholder

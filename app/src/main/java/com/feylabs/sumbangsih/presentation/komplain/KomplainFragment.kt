@@ -107,7 +107,7 @@ class KomplainFragment : BaseFragment() {
     private fun showSuccess() {
         binding.includeSuccess.root.makeViewVisible()
         binding.includeSuccess.btnAction.setOnClickListener {
-            findNavController().popBackStack(R.id.navigation_home, true)
+            findNavController().navigate(R.id.navigation_home)
         }
     }
 

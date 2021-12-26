@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment() {
 
     private fun initUI() {
 
-        setupAnimHome()
+//        setupAnimHome()
         setCardStatsLoading(true)
 
         binding.tvMenuNews.setOnClickListener {
@@ -115,6 +115,7 @@ class HomeFragment : BaseFragment() {
                     setProfileLoading(false)
                 }
                 is ManyunyuRes.Error -> {
+                    setupProfileCard(isError = true)
                     setProfileLoading(false)
                 }
                 is ManyunyuRes.Loading -> {
@@ -123,7 +124,9 @@ class HomeFragment : BaseFragment() {
                 is ManyunyuRes.Success -> {
                     val data = it.data
                     if (data != null) {
-                        setupProfileCard(data)
+                        setupProfileCard(data, false)
+                    } else {
+                        setupProfileCard(data, true)
                     }
                     setProfileLoading(false)
                 }
@@ -166,9 +169,9 @@ class HomeFragment : BaseFragment() {
     }
 
 
-    private fun setupProfileCard(data: ProfileMainReq) {
-        val mKtp = data.resData.ktp
-        val user = data.resData.user
+    private fun setupProfileCard(data: ProfileMainReq? = null, isError: Boolean = false) {
+        val mKtp = data?.resData?.ktp
+        val user = data?.resData?.user
 
         if (mKtp == null) {
             binding.tvSapa.text = "Halo, +" + RazPreferenceHelper.getPhoneNumber(requireContext())
@@ -216,6 +219,14 @@ class HomeFragment : BaseFragment() {
                 )
             }
 
+        }
+
+        if (isError) {
+            val messageShown = "NIK Anda Belum Disetujui"
+
+            (getActivity() as CommonControllerActivity).overrideBottomMenu(
+                true, "Perhatian", messageShown
+            )
         }
 
     }
