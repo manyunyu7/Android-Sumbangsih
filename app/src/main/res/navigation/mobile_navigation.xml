@@ -240,6 +240,16 @@
         android:name="com.feylabs.sumbangsih.presentation.data_diri.DataDiriFragment"
         android:label="DataDiriFragment"
         tools:layout="@layout/fragment_data_diri"
+        >
+        <action
+            android:id="@+id/action_dataDiriFragment_to_reportMistakeFragment"
+            app:destination="@id/reportMistakeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportMistakeFragment"
+        android:name="com.feylabs.sumbangsih.presentation.data_diri.report_mistake.ReportMistakeFragment"
+        android:label="ReportMistakeFragment"
+        tools:layout="@layout/fragment_report_mistake"
         />
 
 </navigation>

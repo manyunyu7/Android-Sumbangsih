@@ -143,6 +143,10 @@ class DataDiriFragment : BaseFragment() {
 
     private fun initUi() {
 
+        binding.btnLapor.setOnClickListener {
+            findNavController().navigate(R.id.action_dataDiriFragment_to_reportMistakeFragment)
+        }
+
         binding.srl.setOnRefreshListener {
             viewModel.getProfile(RazPreferenceHelper.getUserId(requireContext()))
         }

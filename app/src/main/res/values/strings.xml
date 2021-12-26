@@ -54,4 +54,10 @@ Tenang , kini ada fitur tracking yang memberikan detail mengenai alur permohonan
     <string name="desc_photo_frame_verif_nik_step3">Pastikan e-KTP Anda berada dalam area dan cukup jelas untuk dibaca</string>
     <string name="desc_photo_frame_verif_nik_step4">\"Pastikan wajah dan ktp anda sudah sesuai posisi \"</string>
     <string name="desc_step_info_usaha">Upload Foto Usaha, seperti Tampak depan Toko, pembuatan produk atau foto lain yang mewakili kegiatan usaha</string>
+
+    <string-array name="gender">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
 </resources>
