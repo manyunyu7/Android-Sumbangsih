@@ -251,5 +251,9 @@
         android:label="ReportMistakeFragment"
         tools:layout="@layout/fragment_report_mistake"
         />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.feylabs.sumbangsih.presentation.notification.NotificationFragment"
+        android:label="NotificationFragment" />
 
 </navigation>

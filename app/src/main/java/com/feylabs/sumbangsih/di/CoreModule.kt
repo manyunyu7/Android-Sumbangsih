@@ -13,6 +13,7 @@ import com.feylabs.sumbangsih.presentation.data_diri.DataDiriViewModel
 import com.feylabs.sumbangsih.presentation.detailtutorial.DetailTutorialViewModel
 import com.feylabs.sumbangsih.presentation.komplain.KomplainViewModel
 import com.feylabs.sumbangsih.presentation.ktp_verif.KTPVerifViewModel
+import com.feylabs.sumbangsih.presentation.notification.NotificationViewModel
 import com.feylabs.sumbangsih.presentation.pengajuan.PengajuanViewModel
 import com.feylabs.sumbangsih.presentation.pin.AuthViewModel
 import com.feylabs.sumbangsih.presentation.ui.home.HomeViewModel
@@ -96,6 +97,7 @@ val viewModelModule = module {
     single { ChatCsViewModel(get()) }
     single { KomplainViewModel(get()) }
     single { DataDiriViewModel(get()) }
+    single { NotificationViewModel(get()) }
     viewModel { CommonViewModel(get(), get()) }
 }
 

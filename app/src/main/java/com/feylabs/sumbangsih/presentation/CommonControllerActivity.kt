@@ -58,6 +58,10 @@ class CommonControllerActivity : BaseActivity() {
         showNavView()
         hideActionBar()
 
+        binding.btnNotification.setOnClickListener {
+            getNavController().navigate(R.id.notificationFragment)
+        }
+
         addNavChangedListener(navController)
     }
 
