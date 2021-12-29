@@ -37,20 +37,22 @@ val networkModule = module {
                 okhttp3.logging.HttpLoggingInterceptor()
                     .setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY)
             )
-            .addInterceptor(
-                ChuckerInterceptor.Builder(androidContext())
-                    .collector(ChuckerCollector(androidContext()))
-                    .maxContentLength(25000000L)
-                    .redactHeaders(emptySet())
-                    .alwaysReadResponseBody(true)
-                    .build()
-            )
+        /* uncomment this line to enable chucker
+    .addInterceptor(
+        ChuckerInterceptor.Builder(androidContext())
+            .collector(ChuckerCollector(androidContext()))
+            .maxContentLength(25000000L)
+            .redactHeaders(emptySet())
+            .alwaysReadResponseBody(true)
+            .build()
+    )
+    */
 //            .addInterceptor(HttpCustomInterceptor(get(), get()))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
+        .connectTimeout(120, TimeUnit.SECONDS)
+        .readTimeout(120, TimeUnit.SECONDS)
 //            .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
 //            .protocols(listOf(Protocol.HTTP_1_1))
-            .build()
+        .build()
     }
 
     single {

@@ -134,7 +134,7 @@ class KomplainFragment : BaseFragment() {
 
         binding.apply {
             val listForm = arrayOf(
-                containerPhoto, etFeedback, etRejectionAt, etKomplainDana, labelUpload
+                etJmlDana, containerPhoto, etFeedback, etRejectionAt, etKomplainDana, labelUpload
             )
             listForm.forEachIndexed { index, view ->
                 view.makeViewGone()
@@ -172,11 +172,16 @@ class KomplainFragment : BaseFragment() {
 
                 binding.ivBukti.buildDrawingCache()
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    bitmapImage = getBitmapFromView(binding.ivBukti, R.color.white)
-                } else {
-                    bitmapImage = getBitmapFromView(binding.ivBukti)
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        bitmapImage = getBitmapFromView(binding.ivBukti, R.color.white)
+                    } else {
+                        bitmapImage = getBitmapFromView(binding.ivBukti)
+                    }
+                } catch (e: Exception) {
+                    bitmapImage = null
                 }
+
 
                 val obj = KomplainRequestBody(
                     type = binding.dropdownType.text.toString(),
@@ -225,7 +230,6 @@ class KomplainFragment : BaseFragment() {
     }
 
     private fun clickGallery() {
-        showToast("Click Gallery")
         val galleryIntent =
             Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         try {

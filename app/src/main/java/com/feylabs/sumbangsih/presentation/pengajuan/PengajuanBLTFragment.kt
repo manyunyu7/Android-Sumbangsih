@@ -88,8 +88,14 @@ class PengajuanBLTFragment : BaseFragment() {
                                 "Pengajuan anda sedang dalam proses. Silahkan lihat halaman Riwayat. Anda dapat mengajukan komplain mengenai BLT UMKM."
                         }
 
+                        // if there is no Pengajuan That diajukan oleh user
                         if (data?.apiCode == 0) {
+                            includeActive.tvComplain.makeViewGone()
+                            includeActive.btnComplain.makeViewGone()
                             includeActive.btnAction.makeViewVisible()
+                        } else {
+                            includeActive.tvComplain.makeViewVisible()
+                            includeActive.btnComplain.makeViewVisible()
                         }
 
                         val pengajuanData = data?.resData

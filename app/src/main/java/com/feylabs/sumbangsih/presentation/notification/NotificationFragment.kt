@@ -16,6 +16,8 @@ import com.feylabs.sumbangsih.databinding.FragmentNotificationsBinding
 import com.feylabs.sumbangsih.databinding.ListAllNewsFragmentBinding
 import com.feylabs.sumbangsih.presentation.CommonViewModel
 import com.feylabs.sumbangsih.util.BaseFragment
+import com.feylabs.sumbangsih.util.CommonHelper.logout
+import com.feylabs.sumbangsih.util.DialogUtils
 import com.feylabs.sumbangsih.util.sharedpref.RazPreferenceHelper
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -61,7 +63,18 @@ class NotificationFragment : BaseFragment() {
         adapter.notifInterface = object : OnNotifCompactClick {
 
             override fun onclick(model: MNotificatinRes.ResData) {
-
+                DialogUtils.showMnotifDialog(
+                    context = requireContext(),
+                    title = model.title,
+                    subTitle = model.message.toString(),
+                    message = model.desc,
+                    positiveAction = Pair("Tandai Telah Dibaca", {
+                        viewModel.setRead(model.id.toString())
+                    }),
+                    negativeAction = Pair("Tutup", {}),
+                    autoDismiss = true,
+                    buttonAllCaps = false
+                )
             }
         }
     }
@@ -71,12 +84,38 @@ class NotificationFragment : BaseFragment() {
     }
 
     private fun initObserver() {
-        viewModel.notifLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.setReadLiveData.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ManyunyuRes.Default -> {
                 }
                 is ManyunyuRes.Empty -> {
                     showToast("Tidak Ada Data")
+                }
+                is ManyunyuRes.Error -> {
+                    showToast(it.message.toString())
+                }
+                is ManyunyuRes.Loading -> {
+
+                }
+                is ManyunyuRes.Success -> {
+                    viewModel.getNotif(RazPreferenceHelper.getUserId(requireContext()))
+                    viewModel.fireSetRead()
+                }
+            }
+
+            if (it is ManyunyuRes.Loading) {
+                makeSrlLoading(true)
+            } else {
+                makeSrlLoading(false)
+            }
+
+        })
+
+        viewModel.notifLiveData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ManyunyuRes.Default -> {
+                }
+                is ManyunyuRes.Empty -> {
                 }
                 is ManyunyuRes.Error -> {
                     showToast(it.message.toString())
@@ -99,6 +138,7 @@ class NotificationFragment : BaseFragment() {
             }
 
         })
+
     }
 
 

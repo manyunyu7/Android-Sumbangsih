@@ -59,7 +59,7 @@ class KTPVerifStep4Fragment : BaseFragment() {
                     binding.includeSuccess.root.makeViewVisible()
                     binding.includeSuccess.apply {
                         btnAction.setOnClickListener {
-                            findNavController().popBackStack(R.id.navigation_home, true)
+                            findNavController().navigate(R.id.navigation_home)
                         }
                     }
                     showFullscreenLoading(false)

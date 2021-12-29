@@ -118,20 +118,30 @@ object ImageView {
 
 
     fun getBitmapFromView(view: View): Bitmap? {
-        var bitmap =
-            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        var canvas = Canvas(bitmap)
-        view.draw(canvas)
-        return bitmap
+        try {
+            var bitmap =
+                Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            var canvas = Canvas(bitmap)
+            view.draw(canvas)
+            return bitmap
+        } catch (e: Exception) {
+            return null
+        }
+        return null
     }
 
     fun getBitmapFromView(view: View, defaultColor: Int): Bitmap? {
-        var bitmap =
-            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        var canvas = Canvas(bitmap)
-        canvas.drawColor(defaultColor)
-        view.draw(canvas)
-        return bitmap
+        try {
+            val bitmap =
+                Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            var canvas = Canvas(bitmap)
+            canvas.drawColor(defaultColor)
+            view.draw(canvas)
+            return bitmap
+        } catch (e: Exception) {
+            return null
+        }
+        return null
     }
 
     fun convertImageToStringForServer(imageBitmap: Bitmap?): String? {

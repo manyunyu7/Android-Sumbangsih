@@ -24,6 +24,29 @@ class NotificationViewModel(
         MutableLiveData()
     val notifLiveData get() = _notifLiveData
 
+    private var _setReadLiveData: MutableLiveData<ManyunyuRes<String?>> =
+        MutableLiveData()
+    val setReadLiveData get() = _setReadLiveData
+
+    fun setRead(notifId: String) {
+        _setReadLiveData.postValue(ManyunyuRes.Loading())
+
+        AndroidNetworking.get(ServiceLocator.BASE_URL + "mnotification/setRead/$notifId")
+            .build()
+            .getAsString(object : StringRequestListener {
+                override fun onResponse(response: String?) {
+                    _setReadLiveData.postValue(ManyunyuRes.Success(response))
+                }
+
+                override fun onError(anError: ANError?) {
+                    Timber.d("FAN ERROR $anError")
+                    _setReadLiveData.postValue(ManyunyuRes.Error(anError?.localizedMessage.toString()))
+                }
+
+            })
+
+    }
+
 
     fun getNotif(userId: String) {
         _notifLiveData.postValue(ManyunyuRes.Loading())
@@ -46,6 +69,10 @@ class NotificationViewModel(
 
             })
 
+    }
+
+    fun fireSetRead() {
+        _setReadLiveData.value = ManyunyuRes.Default()
     }
 
 

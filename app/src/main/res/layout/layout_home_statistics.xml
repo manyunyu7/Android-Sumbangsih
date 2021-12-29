@@ -35,7 +35,7 @@
                 style="@style/Montserrat.RedSumbangsih.24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1254"
+                android:text="-"
                 android:textAlignment="center" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -68,7 +68,7 @@
                 style="@style/Montserrat.RedSumbangsih.24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1254"
+                android:text="-"
                 android:textAlignment="center" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -103,7 +103,7 @@
                 style="@style/Montserrat.RedSumbangsih.24sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1254"
+                android:text="-"
                 android:textAlignment="center" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

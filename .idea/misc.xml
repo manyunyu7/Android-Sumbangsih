@@ -13,6 +13,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/button_background.xml" value="0.18854166666666666" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/gradient_red_stepper.xml" value="0.22552083333333334" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/grey_border.xml" value="0.1734375" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_check_white.xml" value="0.22552083333333334" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_checklist_blue.xml" value="0.10677083333333333" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_circle_grey.xml" value="0.16510416666666666" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/ic_circle_red.xml" value="0.16510416666666666" />
@@ -27,6 +28,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/drawable/rounded_rectangle.xml" value="0.1890625" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_common_controller.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_receive_otpactivity.xml" value="0.18" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_splash_screen.xml" value="0.12" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_walkthrough.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/activity_write_otpactivity.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/blt_sku_step_1_fragment.xml" value="0.17" />
@@ -45,6 +47,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_detail_news.xml" value="0.17" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_komplain.xml" value="0.22" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_notifications.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_on_board.xml" value="0.16" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_pengajuan_blt.xml" value="0.16458333333333333" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/fragment_proceed_pin.xml" value="0.13541666666666666" />
@@ -54,6 +57,7 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_dropdown_list.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_news.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_news_compact.xml" value="0.22" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_notif.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_rschat.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/item_timeline_history.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/ktp_verif_step_1_fragment.xml" value="0.14" />
@@ -67,11 +71,12 @@
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_blt_history.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_dialog.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_dialog_conf_pengajuan.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_dialog_notifikasi.xml" value="0.18" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_dialog_rotate_phone.xml" value="0.209375" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_dialog_single_button_image.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_empty_chat.xml" value="0.209375" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_empty_history.xml" value="0.14" />
-        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_statistics.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_statistics.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_home_tutor.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_loading_screen_full.xml" value="0.11458333333333333" />
         <entry key="..\:/AndroidStudioProjects/Sumbangsih/app/src/main/res/layout/layout_stepper.xml" value="0.22" />
